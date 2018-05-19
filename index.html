@@ -19,6 +19,10 @@
         <script src="app.js"></script>
         <script src="core/core.module.js"></script>
 
+        <script src="user/user.module.js"></script>
+        <script src="user/navbar-user-info.component.js"></script>
+        <script src="user/user-info.service.js"></script>
+
         <script src="sign-up/sign-up.module.js"></script>
         <script src="sign-up/sign-up.component.js"></script>
         <script src="sign-up/sign-up.service.js"></script>
@@ -48,9 +52,7 @@
                             </div>
                         </li> -->
                     </ul>
-                    <li class="nav-item" ng-controller="UserInfoController">
-                        <span class="nav-link">User: {{ user.name }}</a>
-                    </li>
+                    <navbar-user-info></navbar-user-info>
                     <!-- Search field -->
                     <!-- <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Digite aqui" aria-label="Digite aqui">
@@ -66,7 +68,7 @@
 
         <div class="footer">
             <nav class="navbar fixed-bottom navbar-light bg-light">
-                <span class="navbar-brand">Telefone: (51)-999216614</span>
+                <span class="navbar-brand">Telefone: (51) 99921-6614</span>
                 <span class="navbar-brand">Av. Bento Gonçalves, 9500</span>
             </nav>
         </div>

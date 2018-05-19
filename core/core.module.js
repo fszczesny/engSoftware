@@ -1,1 +1,1 @@
-angular.module('core', ['kinvey']);
+angular.module('core', []);

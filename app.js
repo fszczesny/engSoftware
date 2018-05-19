@@ -1,7 +1,9 @@
 angular.module('RealEstate', [
     'ui.router',
     'kinvey',
-    'signUp'
+    'core',
+    'signUp',
+    'user',
 ]);
 
 angular.module('RealEstate').config(['$stateProvider',
@@ -35,8 +37,8 @@ angular.module('RealEstate').config(['$stateProvider',
 }]);
 
 angular.module('RealEstate').run(['$kinvey', function($kinvey) {
-    var activeUser = $kinvey.User.getActiveUser();
-    console.log(activeUser);
+    /*var activeUser = $kinvey.User.getActiveUser();
+    console.log(activeUser);*/
 
     var promise = $kinvey.User.logout();
     promise = promise.then(function onSuccess() {
