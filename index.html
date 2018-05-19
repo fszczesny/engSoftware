@@ -13,14 +13,18 @@
         <script src="frameworks/Popper/popper.js"></script>
         <script src="frameworks/Bootstrap/bootstrap.js"></script>
         <script src="frameworks/Kinvey/kinvey.min.js"></script>
+        <!-- CSS Files -->
+        <link rel="stylesheet" href="css/app.css">
         <!-- JS Files -->
-        <script src="js/app.js"></script>
+        <script src="app.js"></script>
+        <script src="sign-up/sign-up.module.js"></script>
+        <script src="sign-up/sign-up.component.js"></script>
     </head>
     
 	<body ng-app="RealEstate">
 
         <div class="header">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="#">Imobiliaria UFRGS</a>
                     
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -50,14 +54,14 @@
             </nav>
         </div>
 
-        <main>
+        <div class="main">
             <ui-view></ui-view>    
-        </main>
+        </div>
 
         <div class="footer">
-            <nav class="navbar navbar-light bg-light">
-                <a class="navbar-brand" href="#">Telefone: (51)-999216614</a>
-                <a class="navbar-brand" href="#">Av. Bento Gonçalves, 9500</a>
+            <nav class="navbar fixed-bottom navbar-light bg-light">
+                <span class="navbar-brand">Telefone: (51)-999216614</span>
+                <span class="navbar-brand">Av. Bento Gonçalves, 9500</span>
             </nav>
         </div>
 	</body>

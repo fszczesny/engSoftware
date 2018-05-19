@@ -1,0 +1,88 @@
+<form name="signUpForm" ng-submit="submit(signUpForm.$valid)" novalidate>
+    <div class="form-group">
+        <label for="name">Nome</label>
+        <input type="text" name="name" ng-class="{ 'is-invalid': signUpForm.name.$invalid && !signUpForm.name.$pristine }"
+            ng-model="$ctrl.name" required class="form-control" id="name" placeholder="Digite seu nome">
+    </div>
+    <div class="form-group">
+        <label for="CPF">CPF</label>
+        <input type="number" name="cpf" ng-class="{ 'is-invalid': signUpForm.cpf.$invalid && !signUpForm.cpf.$pristine }"
+            required ng-minlength="11" ng-maxlength="11" ng-model="$ctrl.cpf" class="form-control" id="cpf" placeholder="Digite seu CPF">
+    </div>
+    <div class="form-group">
+        <label for="phone">Telefone</label>
+        <input type="text" name="phone" ng-class="{ 'is-invalid': signUpForm.phone.$invalid && !signUpForm.phone.$pristine }"
+            ng-minlength="10" ng-model="$ctrl.phone" class="form-control" id="phone" placeholder="Digite seu telefone">
+        <small id="passwordHel" class="form-text text-muted">
+            O telefone deve ser precedido pelo código de área (DDD)
+        </small>
+    </div>
+    <div class="form-group">
+        <label for="address">Endereço</label>
+        <input type="text" name="address" ng-class="{ 'is-invalid': signUpForm.address.$invalid && !signUpForm.address.$pristine }"
+            required ng-model="$ctrl.address.line" class="form-control" id="address" placeholder="Digite seu endereço">
+        <small id="passwordHel" class="form-text text-muted">
+            O endereço é composto por nome da rua e número. Ex.: Av. Paulist, 123
+        </small>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-10">
+            <label for="city">Cidade</label>
+            <input type="text" name="city" ng-class="{ 'is-invalid': signUpForm.city.$invalid && !signUpForm.city.$pristine }"
+                required ng-model="$ctrl.address.city" class="form-control" id="city" placeholder="Digite sua cidade">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="state">Estado</label>
+            <select name="state" ng-class="{ 'is-invalid': signUpForm.state.$invalid && !signUpForm.state.$pristine }" ng-model="$ctrl.address.state" required class="form-control" id="state">
+                <option>AC</option>
+                <option>AL</option>
+                <option>AP</option>
+                <option>AM</option>
+                <option>BA</option>
+                <option>CE</option>
+                <option>DF</option>
+                <option>ES</option>
+                <option>GO</option>
+                <option>MA</option>
+                <option>MT</option>
+                <option>MS</option>
+                <option>MG</option>
+                <option>PA</option>
+                <option>PB</option>
+                <option>PR</option>
+                <option>PE</option>
+                <option>PI</option>
+                <option>RJ</option>
+                <option>RN</option>
+                <option>RS</option>
+                <option>RO</option>
+                <option>RR</option>
+                <option>SC</option>
+                <option>SP</option>
+                <option>SE</option>
+                <option>TO</option>
+            </select>
+        </div>
+    </div>
+
+    </div>
+    <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" name="email" ng-class="{ 'is-invalid': signUpForm.email.$invalid && !signUpForm.email.$pristine }"
+            required ng-model="$ctrl.email" class="form-control" id="email" placeholder="Digite seu e-mail">
+    </div>
+    <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" name="password" ng-class="{ 'is-invalid': signUpForm.password.$invalid && !signUpForm.password.$pristine }"
+            required ng-minlength="6" ng-model="$ctrl.password" class="form-control" id="password" placeholder="Crie uma senha">
+        <small id="passwordHelp" class="form-text text-muted">Sua senha deve conter ao menos 6 caracteres.</small>
+    </div>
+    <div class="form-group">
+        <label for="passwordConfirm">Confirmação de senha</label>
+        <input type="password" name="passwordConfirm" ng-class="{ 'is-invalid': signUpForm.passwordConfirm.$invalid && !signUpForm.passwordConfirm.$pristine }"
+            required ng-minlength="6" ng-model="$ctrl.passwordConfirm" class="form-control" id="passwordConfirm" placeholder="Repita sua senha">
+        <small id="passwordConfirmHelp" class="form-text text-muted">As senhas devem ser iguais</small>
+    </div>
+    <button type="submit" class="btn btn-primary" ng-click="$ctrl.submit(signUpForm.$valid)" ng-disabled="signUpForm.$invalid">Cadastrar-me!</button>
+</form>
