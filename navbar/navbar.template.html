@@ -1,0 +1,37 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#!/home">Imobiliaria UFRGS</a>
+        
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" ui-sref="home" ui-sref-active="active">Página Inicial</a>
+            </li>
+            <li class="nav-item" ng-hide="$ctrl.loggedIn">
+                <a class="nav-link" ui-sref="signUp" ui-sref-active="active">Cadastre-se</a>
+            </li>
+            <li class="nav-item" ng-hide="$ctrl.loggedIn">
+                <a class="nav-link" ui-sref="logIn" ui-sref-active="active">Entrar</a>
+            </li>
+            <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Imoveis</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="link">Imoveis à venda</a>
+                    <a class="dropdown-item" href="link">Imoveis para Aluguel</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Anunciar imovel</a>
+                </div>
+            </li> -->
+        </ul>
+        <li class="nav-item" ng-show="$ctrl.loggedIn">
+            <span class="nav-link">Olá, {{ $ctrl.user.name }}</a>
+        </li>
+        <li class="nav-item" ng-show="$ctrl.loggedIn">
+            <a class="nav-link" ng-click="$ctrl.logOut()">Sair</a>
+        </li>
+        <!-- Search field -->
+        <!-- <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Digite aqui" aria-label="Digite aqui">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+        </form> -->
+    </div>
+</nav>

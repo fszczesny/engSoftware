@@ -4,6 +4,7 @@ angular.module('RealEstate', [
     'core',
     'signUp',
     'user',
+    'navbar',
 ]);
 
 angular.module('RealEstate').config(['$stateProvider',
@@ -40,10 +41,10 @@ angular.module('RealEstate').run(['$kinvey', function($kinvey) {
     /*var activeUser = $kinvey.User.getActiveUser();
     console.log(activeUser);*/
 
-    var promise = $kinvey.User.logout();
+    /*var promise = $kinvey.User.logout();
     promise = promise.then(function onSuccess() {
         console.log("Logout");
     }).catch(function onError(error) {
         console.log("Logout fail", error);
-    });
+    });*/
 }])

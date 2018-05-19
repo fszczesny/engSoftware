@@ -1,6 +1,6 @@
 angular
     .module('signUp')
-    .factory('SignUpService', ['$kinvey', 'UserInfo', function($kinvey, UserInfo) {
+    .factory('SignUpService', ['$kinvey', 'User', function($kinvey, User) {
         var goToHomePage = function() {
             window.location.hash = "#!/home";
         };
@@ -22,7 +22,7 @@ angular
                   promise.then(function(user) {
                     // User is signed up and logged in
                     console.log(user);
-                    UserInfo.update();
+                    User.update();
                     goToHomePage();
                   }).catch(function(error) {
                     if (error.code == 409) {
