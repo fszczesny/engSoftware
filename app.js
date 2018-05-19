@@ -17,7 +17,7 @@ angular.module('RealEstate').config(['$stateProvider',
         appSecret: 'a5ff61eb48284d9683ff7a39705198f0'
     });
 
-    // > Routes
+    // > States
     var homeState = {
         name: 'home',
         url: '/home',
