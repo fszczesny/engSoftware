@@ -3,11 +3,7 @@ angular
     .module('user')
     .component('signUp', {
         templateUrl: 'sign-up/sign-up.template.html',
-        controller: ['SignUpService', function SignUpController(SignUpService) {
-            var goToHomePage = function() {
-                window.location.hash = "#!/home";
-            };
-
+        controller: ['SignUpService', 'GoHome', function SignUpController(SignUpService, GoHome) {
             this.submit = function(isValid) {
                 if (isValid) {
                     if (this.password != this.passwordConfirm) {
@@ -25,7 +21,7 @@ angular
                     };
 
                     SignUpService.signUp(userInfo).then(function(user) {
-                        goToHomePage();
+                        GoHome.go();
                     }).catch(function(error) {
                         if (error.code == 409) {
                             alert('Usuário já existe');
