@@ -17,15 +17,18 @@
         <link rel="stylesheet" href="css/app.css">
         <!-- JS Files -->
         <script src="app.js"></script>
+        <script src="core/core.module.js"></script>
+
         <script src="sign-up/sign-up.module.js"></script>
         <script src="sign-up/sign-up.component.js"></script>
+        <script src="sign-up/sign-up.service.js"></script>
     </head>
     
 	<body ng-app="RealEstate">
 
         <div class="header">
             <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">Imobiliaria UFRGS</a>
+                <a class="navbar-brand" href="#!/home">Imobiliaria UFRGS</a>
                     
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
@@ -45,11 +48,14 @@
                             </div>
                         </li> -->
                     </ul>
+                    <li class="nav-item" ng-controller="UserInfoController">
+                        <span class="nav-link">User: {{ user.name }}</a>
+                    </li>
                     <!-- Search field -->
-                    <form class="form-inline my-2 my-lg-0">
+                    <!-- <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Digite aqui" aria-label="Digite aqui">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-                    </form>
+                    </form> -->
                 </div>
             </nav>
         </div>

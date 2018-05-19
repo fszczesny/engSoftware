@@ -3,21 +3,25 @@ angular
     .module('signUp')
     .component('signUp', {
         templateUrl: 'sign-up/sign-up.template.html',
-        controller: function SignUpController() {
+        controller: ['SignUpService', function SignUpController(SignUpService) {
             this.submit = function(isValid) {
                 if (isValid) {
                     if (this.password != this.passwordConfirm) {
                         alert("As senhas devem ser iguais!");
                         return false;
                     }
-                    console.log(this.name);
-                    console.log(this.cpf);
-                    console.log(this.phone);
-                    console.log(this.address);
-                    console.log(this.email);
-                    console.log(this.password);
-                    console.log(this.passwordConfirm); 
+
+                    var userInfo = {
+                        name: this.name,
+                        cpf: this.cpf,
+                        phone: this.phone,
+                        address: this.address, // { line: String, city: String, state: String }
+                        email: this.email,
+                        password: this.password
+                    };
+
+                    SignUpService.signUp(userInfo);
                 } 
             }
-        }
+        }]
     });

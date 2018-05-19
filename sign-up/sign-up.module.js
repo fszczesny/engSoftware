@@ -1,1 +1,1 @@
-angular.module('signUp', ['kinvey']);
+angular.module('signUp', []);

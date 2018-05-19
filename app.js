@@ -33,3 +33,15 @@ angular.module('RealEstate').config(['$stateProvider',
 
     $urlRouterProvider.otherwise('/home');
 }]);
+
+angular.module('RealEstate').run(['$kinvey', function($kinvey) {
+    var activeUser = $kinvey.User.getActiveUser();
+    console.log(activeUser);
+
+    var promise = $kinvey.User.logout();
+    promise = promise.then(function onSuccess() {
+        console.log("Logout");
+    }).catch(function onError(error) {
+        console.log("Logout fail", error);
+    });
+}])
