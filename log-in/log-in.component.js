@@ -11,10 +11,10 @@ angular
                 LogInService.logIn({
                     username: this.username,
                     password: this.password
-                }, function(resp) {
-                    if (resp.success)
-                        goToHomePage();
-                    else if (resp.data.code == 401)
+                }).then(function(user) {
+                    goToHomePage();
+                }).catch(function(error) {
+                    if (error.code == 401)
                         alert('Credenciais erradas!'); 
                 })
             }

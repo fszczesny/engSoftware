@@ -24,8 +24,14 @@ angular
                         password: this.password
                     };
 
-                    SignUpService.signUp(userInfo, function(resp) {
+                    SignUpService.signUp(userInfo).then(function(user) {
                         goToHomePage();
+                    }).catch(function(error) {
+                        if (error.code == 409) {
+                            alert('Usuário já existe');
+                        } else {
+                            alert('Erro no cadastro');
+                        }
                     });
                 } 
             }
