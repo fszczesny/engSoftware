@@ -1,4 +1,4 @@
-<form name="signUpForm" ng-submit="submit(signUpForm.$valid)" novalidate>
+<form name="signUpForm" on-submit="event.preventDefault()" ng-submit="submit(signUpForm.$valid)" novalidate>
     <div class="form-group">
         <label for="name">Nome</label>
         <input type="text" name="name" ng-class="{ 'is-invalid': signUpForm.name.$invalid && !signUpForm.name.$pristine }"

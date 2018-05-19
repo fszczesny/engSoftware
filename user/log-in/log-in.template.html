@@ -1,5 +1,5 @@
 <div class="logIn-container">
-    <form name="logInForm" ng-submit="$ctrl.logIn()">
+    <form name="logInForm" on-submit="event.preventDefault()" ng-submit="$ctrl.logIn()">
         <div class="form-group">
             <label for="username">CPF</label>
             <input type="text" name="username" ng-model="$ctrl.username" class="form-control" id="cpf" placeholder="Digite seu CPF">

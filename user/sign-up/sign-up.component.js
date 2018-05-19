@@ -2,8 +2,12 @@
 angular
     .module('user')
     .component('signUp', {
-        templateUrl: 'sign-up/sign-up.template.html',
-        controller: ['SignUpService', 'GoHome', function SignUpController(SignUpService, GoHome) {
+        templateUrl: 'user/sign-up/sign-up.template.html',
+        controller: ['SignUpService', 'GoHome', 'User', function SignUpController(SignUpService, GoHome, User) {
+            if (User.isLoggedIn) {
+                GoHome.go();
+            }
+
             this.submit = function(isValid) {
                 if (isValid) {
                     if (this.password != this.passwordConfirm) {

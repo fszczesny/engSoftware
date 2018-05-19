@@ -32,5 +32,8 @@ angular
             getUserInfo: function() {
                 return user;
             },
+            isLoggedIn: function() {
+                return user != null;
+            }
         };
     }]);
