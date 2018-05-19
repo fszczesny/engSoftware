@@ -2,7 +2,6 @@ angular.module('RealEstate', [
     'ui.router',
     'kinvey',
     'core',
-    'signUp',
     'user',
     'navbar',
 ]);
@@ -31,8 +30,15 @@ angular.module('RealEstate').config(['$stateProvider',
         component: 'signUp'
     };
 
+    var logInState = {
+        name: 'logIn',
+        url: '/logIn',
+        component: 'logIn'
+    };
+
     $stateProvider.state(homeState);
     $stateProvider.state(signUpState);
+    $stateProvider.state(logInState);
 
     $urlRouterProvider.otherwise('/home');
 }]);

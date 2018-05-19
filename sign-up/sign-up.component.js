@@ -1,9 +1,13 @@
 
 angular
-    .module('signUp')
+    .module('user')
     .component('signUp', {
         templateUrl: 'sign-up/sign-up.template.html',
         controller: ['SignUpService', function SignUpController(SignUpService) {
+            var goToHomePage = function() {
+                window.location.hash = "#!/home";
+            };
+
             this.submit = function(isValid) {
                 if (isValid) {
                     if (this.password != this.passwordConfirm) {
@@ -20,7 +24,9 @@ angular
                         password: this.password
                     };
 
-                    SignUpService.signUp(userInfo);
+                    SignUpService.signUp(userInfo, function(resp) {
+                        goToHomePage();
+                    });
                 } 
             }
         }]
