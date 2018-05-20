@@ -14,13 +14,15 @@ angular
         };
 
         var logOut = function(callback) {
-            $kinvey.User.logout().then(function() {
-                updateUserInfo();
-                if (typeof callback == 'function')
-                    callback();
-            }).catch(function(error) {
-                console.log("Fail logging out", error);
-            });
+            if (user != null) {
+                $kinvey.User.logout().then(function() {
+                    updateUserInfo();
+                    if (typeof callback == 'function')
+                        callback();
+                }).catch(function(error) {
+                    console.log("Fail logging out", error);
+                });
+            }
         }
 
         // > User Type management

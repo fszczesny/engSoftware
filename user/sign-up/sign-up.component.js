@@ -15,16 +15,17 @@ angular
                         return false;
                     }
 
-                    var userInfo = {
+                    var userData = {
+                        username: this.cpf,
+                        password: this.password,
                         name: this.name,
-                        cpf: this.cpf,
                         phone: this.phone,
                         address: this.address, // { line: String, city: String, state: String }
                         email: this.email,
-                        password: this.password
+                        userType: 'Customer'
                     };
 
-                    SignUpService.signUp(userInfo).then(function(user) {
+                    SignUpService.signUp(userData).then(function(user) {
                         GoHome.go();
                     }).catch(function(error) {
                         if (error.code == 409) {

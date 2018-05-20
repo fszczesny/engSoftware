@@ -41,30 +41,30 @@
             <select name="state" ng-class="{ 'is-invalid': signUpForm.state.$invalid && !signUpForm.state.$pristine }" ng-model="$ctrl.address.state" required class="form-control" id="state">
                 <option>AC</option>
                 <option>AL</option>
-                <option>AP</option>
                 <option>AM</option>
+                <option>AP</option>
                 <option>BA</option>
                 <option>CE</option>
                 <option>DF</option>
                 <option>ES</option>
                 <option>GO</option>
                 <option>MA</option>
-                <option>MT</option>
-                <option>MS</option>
                 <option>MG</option>
+                <option>MS</option>
+                <option>MT</option>
                 <option>PA</option>
                 <option>PB</option>
-                <option>PR</option>
                 <option>PE</option>
                 <option>PI</option>
+                <option>PR</option>
                 <option>RJ</option>
                 <option>RN</option>
-                <option>RS</option>
                 <option>RO</option>
                 <option>RR</option>
+                <option>RS</option>
                 <option>SC</option>
-                <option>SP</option>
                 <option>SE</option>
+                <option>SP</option>
                 <option>TO</option>
             </select>
         </div>
@@ -95,5 +95,5 @@
             required ng-minlength="6" ng-model="$ctrl.passwordConfirm" class="form-control" id="passwordConfirm" placeholder="Repita sua senha">
         <small id="passwordConfirmHelp" class="form-text text-muted">As senhas devem ser iguais</small>
     </div>
-    <button type="submit" class="btn btn-primary" ng-click="$ctrl.submit(signUpForm.$valid)" ng-disabled="signUpForm.$invalid">Cadastrar-me!</button>
+    <button type="submit" class="btn btn-primary" ng-click="$ctrl.submit(signUpForm.$valid)">Cadastrar-me!</button>
     </form>
