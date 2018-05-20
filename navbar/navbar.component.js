@@ -7,6 +7,8 @@ angular
 
             this.user = null;
             this.loggedIn = false;
+            this.isAdmin = false;
+            this.isManager = false;
 
             // Watch user info / login status
             $scope.$watch(function() { return User.getUserInfo() }, function(user) {
@@ -15,7 +17,9 @@ angular
 
             var loadUser = function() {
                 self.user = User.getUserInfo();
-                self.loggedIn = self.user != null;
+                self.loggedIn = User.isLoggedIn();
+                self.isAdmin = User.isAdmin();
+                self.isManager = User.isManager();
             }
 
             this.logOut = function() {

@@ -68,6 +68,9 @@ angular
             isManager: function() {
                 return checkUserType('Manager');
             },
+            isAdmin: function() {
+                return checkUserType('Manager') || checkUserType('Supervisor');
+            },
             isCustomer: function() {
                 return checkUserType('Customer');
             },

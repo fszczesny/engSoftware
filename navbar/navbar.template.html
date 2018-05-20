@@ -12,6 +12,12 @@
             <li class="nav-item" ng-hide="$ctrl.loggedIn">
                 <a class="nav-link" ui-sref="logIn" ui-sref-active="active">Entrar</a>
             </li>
+            <li class="nav-item" ng-show="$ctrl.isAdmin">
+                <a class="nav-link" ui-sref="" ui-sref-active="active">Cadastrar imóveis</a>
+            </li>
+            <li class="nav-item" ng-show="$ctrl.isManager">
+                <a class="nav-link" ui-sref="employeeSignUp" ui-sref-active="active">Cadastrar funcionários</a>
+            </li>
             <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Imoveis</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
