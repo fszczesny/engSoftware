@@ -23,9 +23,34 @@ angular
             });
         }
 
+        // > User Type management
+        var checkUserType = function(userType) {
+            if (User.isLoggedIn()) {
+                if (User.getUserInfo().userType == userType) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        var getClientUserTypes = function() {
+            return [
+                { id: 'Customer', name: 'Cliente' },
+                { id: 'Owner', name: 'Proprietário' }
+            ];
+        }
+
+        var getEmployeeUserTypes = function() {
+            return [
+                { id: 'Consultant', name: 'Consultor' },
+                { id: 'Supervisor', name: 'Supervisor' },
+                { id: 'Manager', name: 'Gerente' },
+            ];
+        }
+
         updateUserInfo();
 
-        return {
+        var User = {
             update: updateUserInfo,
             logOut: logOut,
 
@@ -34,6 +59,17 @@ angular
             },
             isLoggedIn: function() {
                 return user != null;
-            }
+            },
+            // > User Type management
+            getClientUserTypes: getClientUserTypes,
+            getEmployeeUserTypes: getEmployeeUserTypes,
+            isManager: function() {
+                return checkUserType('Manager');
+            },
+            isCustomer: function() {
+                return checkUserType('Customer');
+            },
         };
+
+        return User;
     }]);

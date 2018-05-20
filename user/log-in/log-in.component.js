@@ -2,7 +2,7 @@ angular
     .module('user')
     .component('logIn', {
         templateUrl: 'user/log-in/log-in.template.html',
-        controller: ['LogInService', 'GoHome', 'User', function SignUpController(LogInService, GoHome, User) {
+        controller: ['LogInService', 'GoHome', 'User', function LogInController(LogInService, GoHome, User) {
             if (User.isLoggedIn) {
                 GoHome.go();
             }

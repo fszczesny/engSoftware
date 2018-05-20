@@ -1,4 +1,4 @@
-<h3>Cadastro de cliente</h3>
+<h3>Cadastro de funcionários</h3>
 <form name="signUpForm" on-submit="event.preventDefault()" ng-submit="submit(signUpForm.$valid)" novalidate>
     <div class="form-group">
         <label for="name">Nome</label>
@@ -10,7 +10,7 @@
         <input type="text" name="username" ng-class="{ 'is-invalid': signUpForm.username.$invalid && !signUpForm.username.$pristine }"
             required ng-minlength="11" ng-maxlength="11" ng-model="$ctrl.cpf" class="form-control" id="cpf" placeholder="Digite seu CPF">
         <small id="cpfHelp" class="form-text text-muted">
-            O CPF será seu nome de usuário para acesso ao sistema
+            O CPF será o usuário para acesso ao sistema
         </small>
     </div>
     <div class="form-group">
@@ -29,7 +29,7 @@
             O endereço é composto por nome da rua e número. Ex.: Av. Paulist, 123
         </small>
     </div>
-
+    
     <div class="form-row">
         <div class="form-group col-md-10">
             <label for="city">Cidade</label>
@@ -41,40 +41,48 @@
             <select name="state" ng-class="{ 'is-invalid': signUpForm.state.$invalid && !signUpForm.state.$pristine }" ng-model="$ctrl.address.state" required class="form-control" id="state">
                 <option>AC</option>
                 <option>AL</option>
-                <option>AM</option>
                 <option>AP</option>
+                <option>AM</option>
                 <option>BA</option>
                 <option>CE</option>
                 <option>DF</option>
                 <option>ES</option>
                 <option>GO</option>
                 <option>MA</option>
-                <option>MG</option>
-                <option>MS</option>
                 <option>MT</option>
+                <option>MS</option>
+                <option>MG</option>
                 <option>PA</option>
                 <option>PB</option>
+                <option>PR</option>
                 <option>PE</option>
                 <option>PI</option>
-                <option>PR</option>
                 <option>RJ</option>
                 <option>RN</option>
+                <option>RS</option>
                 <option>RO</option>
                 <option>RR</option>
-                <option>RS</option>
                 <option>SC</option>
-                <option>SE</option>
                 <option>SP</option>
+                <option>SE</option>
                 <option>TO</option>
             </select>
         </div>
     </div>
-
+    
     <div class="form-group">
         <label for="email">E-mail</label>
         <input type="email" name="email" autocomplete="email" ng-class="{ 'is-invalid': signUpForm.email.$invalid && !signUpForm.email.$pristine }"
             required ng-model="$ctrl.email" class="form-control" id="email" placeholder="Digite seu e-mail">
     </div>
+
+    <div class="form-group">
+        <label for="userType">Função</label>
+        <select name="userType" ng-class="{ 'is-invalid': signUpForm.userType.$invalid && !signUpForm.userType.$pristine }" ng-model="$ctrl.userType" required class="form-control" id="userType">
+            <option ng-repeat="userType in $ctrl.employeeUserTypes" value="{{ userType.id }}">{{ userType.name }}</option>
+        </select>
+    </div>
+
     <div class="form-group">
         <label for="password">Senha</label>
         <input type="password" name="password" ng-class="{ 'is-invalid': signUpForm.password.$invalid && !signUpForm.password.$pristine }"
@@ -88,4 +96,4 @@
         <small id="passwordConfirmHelp" class="form-text text-muted">As senhas devem ser iguais</small>
     </div>
     <button type="submit" class="btn btn-primary" ng-click="$ctrl.submit(signUpForm.$valid)" ng-disabled="signUpForm.$invalid">Cadastrar-me!</button>
-</form>
+    </form>

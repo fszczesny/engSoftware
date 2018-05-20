@@ -36,9 +36,16 @@ angular.module('RealEstate').config(['$stateProvider',
         component: 'logIn'
     };
 
+    var employeeSignUpState = {
+        name: 'employeeSignUp',
+        url: '/employeeSignUp',
+        component: 'employeeSignUp'
+    };
+
     $stateProvider.state(homeState);
     $stateProvider.state(signUpState);
     $stateProvider.state(logInState);
+    $stateProvider.state(employeeSignUpState);
 
     $urlRouterProvider.otherwise('/home');
 }]);

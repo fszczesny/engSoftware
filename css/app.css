@@ -8,8 +8,7 @@
 
 .main {
     padding: 30px;
+    padding-bottom: calc(30px + 56px);
 }
 
-.footer {
-    height: 56px;
-}
+.footer {}
