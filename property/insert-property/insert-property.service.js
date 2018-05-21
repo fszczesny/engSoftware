@@ -14,6 +14,7 @@ angular
                 resp.invalidMsg = "O proprietário não pode ser você mesmo";
                 if (typeof callback == 'function')
                     callback(resp);
+                return;
             }
 
             User.lookupUser(ownerUsername, function(ownerInfo) {
