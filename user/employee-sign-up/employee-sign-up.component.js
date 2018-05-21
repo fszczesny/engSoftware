@@ -9,7 +9,6 @@ angular
             }
 
             $scope.$watch(function() { return User.getUserInfo() }, function(user) {
-                console.log("here");
                 if (!User.isManager()) {
                     GoHome.go();
                 }

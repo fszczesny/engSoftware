@@ -26,20 +26,20 @@ angular
         }
 
         var lookupUser = function(username, callback) {
+            if (username.length == 0) return;
+            
             var query = new $kinvey.Query();
             query.equalTo('username', username);
-            $kinvey.User.lookup(query).subscribe(function(users) {
+            query.limit = 1;
+            var stream = $kinvey.Users.find(query, { discover: true });
+            stream.subscribe(function(users) {
                 if (typeof callback == 'function') {
-                    if (users.length == 1)
-                        // Prevent self user lookup
-                        if (user != null && users[0].username != user.username)
-                            callback(users[0]);
-                        else
-                            callback(null);
+                    if (users.length > 0)
+                        callback(users[0]);
                     else
                         callback(null);
                 }
-            })
+            });
         }
 
         // > User Type management
