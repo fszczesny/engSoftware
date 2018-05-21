@@ -1,8 +1,19 @@
+body,
+html {
+    margin:0;
+    padding:0;
+    height:100%;
+}
+.main-container {
+    position: relative;
+    min-height: 100%;
+}
+
 .header {
     height: 56px;
 }
 
-.navbar {
+.header .navbar {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, .3);
 }
 
@@ -11,4 +22,8 @@
     padding-bottom: calc(30px + 56px);
 }
 
-.footer {}
+.footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+}

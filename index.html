@@ -12,7 +12,6 @@
         <script src="frameworks/JQuery/jquery.js"></script>
         <script src="frameworks/Popper/popper.js"></script>
         <script src="frameworks/Bootstrap/bootstrap.js"></script>
-        <!-- <script src="frameworks/Kinvey/kinvey.min.js"></script> -->
         <script src="frameworks/Kinvey/kinvey.min.old.js"></script>
         <!-- CSS Files -->
         <link rel="stylesheet" href="css/app.css">
@@ -45,20 +44,21 @@
     </head>
     
 	<body ng-app="RealEstate" ng-controller="AppController">
+        <div class="main-container">
+            <div class="header">
+                <navbar></navbar>
+            </div>
 
-        <div class="header">
-            <navbar></navbar>
-        </div>
+            <div class="main">
+                <ui-view></ui-view>    
+            </div>
 
-        <div class="main">
-            <ui-view></ui-view>    
-        </div>
-
-        <div class="footer">
-            <nav class="navbar fixed-bottom navbar-dark bg-dark">
-                <a class="navbar-brand" href="">Telefone: (51) 99921-6614</a>
-                <a class="navbar-brand" href="">Av. Bento Gonçalves, 9500</a>
-            </nav>
+            <div class="footer">
+                <nav class="navbar navbar-dark bg-dark">
+                    <a class="navbar-brand" href="">Telefone: (51) 99921-6614</a>
+                    <a class="navbar-brand" href="">Av. Bento Gonçalves, 9500</a>
+                </nav>
+            </div>
         </div>
 	</body>
 </html>

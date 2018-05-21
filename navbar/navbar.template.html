@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="#!/home">Imobiliaria UFRGS</a>
         
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -28,12 +28,15 @@
                 </div>
             </li> -->
         </ul>
-        <li class="nav-item" ng-show="$ctrl.loggedIn">
-            <span class="nav-link">{{ $ctrl.user.name }}</a>
-        </li>
-        <li class="nav-item" ng-show="$ctrl.loggedIn">
-            <a class="nav-link" ng-click="$ctrl.logOut()">Sair</a>
-        </li>
+        <ul class="navbar-nav">
+            <li class="nav-item" ng-show="$ctrl.loggedIn">
+                <span class="nav-link">{{ $ctrl.user.name }}</span>
+            </li>
+            <li class="nav-item" ng-show="$ctrl.loggedIn">
+                <span class="nav-link" ng-click="$ctrl.logOut()">Sair</span>
+            </li>
+        </ul>
+        
         <!-- Search field -->
         <!-- <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Digite aqui" aria-label="Digite aqui">

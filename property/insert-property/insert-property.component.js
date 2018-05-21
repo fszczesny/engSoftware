@@ -4,6 +4,7 @@ angular
         templateUrl: 'property/insert-property/insert-property.template.html',
         controller: ['$scope','User', 'GoHome',
                         function InsertPropertyController($scope, User, GoHome) {
+
             var self = this;
 
             if (!User.isManager()) {
@@ -15,7 +16,6 @@ angular
                     GoHome.go();
                 }
             }, true);
-
 
             this.ownerInfo = null;
 
