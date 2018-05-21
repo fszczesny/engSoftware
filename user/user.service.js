@@ -93,7 +93,7 @@ angular
                 return checkUserType('Manager');
             },
             isAdmin: function() {
-                return checkUserType('Manager') || checkUserType('Supervisor');
+                return checkUserType('Manager') || checkUserType('Supervisor');
             },
             isCustomer: function() {
                 return checkUserType('Customer');
