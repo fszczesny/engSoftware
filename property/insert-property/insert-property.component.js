@@ -28,6 +28,8 @@ angular
             };
 
             this.submit = function(isValid) {
+                if (self.ownerInfo == null) return;
+
                 if (isValid) {
                     var propertyInfo = {
                         title: this.title,
