@@ -43,11 +43,13 @@ angular
         }
 
         // > User Type management
-        var checkUserType = function(userType) {
-            if (User.isLoggedIn()) {
-                if (User.getUserInfo().userType == userType) {
-                    return true;
+        var checkUserType = function(userType, userData) {
+            if (typeof userData == 'undefined') {
+                if (User.isLoggedIn()) {
+                    return User.getUserInfo().userType == userType;
                 }
+            } else {
+                return userData.userType == userType;
             }
             return false;
         }
@@ -82,6 +84,9 @@ angular
             lookupUser: lookupUser,
 
             // > User Type management
+            isClientUser: function(user) {
+                return checkUserType('Customer', user) || checkUserType('Owner', user);
+            },
             getClientUserTypes: getClientUserTypes,
             getEmployeeUserTypes: getEmployeeUserTypes,
             isManager: function() {
