@@ -25,6 +25,23 @@ angular
             }
         }
 
+        var lookupUser = function(username, callback) {
+            var query = new $kinvey.Query();
+            query.equalTo('username', username);
+            $kinvey.User.lookup(query).subscribe(function(users) {
+                if (typeof callback == 'function') {
+                    if (users.length == 1)
+                        // Prevent self user lookup
+                        if (user != null && users[0].username != user.username)
+                            callback(users[0]);
+                        else
+                            callback(null);
+                    else
+                        callback(null);
+                }
+            })
+        }
+
         // > User Type management
         var checkUserType = function(userType) {
             if (User.isLoggedIn()) {
@@ -55,13 +72,15 @@ angular
         var User = {
             update: updateUserInfo,
             logOut: logOut,
-
             getUserInfo: function() {
                 return user;
             },
             isLoggedIn: function() {
                 return user != null;
             },
+            
+            lookupUser: lookupUser,
+
             // > User Type management
             getClientUserTypes: getClientUserTypes,
             getEmployeeUserTypes: getEmployeeUserTypes,

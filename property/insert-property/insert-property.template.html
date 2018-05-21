@@ -1,0 +1,99 @@
+<h3>Cadastro de imóveis</h3>
+
+<form name="propertyForm" on-submit="event.preventDefault()" ng-submit="submit(propertyForm.$valid)" novalidate>
+    
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="owner">Proprietário</label>
+            <input type="text" name="owner" ng-class="{ 'is-invalid': (propertyForm.owner.$invalid || $ctrl.ownerInfo == null) && !propertyForm.owner.$pristine, 'is-valid': $ctrl.ownerInfo != null && !propertyForm.owner.$pristine }"
+                ng-model="$ctrl.owner" ng-blur="$ctrl.loadOwner()" autocomplete="off" required class="form-control" id="owner" placeholder="CPF do proprietário">
+        </div>
+        <div class="form-group col-md-6" id="ownerInfo">
+            <span>{{ $ctrl.ownerInfo }}</span>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="rentOrSale">Tipo de negociação</label>
+            <select name="rentOrSale" ng-class="{ 'is-invalid': propertyForm.rentOrSale.$invalid && !propertyForm.rentOrSale.$pristine }" ng-model="$ctrl.rentOrSale" required class="form-control" id="userType">
+                <option value="sale">Para vender</option>
+                <option value="rent">Para alugar</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="price">Preço {{ ($ctrl.rentOrSale == 'rent') ? 'mensal' : ($ctrl.rentOrSale == 'sale') ? 'de venda' : '' }}</label>
+            <input type="number" name="price" ng-class="{ 'is-invalid': propertyForm.price.$invalid && !propertyForm.price.$pristine }"
+                required ng-model="$ctrl.price" class="form-control" id="price" placeholder="Digite o preço">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="area">Área</label>
+            <input type="number" name="area" ng-class="{ 'is-invalid': propertyForm.area.$invalid && !propertyForm.area.$pristine }"
+                required ng-model="$ctrl.area" class="form-control" id="area" placeholder="Digite a área em m²">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="rooms">Número de quartos</label>
+            <input type="number" name="rooms" ng-class="{ 'is-invalid': propertyForm.rooms.$invalid && !propertyForm.rooms.$pristine }"
+                required ng-model="$ctrl.rooms" class="form-control" id="rooms" placeholder="Digite o número de quartos">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="bathrooms">Número de banheiros</label>
+            <input type="number" name="bathrooms" ng-class="{ 'is-invalid': propertyForm.bathrooms.$invalid && !propertyForm.bathrooms.$pristine }"
+                required ng-model="$ctrl.bathrooms" class="form-control" id="bathrooms" placeholder="Digite o número de banheiros">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="address">Endereço</label>
+        <input type="text" name="address" ng-class="{ 'is-invalid': propertyForm.address.$invalid && !propertyForm.address.$pristine }"
+            required ng-model="$ctrl.address.line" class="form-control" id="address" placeholder="Digite seu endereço">
+        <small id="addressHelp" class="form-text text-muted">
+            O endereço é composto por nome da rua e número. Ex.: Av. Paulist, 123
+        </small>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-10">
+            <label for="city">Cidade</label>
+            <input type="text" name="city" ng-class="{ 'is-invalid': propertyForm.city.$invalid && !propertyForm.city.$pristine }"
+                required ng-model="$ctrl.address.city" class="form-control" id="city" placeholder="Digite sua cidade">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="state">Estado</label>
+            <select name="state" ng-class="{ 'is-invalid': propertyForm.state.$invalid && !propertyForm.state.$pristine }" ng-model="$ctrl.address.state" required class="form-control" id="state">
+                <option>AC</option>
+                <option>AL</option>
+                <option>AM</option>
+                <option>AP</option>
+                <option>BA</option>
+                <option>CE</option>
+                <option>DF</option>
+                <option>ES</option>
+                <option>GO</option>
+                <option>MA</option>
+                <option>MG</option>
+                <option>MS</option>
+                <option>MT</option>
+                <option>PA</option>
+                <option>PB</option>
+                <option>PE</option>
+                <option>PI</option>
+                <option>PR</option>
+                <option>RJ</option>
+                <option>RN</option>
+                <option>RO</option>
+                <option>RR</option>
+                <option>RS</option>
+                <option>SC</option>
+                <option>SE</option>
+                <option>SP</option>
+                <option>TO</option>
+            </select>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" ng-click="$ctrl.submit(propertyForm.$valid)" ng-disabled="propertyForm.$invalid">Inserir imóvel</button>
+</form>

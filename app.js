@@ -4,6 +4,7 @@ angular.module('RealEstate', [
     'core',
     'user',
     'navbar',
+    'property',
 ]);
 
 angular.module('RealEstate').config(['$stateProvider',
@@ -42,10 +43,17 @@ angular.module('RealEstate').config(['$stateProvider',
         component: 'employeeSignUp'
     };
 
+    var insertPropertyState = {
+        name: 'insertProperty',
+        url: '/insertProperty',
+        component: 'insertProperty'
+    };
+
     $stateProvider.state(homeState);
     $stateProvider.state(signUpState);
     $stateProvider.state(logInState);
     $stateProvider.state(employeeSignUpState);
+    $stateProvider.state(insertPropertyState);
 
     $urlRouterProvider.otherwise('/home');
 }]);

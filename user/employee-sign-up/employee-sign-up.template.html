@@ -95,5 +95,5 @@
             required ng-minlength="6" ng-model="$ctrl.passwordConfirm" class="form-control" id="passwordConfirm" placeholder="Repita sua senha">
         <small id="passwordConfirmHelp" class="form-text text-muted">As senhas devem ser iguais</small>
     </div>
-    <button type="submit" class="btn btn-primary" ng-click="$ctrl.submit(signUpForm.$valid)">Cadastrar-me!</button>
+    <button type="submit" class="btn btn-primary" ng-click="$ctrl.submit(signUpForm.$valid)" ng-disabled="signUpForm.$invalid">Cadastrar-me!</button>
     </form>
