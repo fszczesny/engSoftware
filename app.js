@@ -10,7 +10,7 @@ angular.module('RealEstate', [
 angular.module('RealEstate').config(['$stateProvider',
                                      '$urlRouterProvider',
                                      '$kinveyProvider',
-                                     function($stateProvider, $urlRouterProvider, $kinveyProvider) {
+                                     function($stateProvider, $urlRouterProvider, $kinveyProvider, User) {
     
     // > Kinvey
     $kinveyProvider.init({
@@ -40,13 +40,27 @@ angular.module('RealEstate').config(['$stateProvider',
     var employeeSignUpState = {
         name: 'employeeSignUp',
         url: '/employeeSignUp',
-        component: 'employeeSignUp'
+        component: 'employeeSignUp',
+        resolve: {
+            checkAuth: function(User, GoHome) {
+                if (!User.isManager()) {
+                    GoHome.go();
+                }
+            }
+        }
     };
 
     var insertPropertyState = {
         name: 'insertProperty',
         url: '/insertProperty',
-        component: 'insertProperty'
+        component: 'insertProperty',
+        resolve: {
+            checkAuth: function(User, GoHome) {
+                if (!User.isAdmin()) {
+                    GoHome.go();
+                }
+            }
+        }
     };
 
     $stateProvider.state(homeState);
@@ -58,6 +72,6 @@ angular.module('RealEstate').config(['$stateProvider',
     $urlRouterProvider.otherwise('/home');
 }]);
 
-angular.module('RealEstate').run(['$kinvey', function($kinvey) {
+angular.module('RealEstate').run(['$kinvey', '$rootScope', function($kinvey, $rootScope) {
     
 }])

@@ -7,12 +7,12 @@ angular
 
             var self = this;
 
-            if (!User.isManager()) {
+            if (!User.isAdmin()) {
                 GoHome.go();
             }
 
             $scope.$watch(function() { return User.getUserInfo() }, function(user) {
-                if (!User.isManager()) {
+                if (!User.isAdmin()) {
                     GoHome.go();
                 }
             }, true);
