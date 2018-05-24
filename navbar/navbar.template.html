@@ -1,6 +1,10 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="#!/home">Imobiliária UFRGS</a>
-        
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -29,9 +33,7 @@
             </li> -->
         </ul>
         <ul class="navbar-nav">
-            <li class="nav-item" ng-show="$ctrl.loggedIn">
-                <span class="nav-link">{{ $ctrl.user.name }}</span>
-            </li>
+            <span class="navbar-text">{{ $ctrl.user.name }}</span>
             <li class="nav-item" ng-show="$ctrl.loggedIn">
                 <span class="nav-link" ng-click="$ctrl.logOut()">Sair</span>
             </li>
