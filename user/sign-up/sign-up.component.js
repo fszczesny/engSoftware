@@ -4,7 +4,8 @@ angular
     .component('signUp', {
         templateUrl: 'user/sign-up/sign-up.template.html',
         controller: ['SignUpService', 'GoHome', 'User', function SignUpController(SignUpService, GoHome, User) {
-            if (User.isLoggedIn) {
+            if (User.isLoggedIn()) {
+                console.log("here");
                 GoHome.go();
             }
 
