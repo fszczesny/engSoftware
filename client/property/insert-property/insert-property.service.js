@@ -47,9 +47,26 @@ angular
             });
         };
 
+        var uploadPhoto = function(file) {
+            var metadata = {
+                _id: 'abc123def456ghi',
+                filename: file.name,
+                mimeType: file.type,
+                size: file.size,
+                public: true
+            };
+            console.log("Uploading...", file);
+            $kinvey.Files.upload(file, metadata).then(function(file) {
+                console.log(file);
+            }).catch(function(error) {
+                console.log(error);
+            });
+        };
+
         return {
             loadOwnerInfo: loadOwnerInfo,
             insertProperty: insertProperty,
+            uploadPhoto: uploadPhoto,
         };
 
     }]);

@@ -56,5 +56,22 @@ angular
                 }
             };
 
+            $scope.$watch(function() { return self.photos }, function(photos) {
+                if (photos && photos[0])
+                    InsertPropertyService.uploadPhoto(photos[0]);
+            }, true);
+
         }]
-    })
+    });
+
+angular.module('core').directive('filesInput', function() {
+    return {
+        require: 'ngModel',
+        link: function postLink(scope, elem, attrs, ngModel) {
+            elem.on('change', function(e) {
+                var files = elem[0].files;
+                ngModel.$setViewValue(files);
+            })
+        }
+    }
+});

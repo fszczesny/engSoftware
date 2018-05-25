@@ -72,6 +72,26 @@ angular.module('RealEstate').config(['$stateProvider',
     $urlRouterProvider.otherwise('/home');
 }]);
 
-angular.module('RealEstate').run(['$kinvey', '$rootScope', function($kinvey, $rootScope) {
-    
+angular.module('RealEstate').run(['$kinvey', '$http', function($kinvey, $http) {
+    /*var basicAuth = "kid_B1Km-D3RM:a5ff61eb48284d9683ff7a39705198f0";
+    $http.defaults.headers.common['Authorization'] = "Basic " + btoa(basicAuth);
+
+    $http({
+        method: 'POST',
+        url: 'https://baas.kinvey.com/user/kid_B1Km-D3RM/',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: {
+            "username": "0815981590",
+            "password": "123456",
+            "userType": "Supervisor",
+            "name": "Joao Podre",
+            "phone": "5345435932",
+        }
+    }).then(function successCallback(response) {
+        console.log(response);
+    }, function errorCallback(response) {
+        console.log(response);
+    });*/
 }])
