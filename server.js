@@ -1,19 +1,31 @@
 'use strict';
 
 var express = require('express');
+var bodyParser = require('body-parser');
+var AWS = require('aws-sdk');
+var mysql = require('mysql');
+
 var app = express();
 var port = process.env.PORT || 8000;
 
 // > Configuration
-app.use(express.static(__dirname + '/client')); 
+app.use(express.static(__dirname + '/client'));
+app.use(bodyParser.urlencoded({ 'extended' : 'true' }));        // parse application/x-www-form-urlencoded
+app.use(bodyParser.json());                                     // parse application/json
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 
-// API routes
+// > MySQL
+var mysqlConnect = require('./server/mysqlConnect');
+mysqlConnect(mysql);
 
-var routes = require('./server/routes/routes');
-routes(app);    // Register routes
+// > API routes
 
-// Application
+var userRoutes = require('./server/routes/users');
+userRoutes(app);    // Register routes
+
+// > Application
+
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/client/main.html');
 })
