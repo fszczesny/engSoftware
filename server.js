@@ -3,7 +3,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var AWS = require('aws-sdk');
-var mysql = require('mysql');
+var mysqlConnect = require('./server/db');
 
 var app = express();
 var port = process.env.PORT || 8000;
@@ -13,11 +13,6 @@ app.use(express.static(__dirname + '/client'));
 app.use(bodyParser.urlencoded({ 'extended' : 'true' }));        // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
-
-
-// > MySQL
-var mysqlConnect = require('./server/mysqlConnect');
-mysqlConnect(mysql);
 
 // > API routes
 

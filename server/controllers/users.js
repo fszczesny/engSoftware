@@ -1,5 +1,7 @@
 'use strict';
 
+var db = require('../db')
+
 exports.getAllUsers = function(req, res) {
     res.send("Get all users");
 }
@@ -10,6 +12,9 @@ exports.createUser = function(req, res) {
 
 
 exports.getUser = function(req, res) {
+    db.connection.end(function(err) {
+        console.log("Connection end!");
+    });
     res.send("Get user");
 }
 
