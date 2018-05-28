@@ -4,8 +4,7 @@ module.exports = function(app) {
     var user = require('../controllers/users');
     
     app.route('/api/user')
-                .get(user.getAllUsers)
-                .post(user.createUser);
+                .post(user.signUp);
 
     app.route('/api/user/:userId')
                 .get(user.getUser)
@@ -14,5 +13,8 @@ module.exports = function(app) {
 
     app.route('/api/user/login')
             .post(user.logIn);
+
+    app.route('/api/user/check-exist')
+            .post(user.checkExist);
 
 }

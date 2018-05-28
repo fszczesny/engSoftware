@@ -1,14 +1,12 @@
 angular
     .module('user')
-    .factory('LogInService', ['$kinvey', 'User', function($kinvey, User) {
+    .factory('LogInService', ['User', function(User) {
+
         var logIn = function(logInInfo) {
             return new Promise(function(resolve, reject) {
-                var kinveyPromise = $kinvey.User.login(logInInfo);
-                kinveyPromise.then(function(user) {
-                    User.update();
-                    resolve(user);
+                User.logIn(logInInfo).then(function(userData) {
+                    resolve(userData);
                 }).catch(function(error) {
-                    console.log("Failed logging in", error);
                     reject(error);
                 });
             });

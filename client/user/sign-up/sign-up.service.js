@@ -1,52 +1,54 @@
 angular
     .module('user')
-    .factory('SignUpService', ['$kinvey', 'User', function($kinvey, User) {
+    .factory('SignUpService', ['User', 'UserSession', '$http', function(User, UserSession, $http) {
+        var checkUserExists = function(username) {
+            return new Promise(function(resolve, reject) {
+                $http
+                    .post('/api/user/check-exist', {
+                        username: username
+                    }).then(function(resp) {
+                        resolve(resp.data.userExists);
+                    }).catch(function(error) {
+                        console.log('Error', error);
+                        reject(error);
+                    });
+            });
+        };
+
         var signUp = function(userData) {
             return new Promise(function(resolve, reject) {
-
-                var existsPromise = $kinvey.User.exists(userData.username);
-                existsPromise.then(function(exists) {
-                    // Check user exists
-                    if (exists) {
-                        // Generate "User already exists" error
-                        var error = {
-                            code: 409,
-                            message: "User already exists"
-                        };
-                        reject(error);
-                    } else {
-                        // Logout in case there is an active user
-                        // Needed because of Kinvey!!!
-                        $kinvey.User.logout().then(function() {
-
-                            // Sign up new user
-                            var kinveyPromise = $kinvey.User.signup(userData);
-                            kinveyPromise.then(function(user) {
-                                console.log(user);
-                                // User is signed up and logged in
+                checkUserExists(userData.username).then(function(userExists) {
+                    if (!userExists) {
+                        $http
+                            .post('/api/user', userData)
+                            .then(function(resp) {
+                                // Log In
+                                var userData = resp.data;
+                                UserSession.setSession(userData);
                                 User.update();
-                                resolve(user);
+                                resolve(userData);
                             }).catch(function(error) {
-                                console.log(error);
-                                reject(error);
+                                console.log('Error', error);
+                                reject({
+                                    msg: 'ERRO: Não foi possível cadastrar o usuário'
+                                })
                             });
-
-                        }).catch(function(error) {
-                            console.log("Fail logging out", error);
-                            reject(error)
+                    } else {
+                        reject({
+                            msg: 'Usuário já cadastrado'
                         });
                     }
                 }).catch(function(error) {
-                    console.log("Error: check user existance", error);
-                    reject(error);
+                   reject({
+                       msg: 'ERRO: Não foi possível verificar existência do usuário'
+                   });
                 });
-
-                
 
             });
         };
 
         return {
-            signUp: signUp
+            signUp: signUp,
+            checkUserExists: checkUserExists,
         };
     }]);

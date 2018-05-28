@@ -1,103 +1,110 @@
 angular
     .module('user')
-    .factory('User', ['$kinvey', function($kinvey) {
-        var activeUser;
+    .factory('User', ['UserSession',
+                      'ClientUserTypes',
+                      'EmployeeUserTypes',
+                      '$http',
+                      function(UserSession, ClientUserTypes, EmployeeUserTypes, $http) {
         var user = null;
 
-        var updateUserInfo = function() {
-            activeUser = $kinvey.User.getActiveUser();
-            if (activeUser != null) {
-                user = activeUser.data;
-            } else {
-                user = null;
+        var fetchUserData = function() {
+            user = UserSession.getSession();
+            if (user != null) {
+                var userId = user.id;
+                $http
+                    .get('/api/user/' + userId)
+                    .then(function(resp) {
+                        var userData = resp.data;
+                        UserSession.setSession(userData);
+                        updateUserData();
+                    }).catch(function(error) {
+                        console.log('Error', error);
+                    });
             }
         };
 
-        var logOut = function(callback) {
-            if (user != null) {
-                $kinvey.User.logout().then(function() {
-                    updateUserInfo();
-                    if (typeof callback == 'function')
-                        callback();
-                }).catch(function(error) {
-                    console.log("Fail logging out", error);
-                });
-            }
+        var updateUserData = function() {
+            user = UserSession.getSession();
+        };
+
+        var isLoggedIn = function() {
+            return user != null;
         }
 
-        var lookupUser = function(username, callback) {
-            if (username.length == 0) return;
-            
-            var query = new $kinvey.Query();
-            query.equalTo('username', username);
-            query.limit = 1;
-            var stream = $kinvey.Users.find(query, { discover: true });
-            stream.subscribe(function(users) {
-                if (typeof callback == 'function') {
-                    if (users.length > 0)
-                        callback(users[0]);
-                    else
-                        callback(null);
-                }
+        var getUserData = function() {
+            return user;
+        }
+
+        /*
+         * LogInInfo: { username: String, password: String }
+         * > Promise: -> userData: Object
+         */
+        var logIn = function(logInInfo) {
+            return new Promise(function(resolve, reject) {
+                $http
+                    .post('/api/user/login', logInInfo)
+                    .then(function(resp) {
+                        var userData = resp.data;
+
+                        if (userData != null) {
+                            // Login successful
+                            UserSession.setSession(userData);
+                            updateUserData();
+                            resolve(resp.data);
+                        } else {
+                            reject({
+                                msg: 'Credenciais erradas!'
+                            })
+                        }
+                    }).catch(function(error) {
+                        console.log('Error', error);
+                        reject({
+                            msg: 'ERRO: Não foi possível fazer login'
+                        })
+                    });
             });
+        };
+
+        var logOut = function(callback) {
+            if (isLoggedIn()) {
+                UserSession.endSession();
+                updateUserData();
+                if (typeof callback == 'function')
+                    callback();
+            }
         }
 
         // > User Type management
-        var checkUserType = function(userType, userData) {
-            if (typeof userData == 'undefined') {
-                if (User.isLoggedIn()) {
-                    return User.getUserInfo().userType == userType;
-                }
+        var checkUserType = function(userType) {
+            if (isLoggedIn()) {
+                return getUserData().userType == userType;
             } else {
-                return userData.userType == userType;
+                return false;
             }
-            return false;
-        }
-        
-        var getClientUserTypes = function() {
-            return [
-                { id: 'Customer', name: 'Cliente' },
-                { id: 'Owner', name: 'Proprietário' }
-            ];
         }
 
-        var getEmployeeUserTypes = function() {
-            return [
-                { id: 'Consultant', name: 'Consultor' },
-                { id: 'Supervisor', name: 'Supervisor' },
-                { id: 'Manager', name: 'Gerente' },
-            ];
-        }
-
-        updateUserInfo();
+        fetchUserData();
 
         var User = {
-            update: updateUserInfo,
+            update: updateUserData,
+            logIn: logIn,
             logOut: logOut,
-            getUserInfo: function() {
-                return user;
-            },
-            isLoggedIn: function() {
-                return user != null;
-            },
-            
-            lookupUser: lookupUser,
+            getUserData: getUserData,
+            isLoggedIn: isLoggedIn,
 
             // > User Type management
-            isClientUser: function(user) {
-                return checkUserType('Customer', user) || checkUserType('Owner', user);
+            isClient: function(user) {
+                return checkUserType('Customer') || checkUserType('Owner');
             },
-            getClientUserTypes: getClientUserTypes,
-            getEmployeeUserTypes: getEmployeeUserTypes,
+            isCustomer: function() {
+                return checkUserType('Customer');
+            },
             isManager: function() {
                 return checkUserType('Manager');
             },
             isAdmin: function() {
                 return checkUserType('Manager') || checkUserType('Supervisor');
-            },
-            isCustomer: function() {
-                return checkUserType('Customer');
-            },
+            }
         };
 
         return User;

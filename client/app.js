@@ -1,6 +1,5 @@
 angular.module('RealEstate', [
     'ui.router',
-    'kinvey',
     'core',
     'user',
     'navbar',
@@ -9,14 +8,7 @@ angular.module('RealEstate', [
 
 angular.module('RealEstate').config(['$stateProvider',
                                      '$urlRouterProvider',
-                                     '$kinveyProvider',
-                                     function($stateProvider, $urlRouterProvider, $kinveyProvider, User) {
-    
-    // > Kinvey
-    $kinveyProvider.init({
-        appKey: 'kid_B1Km-D3RM',
-        appSecret: 'a5ff61eb48284d9683ff7a39705198f0'
-    });
+                                     function($stateProvider, $urlRouterProvider, User) {
 
     // > States
     var homeState = {
@@ -72,7 +64,7 @@ angular.module('RealEstate').config(['$stateProvider',
     $urlRouterProvider.otherwise('/home');
 }]);
 
-angular.module('RealEstate').run(['$kinvey', '$http', '$window', function($kinvey, $http, $window) {
+angular.module('RealEstate').run(['$http', '$window', function($http, $window) {
     /*var basicAuth = "kid_B1Km-D3RM:a5ff61eb48284d9683ff7a39705198f0";
     $http.defaults.headers.common['Authorization'] = "Basic " + btoa(basicAuth);
 
@@ -94,5 +86,4 @@ angular.module('RealEstate').run(['$kinvey', '$http', '$window', function($kinve
     }, function errorCallback(response) {
         console.log(response);
     });*/
-
 }]);

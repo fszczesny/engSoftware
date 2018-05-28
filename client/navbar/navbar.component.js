@@ -11,12 +11,12 @@ angular
             this.isManager = false;
 
             // Watch user info / login status
-            $scope.$watch(function() { return User.getUserInfo() }, function(user) {
+            $scope.$watch(function() { return User.getUserData() }, function(user) {
                 loadUser();
             }, true);
 
             var loadUser = function() {
-                self.user = User.getUserInfo();
+                self.user = User.getUserData();
                 self.loggedIn = User.isLoggedIn();
                 self.isAdmin = User.isAdmin();
                 self.isManager = User.isManager();

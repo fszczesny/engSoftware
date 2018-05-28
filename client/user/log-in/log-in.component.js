@@ -14,8 +14,7 @@ angular
                 }).then(function(user) {
                     GoHome.go();
                 }).catch(function(error) {
-                    if (error.code == 401)
-                        alert('Credenciais erradas!'); 
+                    alert(error.msg); 
                 })
             }
         }]

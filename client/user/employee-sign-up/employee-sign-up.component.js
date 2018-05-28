@@ -2,19 +2,23 @@ angular
     .module('user')
     .component('employeeSignUp', {
         templateUrl: 'user/employee-sign-up/employee-sign-up.template.html',
-        controller: ['User', 'GoHome', 'SignUpService', '$scope',
-                        function EmployeeSignUpController(User, GoHome, SignUpService, $scope) {
+        controller: ['User',
+                     'GoHome',
+                     'SignUpService',
+                     '$scope',
+                     'EmployeeUserTypes',
+                     function EmployeeSignUpController(User, GoHome, SignUpService, $scope, EmployeeUserTypes) {
             if (!User.isManager()) {
                 GoHome.go();
             }
 
-            $scope.$watch(function() { return User.getUserInfo() }, function(user) {
+            $scope.$watch(function() { return User.getUserData() }, function(user) {
                 if (!User.isManager()) {
                     GoHome.go();
                 }
             }, true);
 
-            this.employeeUserTypes = User.getEmployeeUserTypes();
+            this.employeeUserTypes = EmployeeUserTypes;
 
             this.submit = function(isValid) {
                 if (isValid) {}

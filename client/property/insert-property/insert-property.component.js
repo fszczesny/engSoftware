@@ -11,7 +11,7 @@ angular
                 GoHome.go();
             }
 
-            $scope.$watch(function() { return User.getUserInfo() }, function(user) {
+            $scope.$watch(function() { return User.getUserData() }, function(user) {
                 if (!User.isAdmin()) {
                     GoHome.go();
                 }
@@ -57,8 +57,9 @@ angular
             };
 
             $scope.$watch(function() { return self.photos }, function(photos) {
-                if (photos && photos[0])
-                    InsertPropertyService.uploadPhoto(photos[0]);
+                if (photos && photos[0]) {
+                    // InsertPropertyService.uploadPhoto(photos[0]);
+                }
             }, true);
 
         }]

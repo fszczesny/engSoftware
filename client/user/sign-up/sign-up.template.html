@@ -8,7 +8,7 @@
     <div class="form-group">
         <label for="CPF">CPF</label>
         <input type="text" name="username" ng-class="{ 'is-invalid': signUpForm.username.$invalid && !signUpForm.username.$pristine }"
-            required ng-minlength="11" ng-maxlength="11" ng-model="$ctrl.cpf" class="form-control" id="cpf" placeholder="Digite seu CPF">
+            required ng-minlength="11" ng-blur="$ctrl.checkUserExists()" ng-maxlength="11" ng-model="$ctrl.cpf" class="form-control" id="cpf" placeholder="Digite seu CPF">
         <small id="cpfHelp" class="form-text text-muted">
             O CPF será seu nome de usuário para acesso ao sistema
         </small>
@@ -24,7 +24,7 @@
     <div class="form-group">
         <label for="address">Endereço</label>
         <input type="text" name="address" ng-class="{ 'is-invalid': signUpForm.address.$invalid && !signUpForm.address.$pristine }"
-            required ng-model="$ctrl.address.line" class="form-control" id="address" placeholder="Digite seu endereço">
+            required ng-model="$ctrl.address" class="form-control" id="address" placeholder="Digite seu endereço">
         <small id="addressHelp" class="form-text text-muted">
             O endereço é composto por nome da rua e número. Ex.: Av. Paulist, 123
         </small>
@@ -34,11 +34,11 @@
         <div class="form-group col-md-10">
             <label for="city">Cidade</label>
             <input type="text" name="city" ng-class="{ 'is-invalid': signUpForm.city.$invalid && !signUpForm.city.$pristine }"
-                required ng-model="$ctrl.address.city" class="form-control" id="city" placeholder="Digite sua cidade">
+                required ng-model="$ctrl.city" class="form-control" id="city" placeholder="Digite sua cidade">
         </div>
         <div class="form-group col-md-2">
             <label for="state">Estado</label>
-            <select name="state" ng-class="{ 'is-invalid': signUpForm.state.$invalid && !signUpForm.state.$pristine }" ng-model="$ctrl.address.state" required class="form-control" id="state">
+            <select name="state" ng-class="{ 'is-invalid': signUpForm.state.$invalid && !signUpForm.state.$pristine }" ng-model="$ctrl.state" required class="form-control" id="state">
                 <option>AC</option>
                 <option>AL</option>
                 <option>AM</option>

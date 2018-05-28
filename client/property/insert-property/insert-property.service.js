@@ -1,6 +1,6 @@
 angular
     .module('property')
-    .factory('InsertPropertyService', ['User', '$kinvey', function(User, $kinvey) {
+    .factory('InsertPropertyService', ['User', function(User) {
         
         var loadOwnerInfo = function(ownerUsername, callback) {
             var resp = {
@@ -9,7 +9,7 @@ angular
             };
 
             // Avoid owner to be current active user
-            if (ownerUsername.length == 0 || User.getUserInfo().username == ownerUsername) {
+            if (ownerUsername.length == 0 || User.getUserData().username == ownerUsername) {
                 resp.ownerInfo = null;
                 resp.invalidMsg = "O proprietário não pode ser você mesmo";
                 if (typeof callback == 'function')
@@ -38,35 +38,18 @@ angular
 
         var insertProperty = function(propertyInfo) {
             return new Promise(function(resolve, reject) {
-                var dataStore = $kinvey.DataStore.collection('Properties');
+                /*var dataStore = $kinvey.DataStore.collection('Properties');
                 dataStore.save(propertyInfo).then(function(property) {
                     resolve(property);
                 }).catch(function(error) {
                     reject(error);
-                });
-            });
-        };
-
-        var uploadPhoto = function(file) {
-            var metadata = {
-                _id: 'abc123def456ghi',
-                filename: file.name,
-                mimeType: file.type,
-                size: file.size,
-                public: true
-            };
-            console.log("Uploading...", file);
-            $kinvey.Files.upload(file, metadata).then(function(file) {
-                console.log(file);
-            }).catch(function(error) {
-                console.log(error);
+                });*/
             });
         };
 
         return {
             loadOwnerInfo: loadOwnerInfo,
             insertProperty: insertProperty,
-            uploadPhoto: uploadPhoto,
         };
 
     }]);

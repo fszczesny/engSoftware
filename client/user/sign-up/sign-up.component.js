@@ -3,10 +3,25 @@ angular
     .module('user')
     .component('signUp', {
         templateUrl: 'user/sign-up/sign-up.template.html',
-        controller: ['SignUpService', 'GoHome', 'User', function SignUpController(SignUpService, GoHome, User) {
+        controller: ['SignUpService',
+                     'GoHome',
+                     'User',
+                     function SignUpController(SignUpService, GoHome, User) {
+
             if (User.isLoggedIn()) {
-                console.log("here");
                 GoHome.go();
+            }
+
+            this.checkUserExists = function() {
+                var username = this.cpf;
+                if (username) {
+                    // Will only check after username (str length) is valid
+                    SignUpService.checkUserExists(username)
+                    .then(function(userExists) {
+                        // UI feedback
+                        console.log("User exists", userExists);
+                    });
+                }
             }
 
             this.submit = function(isValid) {
@@ -17,23 +32,21 @@ angular
                     }
 
                     var userData = {
+                        userType: 'Customer',
                         username: this.cpf,
                         password: this.password,
                         name: this.name,
                         phone: this.phone,
-                        address: this.address, // { line: String, city: String, state: String }
-                        email: this.email,
-                        userType: 'Customer'
+                        address: this.address,
+                        city: this.city,
+                        state: this.state,
+                        email: this.email
                     };
 
                     SignUpService.signUp(userData).then(function(user) {
                         GoHome.go();
                     }).catch(function(error) {
-                        if (error.code == 409) {
-                            alert('Usuário já existe');
-                        } else {
-                            alert('Erro no cadastro');
-                        }
+                        alert(error.msg);
                     });
                 } 
             }
