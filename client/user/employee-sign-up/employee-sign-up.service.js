@@ -1,19 +1,17 @@
 angular
     .module('user')
-    .factory('EmployeeSignUp', [function() {
-        var signUp = function (userData) {
-            return new Promise(function(resolve, reject) {
-                /*var kinveyPromise = $kinvey.User.update(userData);
+    .factory('EmployeeSignUp', ['SignUpService', function(SignUpService) {
 
-                kinveyPromise.then(function(user) {
-                    console.log(user);
-                }).catch(function(error) {
-                    console.log(error);
-                });*/
-            });
+        var checkUserExists = function(username) {
+            return SignUpService.checkUserExists(username);
+        }
+
+        var createUser = function (userData) {
+            return SignUpService.createUser(userData);
         }
 
         return {
-            signUp: signUp
+            createUser: createUser,
+            checkUserExists: checkUserExists,
         }
     }]);

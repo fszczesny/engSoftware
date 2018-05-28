@@ -4,10 +4,10 @@ angular
         templateUrl: 'user/employee-sign-up/employee-sign-up.template.html',
         controller: ['User',
                      'GoHome',
-                     'SignUpService',
+                     'EmployeeSignUp',
                      '$scope',
                      'EmployeeUserTypes',
-                     function EmployeeSignUpController(User, GoHome, SignUpService, $scope, EmployeeUserTypes) {
+                     function EmployeeSignUpController(User, GoHome, EmployeeSignUp, $scope, EmployeeUserTypes) {
             if (!User.isManager()) {
                 GoHome.go();
             }
@@ -20,29 +20,41 @@ angular
 
             this.employeeUserTypes = EmployeeUserTypes;
 
+            this.checkUserExists = function() {
+                var username = this.cpf;
+                if (username) {
+                    // Will only check after username (str length) is valid
+                    EmployeeSignUp.checkUserExists(username)
+                    .then(function(userExists) {
+                        // UI feedback
+                        console.log("User exists", userExists);
+                    });
+                }
+            }
+
             this.submit = function(isValid) {
                 if (isValid) {}
 
                 var userData = {
+                    userType: this.userType,
                     username: this.cpf,
                     password: this.password,
                     name: this.name,
                     phone: this.phone,
-                    address: this.address, // { line: String, city: String, state: String }
-                    email: this.email,
-                    userType: this.userType
+                    address: this.address,
+                    city: this.city,
+                    state: this.state,
+                    email: this.email
                 };
 
-                SignUpService.signUp(userData).then(function(user) {
+                console.log(userData);
+
+                EmployeeSignUp.createUser(userData).then(function(user) {
+                    alert("Funcionário cadastrado!")
                     GoHome.go();
                 }).catch(function(error) {
-                    console.log(error);
-                    if (error.code == 409) {
-                        alert('Usuário já existe');
-                    } else {
-                        alert('Erro no cadastro');
-                    }
-                }); 
+                    alert(error.msg);
+                });
             }
 
         }],

@@ -15,17 +15,17 @@ angular
             });
         };
 
-        var signUp = function(userData) {
+        /*
+         * Inserts new user into database
+         */
+        var createUser = function(userData) {
             return new Promise(function(resolve, reject) {
                 checkUserExists(userData.username).then(function(userExists) {
                     if (!userExists) {
                         $http
                             .post('/api/user', userData)
                             .then(function(resp) {
-                                // Log In
                                 var userData = resp.data;
-                                UserSession.setSession(userData);
-                                User.update();
                                 resolve(userData);
                             }).catch(function(error) {
                                 console.log('Error', error);
@@ -47,8 +47,33 @@ angular
             });
         };
 
+        /*
+         * Sets current user session to create user
+         */
+        var logIn = function(userData) {
+            UserSession.setSession(userData);
+            User.update();
+        }
+
+        /*
+         * Creates user and log in to create account
+         */
+        var signUp = function(userData) {
+            return new Promise(function(resolve, reject) {
+                createUser(userData).then(function(userData) {
+                    logIn(userData);
+                    resolve(userData);
+                }).catch(function(error) {
+                   reject({
+                       msg: 'ERRO: Não foi possível cadastrar o usuário'
+                   });
+                });
+            });
+        };
+
         return {
             signUp: signUp,
+            createUser: createUser,
             checkUserExists: checkUserExists,
         };
     }]);
