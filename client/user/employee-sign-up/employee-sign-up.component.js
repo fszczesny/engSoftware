@@ -33,7 +33,12 @@ angular
             }
 
             this.submit = function(isValid) {
-                if (isValid) {}
+                if (!isValid) { return false; };
+
+                if (this.password != this.passwordConfirm) {
+                    alert("As senhas devem ser iguais!");
+                    return false;
+                }
 
                 var userData = {
                     userType: this.userType,
@@ -47,10 +52,8 @@ angular
                     email: this.email
                 };
 
-                console.log(userData);
-
                 EmployeeSignUp.createUser(userData).then(function(user) {
-                    alert("Funcionário cadastrado!")
+                    alert("Funcionário cadastrado!");
                     GoHome.go();
                 }).catch(function(error) {
                     alert(error.msg);
