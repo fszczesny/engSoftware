@@ -35,7 +35,7 @@ exports.signUp = function(req, res) {
     });
 }
 
-exports.getUser = function(req, res) {
+exports.getUserById = function(req, res) {
     var userId = req.params.userId;
     getUserById(userId, function(userData) {
         res.json(userData);
@@ -85,3 +85,19 @@ exports.checkExist = function(req, res) {
     });
 }
 
+exports.lookUpUser = function(req, res) {
+    var username = req.body.username;
+    var sql = "SELECT * FROM users WHERE username = ?";
+    
+    dbConnection.query(sql, [username], function (error, results, fields) {
+        if (error) throw error;
+        
+        if (results.length > 0) {
+            var userData = results[0];
+            delete userData.password;
+            res.json(userData);
+        } else {
+            res.json(null);
+        }
+    });
+}

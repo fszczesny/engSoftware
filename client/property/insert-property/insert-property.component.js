@@ -2,8 +2,11 @@ angular
     .module('property')
     .component('insertProperty', {
         templateUrl: 'property/insert-property/insert-property.template.html',
-        controller: ['$scope','User', 'GoHome', 'InsertPropertyService',
-                        function InsertPropertyController($scope, User, GoHome, InsertPropertyService) {
+        controller: ['$scope',
+                     'User',
+                     'GoHome',
+                     'InsertPropertyService',
+                     function InsertPropertyController($scope, User, GoHome, InsertPropertyService) {
 
             var self = this;
 
@@ -17,10 +20,12 @@ angular
                 }
             }, true);
 
+            // > Owner Management
             this.ownerInfo = null;
-
+            this.ownerInvalidMsg = null;
             this.loadOwner = function() {
-                InsertPropertyService.loadOwnerInfo(self.owner, function(resp) {
+                InsertPropertyService.loadOwnerInfo(this.owner, function(resp) {
+                    console.log(resp);
                     self.ownerInfo = resp.ownerInfo;
                     self.ownerInvalidMsg = resp.invalidMsg;
                     $scope.$applyAsync();
@@ -28,31 +33,31 @@ angular
             };
 
             this.submit = function(isValid) {
-                if (self.ownerInfo == null) return;
+                if (this.ownerInfo == null) return;
 
                 if (isValid) {
                     var propertyInfo = {
                         title: this.title,
-                        ownerUsername: this.owner,
+                        ownerId: this.ownerInfo.id,
                         rentOrSale: this.rentOrSale,
                         price: this.price,
                         area: this.area,
                         rooms: this.rooms,
                         bathrooms: this.bathrooms,
                         address: this.address,
+                        city: this.city,
+                        state: this.state,
                         description: this.description
                     };
 
-                    var promise = InsertPropertyService.insertProperty(propertyInfo);
-                    promise.then(function(property) {
-                        console.log(property);
-                        alert("Imóvel inserido!");
-                        GoHome.go();
-                    }).catch(function(error) {
-                        console.log(error);
-                        alert("Erro na inserção do imóvel");
-                        GoHome.go();
-                    });
+                    InsertPropertyService.insertProperty(propertyInfo)
+                        .then(function(propertyId) {
+                            alert("Imóvel inserido!");
+                            GoHome.go();
+                        }).catch(function(error) {
+                            console.log(error);
+                            alert("Erro na inserção do imóvel");
+                        });
                 }
             };
 

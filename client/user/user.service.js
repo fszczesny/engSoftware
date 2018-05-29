@@ -93,7 +93,7 @@ angular
             isLoggedIn: isLoggedIn,
 
             // > User Type management
-            isClient: function(user) {
+            isClient: function() {
                 return checkUserType('Customer') || checkUserType('Owner');
             },
             isCustomer: function() {
