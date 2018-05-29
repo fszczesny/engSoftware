@@ -32,43 +32,13 @@ angular
                 });
             };
 
-            this.submit = function(isValid) {
-                if (this.ownerInfo == null) return;
-
-                if (isValid) {
-                    var propertyInfo = {
-                        title: this.title,
-                        ownerId: this.ownerInfo.id,
-                        rentOrSale: this.rentOrSale,
-                        price: this.price,
-                        area: this.area,
-                        rooms: this.rooms,
-                        bathrooms: this.bathrooms,
-                        address: this.address,
-                        city: this.city,
-                        state: this.state,
-                        description: this.description
-                    };
-
-                    InsertPropertyService.insertProperty(propertyInfo)
-                        .then(function(propertyId) {
-                            alert("Imóvel inserido!");
-                            GoHome.go();
-                        }).catch(function(error) {
-                            console.log(error);
-                            alert("Erro na inserção do imóvel");
-                        });
-                }
-            };
-
-            // > Upload photo
+            // > Photo management
             this.uploadingPhoto = false;
             this.photoURL = null;
 
             this.uploadPhoto = function() {
                 var photos = this.photos;
                 if (photos && photos[0]) {
-                    console.log("here");
                     self.uploadingPhoto = true;
                     InsertPropertyService.uploadPhoto(photos[0])
                         .then(function(url) {
@@ -93,6 +63,41 @@ angular
                     }).catch(function(error) {
                         alert(error.msg);
                     });
+            };
+
+            this.submit = function(isValid) {
+                if (this.ownerInfo == null) return;
+
+                if (this.uploadingPhoto) {
+                    alert("Aguarde um instante!\nA foto está sendo enviada.");
+                    return;
+                }
+
+                if (isValid) {
+                    var propertyInfo = {
+                        title: this.title,
+                        ownerId: this.ownerInfo.id,
+                        rentOrSale: this.rentOrSale,
+                        price: this.price,
+                        area: this.area,
+                        rooms: this.rooms,
+                        bathrooms: this.bathrooms,
+                        address: this.address,
+                        city: this.city,
+                        state: this.state,
+                        description: this.description,
+                        img: this.photoURL
+                    };
+
+                    InsertPropertyService.insertProperty(propertyInfo)
+                        .then(function(propertyId) {
+                            alert("Imóvel inserido!");
+                            GoHome.go();
+                        }).catch(function(error) {
+                            console.log(error);
+                            alert("Erro na inserção do imóvel");
+                        });
+                }
             };
 
         }]
