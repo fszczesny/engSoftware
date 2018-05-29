@@ -19,6 +19,7 @@ angular
                 self.loggedIn = UserService.isLoggedIn();
                 self.isAdmin = UserService.isAdmin();
                 self.isManager = UserService.isManager();
+                $scope.$applyAsync();
             };
 
             UserAuth.addListener(loadUser, {
