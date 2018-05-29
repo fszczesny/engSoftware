@@ -2,21 +2,18 @@ angular
     .module('user')
     .component('employeeSignUp', {
         templateUrl: 'user/employee-sign-up/employee-sign-up.template.html',
-        controller: ['User',
+        controller: ['UserAuth',
                      'GoHome',
                      'EmployeeSignUp',
                      '$scope',
                      'EmployeeUserTypes',
-                     function EmployeeSignUpController(User, GoHome, EmployeeSignUp, $scope, EmployeeUserTypes) {
-            if (!User.isManager()) {
+                     function EmployeeSignUpController(UserAuth, GoHome, EmployeeSignUp, $scope, EmployeeUserTypes) {
+            
+            UserAuth.validate(function validator(User) {
+                return User.isManager();
+            }, function authFailed(User) {
                 GoHome.go();
-            }
-
-            $scope.$watch(function() { return User.getUserData() }, function(user) {
-                if (!User.isManager()) {
-                    GoHome.go();
-                }
-            }, true);
+            }, function authSuccess(User) {});
 
             this.employeeUserTypes = EmployeeUserTypes;
 

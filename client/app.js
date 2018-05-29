@@ -8,7 +8,7 @@ angular.module('RealEstate', [
 
 angular.module('RealEstate').config(['$stateProvider',
                                      '$urlRouterProvider',
-                                     function($stateProvider, $urlRouterProvider, User) {
+                                     function($stateProvider, $urlRouterProvider, UserAuth) {
 
     // > States
     var homeState = {
@@ -34,10 +34,8 @@ angular.module('RealEstate').config(['$stateProvider',
         url: '/employeeSignUp',
         component: 'employeeSignUp',
         resolve: {
-            checkAuth: function(User, GoHome) {
-                if (!User.isManager()) {
-                    GoHome.go();
-                }
+            checkAuth: function(UserAuth, GoHome) {
+               // Implemented inside controller
             }
         }
     };
@@ -47,10 +45,8 @@ angular.module('RealEstate').config(['$stateProvider',
         url: '/insertProperty',
         component: 'insertProperty',
         resolve: {
-            checkAuth: function(User, GoHome) {
-                if (!User.isAdmin()) {
-                    GoHome.go();
-                }
+            checkAuth: function(UserAuth, GoHome) {
+                // Implemented inside controller
             }
         }
     };
@@ -64,26 +60,6 @@ angular.module('RealEstate').config(['$stateProvider',
     $urlRouterProvider.otherwise('/home');
 }]);
 
-angular.module('RealEstate').run(['$http', '$window', function($http, $window) {
-    /*var basicAuth = "kid_B1Km-D3RM:a5ff61eb48284d9683ff7a39705198f0";
-    $http.defaults.headers.common['Authorization'] = "Basic " + btoa(basicAuth);
+angular.module('RealEstate').run(['UserAuth', function(UserAuth) {
 
-    $http({
-        method: 'POST',
-        url: 'https://baas.kinvey.com/user/kid_B1Km-D3RM/',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        data: {
-            "username": "0815981590",
-            "password": "123456",
-            "userType": "Supervisor",
-            "name": "Joao Podre",
-            "phone": "5345435932",
-        }
-    }).then(function successCallback(response) {
-        console.log(response);
-    }, function errorCallback(response) {
-        console.log(response);
-    });*/
 }]);

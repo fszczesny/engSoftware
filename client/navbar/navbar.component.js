@@ -2,7 +2,9 @@ angular
     .module('navbar')
     .component('navbar', {
         templateUrl: 'navbar/navbar.template.html',
-        controller: ['User', '$scope', function NavbarUserInfoController(User, $scope) {
+        controller: ['$scope', 'UserAuth', 'User',
+                     function NavbarUserInfoController($scope, UserAuth, User) {
+
             var self = this;
 
             this.user = null;
@@ -10,17 +12,16 @@ angular
             this.isAdmin = false;
             this.isManager = false;
 
-            // Watch user info / login status
-            $scope.$watch(function() { return User.getUserData() }, function(user) {
-                loadUser();
-            }, true);
-
-            var loadUser = function() {
+            var loadUser = function(User) {
                 self.user = User.getUserData();
                 self.loggedIn = User.isLoggedIn();
                 self.isAdmin = User.isAdmin();
                 self.isManager = User.isManager();
-            }
+            };
+
+            UserAuth.addListener(loadUser, {
+                callOnSubscribe: true
+            })
 
             this.logOut = function() {
                 User.logOut(function() {

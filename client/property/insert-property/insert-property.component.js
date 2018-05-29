@@ -3,22 +3,18 @@ angular
     .component('insertProperty', {
         templateUrl: 'property/insert-property/insert-property.template.html',
         controller: ['$scope',
-                     'User',
+                     'UserAuth',
                      'GoHome',
                      'InsertPropertyService',
-                     function InsertPropertyController($scope, User, GoHome, InsertPropertyService) {
+                     function InsertPropertyController($scope, UserAuth, GoHome, InsertPropertyService) {
 
             var self = this;
 
-            if (!User.isAdmin()) {
+            UserAuth.validate(function(User) {
+                return User.isAdmin();
+            }, function authError(User) {
                 GoHome.go();
-            }
-
-            $scope.$watch(function() { return User.getUserData() }, function(user) {
-                if (!User.isAdmin()) {
-                    GoHome.go();
-                }
-            }, true);
+            }, function authSuccess(User) {});
 
             // > Owner Management
             this.ownerInfo = null;
