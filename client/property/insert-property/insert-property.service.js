@@ -62,7 +62,30 @@ angular
         };
 
         var uploadPhoto = function(file) {
+            return new Promise(function(resolve, reject) {
+            
+                var myReader = new FileReader();
+                myReader.onloadend = function (e) {
+                    var fileData = myReader.result;
+                    var fileInfo = {
+                        extension: '.jpg',
+                        base64: fileData
+                    };
 
+                    $http
+                        .post('/api/core/upload-img', fileInfo)
+                        .then(function(resp) {
+                            var path = resp.data.path;
+                            resolve(path);
+                        }).catch(function(error) {
+                            reject({
+                                msg: "Não foi fazer upload da imagem"
+                            })
+                        });
+                };
+
+                myReader.readAsDataURL(file);
+            });
         };
 
         return {

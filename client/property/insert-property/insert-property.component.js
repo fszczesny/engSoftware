@@ -63,7 +63,12 @@ angular
 
             $scope.$watch(function() { return self.photos }, function(photos) {
                 if (photos && photos[0]) {
-                    // InsertPropertyService.uploadPhoto(photos[0]);
+                    InsertPropertyService.uploadPhoto(photos[0])
+                        .then(function(path) {
+                            console.log(path);
+                        }).catch(function(error) {
+                            console.log(error);
+                        });
                 }
             }, true);
 
