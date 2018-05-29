@@ -2,7 +2,10 @@
 
 angular
     .module('property')
-    .factory('InsertPropertyService', ['UserService', 'Users', '$http', function(UserService, Users, $http) {
+    .factory('InsertPropertyService', ['UserService',
+                                       'UsersService',
+                                       '$http',
+                                       function(UserService, UsersService, $http) {
         
         var loadOwnerInfo = function(ownerUsername, callback) {
             var resp = {
@@ -27,9 +30,9 @@ angular
             }
 
             // Load owner info
-            Users.lookUpUser(ownerUsername).then(function(ownerInfo) {
+            UsersService.lookUpUser(ownerUsername).then(function(ownerInfo) {
                 if (ownerInfo != null) {
-                    if (Users.isClient(ownerInfo)) {
+                    if (UsersService.isClient(ownerInfo)) {
                         resp.ownerInfo = ownerInfo;
                         resp.invalidMsg = null;
                     } else {

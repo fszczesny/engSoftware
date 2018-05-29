@@ -2,7 +2,7 @@
 
 angular
     .module('user')
-    .factory('Users', ['$http', function($http) {
+    .factory('UsersService', ['$http', function($http) {
 
         var checkUserType = function(userData, userType) {
             return userData.userType == userType;
