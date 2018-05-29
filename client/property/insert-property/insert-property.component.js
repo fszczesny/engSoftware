@@ -61,28 +61,39 @@ angular
                 }
             };
 
-            $scope.$watch(function() { return self.photos }, function(photos) {
+            // > Upload photo
+            this.uploadingPhoto = false;
+            this.photoURL = null;
+
+            this.uploadPhoto = function() {
+                var photos = this.photos;
                 if (photos && photos[0]) {
+                    console.log("here");
+                    self.uploadingPhoto = true;
                     InsertPropertyService.uploadPhoto(photos[0])
-                        .then(function(path) {
-                            console.log(path);
+                        .then(function(url) {
+                            self.uploadingPhoto = false;
+                            self.photoURL = url;
+                            $scope.$applyAsync();
                         }).catch(function(error) {
-                            console.log(error);
+                            self.uploadingPhoto = false;
+                            self.photoURL = null;
+                            $scope.$applyAsync();
                         });
                 }
-            }, true);
+            };
+
+            this.removePhoto = function() {
+                if (this.photoURL == null) return;
+
+                InsertPropertyService.removePhoto(this.photoURL)
+                    .then(function(resp) {
+                        self.photoURL = null;
+                        $scope.$applyAsync();
+                    }).catch(function(error) {
+                        alert(error.msg);
+                    });
+            };
 
         }]
     });
-
-angular.module('core').directive('filesInput', function() {
-    return {
-        require: 'ngModel',
-        link: function postLink(scope, elem, attrs, ngModel) {
-            elem.on('change', function(e) {
-                var files = elem[0].files;
-                ngModel.$setViewValue(files);
-            })
-        }
-    }
-});

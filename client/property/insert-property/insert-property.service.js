@@ -73,9 +73,9 @@ angular
                     };
 
                     $http
-                        .post('/api/core/upload-img', fileInfo)
+                        .post('/api/core/img/', fileInfo)
                         .then(function(resp) {
-                            var path = resp.data.path;
+                            var path = resp.data.url;
                             resolve(path);
                         }).catch(function(error) {
                             reject({
@@ -88,10 +88,27 @@ angular
             });
         };
 
+        var removePhoto = function(imgUrl) {
+            return new Promise(function(resolve, reject) {
+                var imgKey = imgUrl.split('/').pop();
+
+                $http
+                    .delete('/api/core/img/' + imgKey)
+                    .then(function(resp) {
+                        resolve(resp.data);
+                    }).catch(function(error) {
+                        reject({
+                            msg: "Não foi remover a imagem"
+                        });
+                    });
+            });
+        };
+
         return {
             loadOwnerInfo: loadOwnerInfo,
             insertProperty: insertProperty,
-            uploadPhoto: uploadPhoto
+            uploadPhoto: uploadPhoto,
+            removePhoto: removePhoto,
         };
 
     }]);
