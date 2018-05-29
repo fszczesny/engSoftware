@@ -1,3 +1,4 @@
+'use strict';
 
 angular
     .module('user')
@@ -5,12 +6,14 @@ angular
         templateUrl: 'user/sign-up/sign-up.template.html',
         controller: ['SignUpService',
                      'GoHome',
-                     'User',
-                     function SignUpController(SignUpService, GoHome, User) {
+                     'UserAuth',
+                     function SignUpController(SignUpService, GoHome, UserAuth) {
 
-            if (User.isLoggedIn()) {
+            UserAuth.validate(function(UserService) { 
+                return !UserService.isLoggedIn();
+            }, function authFailed(UserService) {
                 GoHome.go();
-            }
+            }, function authSuccess(UserService) {});
 
             this.checkUserExists = function() {
                 var username = this.cpf;

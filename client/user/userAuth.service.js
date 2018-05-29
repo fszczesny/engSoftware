@@ -1,21 +1,23 @@
+'use strict';
+
 angular
     .module('core')
-    .factory('UserAuth', ['$rootScope', 'User', function($rootScope, User) {
+    .factory('UserAuth', ['$rootScope', 'UserService', function($rootScope, UserService) {
 
         var listeners = [];
 
         var callListeners = function(userData) {
             console.log("> User Auth changed", userData);
             listeners.forEach(function(action) {
-                action(User);
+                action(UserService);
             });
         };
 
-        $rootScope.$watch(function() { return User.getUserData() }, callListeners, true);
+        $rootScope.$watch(function() { return UserService.getUserData() }, callListeners, true);
 
         /*
          * Registers action for User auth data change event
-         * action: function(User)
+         * action: function(UserService)
          * options: Object {
          *              callOnSubscribe: Bool   [if true => will fire the action right on subscription]
          *          }
@@ -27,11 +29,11 @@ angular
 
             // > Options management
             if (typeof options == 'object') {
-                var userData = User.getUserData();
+                var userData = UserService.getUserData();
                 if (options.callOnSubscribe) {
                     // Wait for injections load
                     setTimeout(function() {
-                        action(User);
+                        action(UserService);
                     }, 2);
                 }
             }
@@ -39,18 +41,18 @@ angular
 
         /*
          * Validate user auth on User auth data change event
-         * validator: function(User) -> bool
-         * authFailed: [function(User): called if auth validation fails]?
-         * authSuccess: [function(User): called if auth validation succeed]?
+         * validator: function(UserService) -> bool
+         * authFailed: [function(UserService): called if auth validation fails]?
+         * authSuccess: [function(UserService): called if auth validation succeed]?
          */
         var validateAuth = function(validator, authFailed, authSuccess) {
             if (typeof validator !== 'function') return;
 
             addListener(function() {
-                if (!validator(User)) {
-                    if (typeof authFailed == 'function') authFailed(User);
+                if (!validator(UserService)) {
+                    if (typeof authFailed == 'function') authFailed(UserService);
                 } else {
-                    if (typeof authSuccess == 'function') authSuccess(User);
+                    if (typeof authSuccess == 'function') authSuccess(UserService);
                 }
             }, {
                 callOnSubscribe: true
@@ -62,7 +64,7 @@ angular
             validate: validateAuth,
 
             getUser: function() {
-                return User;
+                return UserService;
             }
         };
 

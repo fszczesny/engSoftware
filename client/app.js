@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('RealEstate', [
     'ui.router',
     'core',

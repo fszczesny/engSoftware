@@ -1,3 +1,5 @@
+'use strict';
+
 angular
     .module('user')
     .factory('UserSession', ['$window', function($window) {

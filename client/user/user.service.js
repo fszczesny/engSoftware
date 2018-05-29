@@ -1,10 +1,12 @@
+'use strict';
+
 angular
     .module('user')
-    .factory('User', ['UserSession',
-                      'ClientUserTypes',
-                      'EmployeeUserTypes',
-                      '$http',
-                      function(UserSession, ClientUserTypes, EmployeeUserTypes, $http) {
+    .factory('UserService', ['UserSession',
+                             'ClientUserTypes',
+                             'EmployeeUserTypes',
+                             '$http',
+                             function(UserSession, ClientUserTypes, EmployeeUserTypes, $http) {
         var user = null;
 
         var fetchUserData = function() {

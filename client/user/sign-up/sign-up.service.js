@@ -1,6 +1,8 @@
+'use strict';
+
 angular
     .module('user')
-    .factory('SignUpService', ['User', 'UserSession', '$http', function(User, UserSession, $http) {
+    .factory('SignUpService', ['UserService', 'UserSession', '$http', function(UserService, UserSession, $http) {
         var checkUserExists = function(username) {
             return new Promise(function(resolve, reject) {
                 $http
@@ -52,7 +54,7 @@ angular
          */
         var logIn = function(userData) {
             UserSession.setSession(userData);
-            User.update();
+            UserService.update();
         }
 
         /*

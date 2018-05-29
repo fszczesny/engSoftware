@@ -1,6 +1,8 @@
+'use strict';
+
 angular
     .module('property')
-    .factory('InsertPropertyService', ['User', 'Users', '$http', function(User, Users, $http) {
+    .factory('InsertPropertyService', ['UserService', 'Users', '$http', function(UserService, Users, $http) {
         
         var loadOwnerInfo = function(ownerUsername, callback) {
             var resp = {
@@ -16,7 +18,7 @@ angular
             }
 
             // Avoid owner to be current active user
-            if (User.getUserData().username == ownerUsername) {
+            if (UserService.getUserData().username == ownerUsername) {
                 resp.ownerInfo = null;
                 resp.invalidMsg = "O proprietário não pode ser você mesmo";
                 if (typeof callback == 'function')

@@ -1,9 +1,11 @@
+'use strict';
+
 angular
     .module('navbar')
     .component('navbar', {
         templateUrl: 'navbar/navbar.template.html',
-        controller: ['$scope', 'UserAuth', 'User',
-                     function NavbarUserInfoController($scope, UserAuth, User) {
+        controller: ['$scope', 'UserAuth', 'UserService',
+                     function NavbarUserInfoController($scope, UserAuth, UserService) {
 
             var self = this;
 
@@ -12,11 +14,11 @@ angular
             this.isAdmin = false;
             this.isManager = false;
 
-            var loadUser = function(User) {
-                self.user = User.getUserData();
-                self.loggedIn = User.isLoggedIn();
-                self.isAdmin = User.isAdmin();
-                self.isManager = User.isManager();
+            var loadUser = function(UserService) {
+                self.user = UserService.getUserData();
+                self.loggedIn = UserService.isLoggedIn();
+                self.isAdmin = UserService.isAdmin();
+                self.isManager = UserService.isManager();
             };
 
             UserAuth.addListener(loadUser, {
@@ -24,7 +26,7 @@ angular
             })
 
             this.logOut = function() {
-                User.logOut(function() {
+                UserService.logOut(function() {
                     $scope.$applyAsync();
                 });
             }

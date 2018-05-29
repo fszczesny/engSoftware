@@ -1,3 +1,5 @@
+'use strict';
+
 angular
     .module('property')
     .component('insertProperty', {
@@ -10,11 +12,11 @@ angular
 
             var self = this;
 
-            UserAuth.validate(function(User) {
-                return User.isAdmin();
-            }, function authError(User) {
+            UserAuth.validate(function(UserService) {
+                return UserService.isAdmin();
+            }, function authError(UserService) {
                 GoHome.go();
-            }, function authSuccess(User) {});
+            }, function authSuccess(UserService) {});
 
             // > Owner Management
             this.ownerInfo = null;

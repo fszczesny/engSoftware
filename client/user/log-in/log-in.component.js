@@ -1,11 +1,16 @@
+'use strict';
+
 angular
     .module('user')
     .component('logIn', {
         templateUrl: 'user/log-in/log-in.template.html',
-        controller: ['LogInService', 'GoHome', 'User', function LogInController(LogInService, GoHome, User) {
-            if (User.isLoggedIn()) {
+        controller: ['LogInService', 'GoHome', 'UserAuth', function LogInController(LogInService, GoHome, UserAuth) {
+            
+            UserAuth.validate(function(UserService) { 
+                return !UserService.isLoggedIn();
+            }, function authFailed(UserService) {
                 GoHome.go();
-            }
+            }, function authSuccess(UserService) {});
 
             this.logIn = function() {
                 LogInService.logIn({

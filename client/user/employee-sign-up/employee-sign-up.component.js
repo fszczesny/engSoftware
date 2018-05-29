@@ -1,3 +1,5 @@
+'use strict';
+
 angular
     .module('user')
     .component('employeeSignUp', {
@@ -9,11 +11,11 @@ angular
                      'EmployeeUserTypes',
                      function EmployeeSignUpController(UserAuth, GoHome, EmployeeSignUp, $scope, EmployeeUserTypes) {
             
-            UserAuth.validate(function validator(User) {
-                return User.isManager();
-            }, function authFailed(User) {
+            UserAuth.validate(function validator(UserService) {
+                return UserService.isManager();
+            }, function authFailed(UserService) {
                 GoHome.go();
-            }, function authSuccess(User) {});
+            }, function authSuccess(UserService) {});
 
             this.employeeUserTypes = EmployeeUserTypes;
 
