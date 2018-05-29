@@ -22,9 +22,9 @@ var getUserById = function(userId, callback) {
 
 exports.signUp = function(req, res) {
     var userData = req.body;
-    var sql = "INSERT INTO users (userType, username, password, name, phone, address, city, state, email) VALUES (?)";
+    var sql = "INSERT users SET ?";
 
-    dbConnection.query(sql, [Object.values(userData)], function (error, results, fields) {
+    dbConnection.query(sql, userData, function (error, results, fields) {
         if (error) throw error;
 
         // Load created userData
