@@ -4,8 +4,8 @@ angular
     .module('navbar')
     .component('navbar', {
         templateUrl: 'navbar/navbar.template.html',
-        controller: ['$scope', 'UserAuth', 'UserService',
-                     function NavbarUserInfoController($scope, UserAuth, UserService) {
+        controller: ['$scope', 'UserAuth', 'UserService', 'GoHome',
+                     function NavbarUserInfoController($scope, UserAuth, UserService, GoHome) {
 
             var self = this;
 
@@ -26,11 +26,15 @@ angular
                 callOnSubscribe: true
             })
 
+            this.goHome = function() {
+                GoHome.go();
+            };
+
             this.logOut = function() {
                 UserService.logOut(function() {
                     $scope.$applyAsync();
                 });
-            }
+            };
 
         }]
     });

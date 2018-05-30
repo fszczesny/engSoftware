@@ -1,4 +1,65 @@
-search-properties .pContainer {
+search-properties input {
+    padding: .25rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+}
+
+search-properties .form-group {
+    margin-bottom: 0;
+}
+
+search-properties .form-check-input {
+    margin-top: 0.6rem;
+}
+
+
+search-properties .filters-container {
+    padding: 1em 0em;
+}
+
+search-properties .filters-column {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 4em;
+}
+
+search-properties .filters-column#rentOrSale,
+search-properties .filters-column#state {
+    padding-top: 0.3em;
+}
+
+search-properties .filter-row {
+    height: 2em;
+    line-height: 2em;
+    margin-bottom: 0.5em;
+}
+
+search-properties .filter-row:last-child {
+    margin-bottom: 0;
+}
+
+
+search-properties .filters-column input[type="checkbox"] {
+    margin-right: 0.5em;
+}
+
+search-properties .filters-column input[type="number"] {
+    float: right;
+    margin-left: 1em;
+}
+
+search-properties .filters-column#rooms input[type="number"] {
+    float: right;
+    width: 5em;
+    margin-left: 1em;
+}
+
+
+search-properties .results-container {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;

@@ -7,13 +7,16 @@ angular
         controller: ['SignUpService',
                      'GoHome',
                      'UserAuth',
-                     function SignUpController(SignUpService, GoHome, UserAuth) {
+                     'AddressStates', 
+                     function SignUpController(SignUpService, GoHome, UserAuth, AddressStates) {
 
             UserAuth.validate(function(UserService) { 
                 return !UserService.isLoggedIn();
             }, function authFailed(UserService) {
                 GoHome.go();
             }, function authSuccess(UserService) {});
+
+            this.addressStates = AddressStates;
 
             this.checkUserExists = function() {
                 var username = this.cpf;

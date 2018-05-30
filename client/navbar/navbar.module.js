@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('navbar', ['user']);
+angular.module('navbar', ['user', 'core']);

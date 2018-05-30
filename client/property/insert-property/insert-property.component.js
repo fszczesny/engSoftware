@@ -8,7 +8,8 @@ angular
                      'UserAuth',
                      'GoHome',
                      'InsertPropertyService',
-                     function InsertPropertyController($scope, UserAuth, GoHome, InsertPropertyService) {
+                     'AddressStates',
+                     function InsertPropertyController($scope, UserAuth, GoHome, InsertPropertyService, AddressStates) {
 
             var self = this;
 
@@ -17,6 +18,8 @@ angular
             }, function authError(UserService) {
                 GoHome.go();
             }, function authSuccess(UserService) {});
+
+            this.addressStates = AddressStates;
 
             // > Owner Management
             this.ownerInfo = null;

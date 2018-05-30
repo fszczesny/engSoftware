@@ -9,7 +9,8 @@ angular
                      'EmployeeSignUp',
                      '$scope',
                      'EmployeeUserTypes',
-                     function EmployeeSignUpController(UserAuth, GoHome, EmployeeSignUp, $scope, EmployeeUserTypes) {
+                     'AddressStates',
+                     function EmployeeSignUpController(UserAuth, GoHome, EmployeeSignUp, $scope, EmployeeUserTypes, AddressStates) {
             
             UserAuth.validate(function validator(UserService) {
                 return UserService.isManager();
@@ -17,6 +18,7 @@ angular
                 GoHome.go();
             }, function authSuccess(UserService) {});
 
+            this.addressStates = AddressStates;
             this.employeeUserTypes = EmployeeUserTypes;
 
             this.checkUserExists = function() {
