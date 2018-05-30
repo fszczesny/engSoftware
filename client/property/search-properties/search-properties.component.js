@@ -1,13 +1,13 @@
 'use strict';
 
 angular
-    .module('home')
-    .component('home', {
-        templateUrl: 'home/home.template.html',
-        controller: ['HomeService',
+    .module('property')
+    .component('searchProperties', {
+        templateUrl: 'property/search-properties/search-properties.template.html',
+        controller: ['SearchPropertiesService',
                      'PropertiesAPI',
                      'NoPhotoImg',
-                     function(HomeService, PropertiesAPI, NoPhotoImg) {
+                     function(SearchPropertiesService, PropertiesAPI, NoPhotoImg) {
 
             var self = this;
 

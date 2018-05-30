@@ -5,7 +5,6 @@ angular.module('RealEstate', [
     'ngResource',
     'core',
     'user',
-    'home',
     'navbar',
     'property',
 ]);
@@ -15,10 +14,10 @@ angular.module('RealEstate').config(['$stateProvider',
                                      function($stateProvider, $urlRouterProvider, UserAuth) {
 
     // > States
-    var homeState = {
-        name: 'home',
-        url: '/home',
-        component: 'home'
+    var searchPropertiesState = {
+        name: 'searchProperties',
+        url: '/searchProperties',
+        component: 'searchProperties'
     };
 
     var signUpState = {
@@ -55,13 +54,20 @@ angular.module('RealEstate').config(['$stateProvider',
         }
     };
 
-    $stateProvider.state(homeState);
+    var employeeHomeState = {
+        name: 'employeeHome',
+        url: '/employeeHome',
+        template: '<h3>Funcionário</h3>'
+    };
+
+    $stateProvider.state(searchPropertiesState);
     $stateProvider.state(signUpState);
     $stateProvider.state(logInState);
     $stateProvider.state(employeeSignUpState);
     $stateProvider.state(insertPropertyState);
+    $stateProvider.state(employeeHomeState);
 
-    $urlRouterProvider.otherwise('/home');
+    //$urlRouterProvider.otherwise('/');
 }]);
 
 angular.module('RealEstate').run(['UserAuth', function(UserAuth) {

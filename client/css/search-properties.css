@@ -1,10 +1,10 @@
-home .pContainer {
+search-properties .pContainer {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
 }
 
-home .pCard {
+search-properties .pCard {
     word-wrap: break-word;
     background-color: #fff;
     border: 1px solid rgba(0,0,0,.125);
@@ -15,28 +15,28 @@ home .pCard {
     margin: .8em;
 }
 
-home .pCard-img-container {
+search-properties .pCard-img-container {
     overflow: hidden;
     width: 100%;
     height: 225px;
     text-align: center;
 }
 
-home img.pCard-img {
+search-properties img.pCard-img {
     height: 100%;
     position: relative;
     left: 100%;
     margin-left: -200%;
 }
 
-home .pCard-body {
+search-properties .pCard-body {
     padding: 1em;
     border-top: 1px solid rgba(0,0,0,.125);
 }
 
-home .pCard-title {}
+search-properties .pCard-title {}
 
-home p.pCard-description {
+search-properties p.pCard-description {
     line-height: 1.5em;
     height: 4.5em;      
     overflow: hidden;
@@ -50,22 +50,22 @@ home p.pCard-description {
     display: -webkit-box;
 }
 
-home p:last-child {
+search-properties p:last-child {
     margin-bottom: 0 !important;
 }
 
-home .pCard-footer {
+search-properties .pCard-footer {
     position: relative;
     padding: .8em 1em;
     background-color: rgba(0,0,0,.04);
     border-top: 1px solid rgba(0,0,0,.125);
 }
 
-home .pCard-footer p {
+search-properties .pCard-footer p {
     margin-bottom: 0.2em;
 }
 
-home .pCard-footer .badge {
+search-properties .pCard-footer .badge {
     font-size: 0.8em;
     position: absolute;
     right: 1.25em;

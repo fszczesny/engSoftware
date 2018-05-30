@@ -5,7 +5,7 @@ angular
     .factory('GoHome', function() {
         return {
             go: function() {
-                window.location.hash = '#!/home';
+                window.location.hash = '#!/searchProperties';
             }
         }
     })
