@@ -62,10 +62,21 @@
             <input type="text" class="form-control form-control-sm" id="search" ng-model="$ctrl.filterValue.query" placeholder="Endereço, descrição, título, ...">
         </div>
     </div>
+    <div class="filters-column" id="orderBy">
+        <div class="form-group">
+            <label for="orderBy">Ordernar por</label>
+            <select class="form-control form-control-sm" id="orderBy" ng-model="$ctrl.orderBy">
+                <option value="price">Preço</option>
+                <option value="area">Área</option>
+                <option value="rooms">Quartos</option>
+                <option value="bathrooms">Banheiros</option>
+            </select>
+        </div>
+    </div>
 </div>
 
 <div class="results-container">
-    <div class="pCard" ng-repeat="property in $ctrl.properties | filter: $ctrl.filter | filter: $ctrl.filterArea | filter: $ctrl.filterPrice | filter: $ctrl.search">
+    <div class="pCard" ng-repeat="property in $ctrl.properties | filter: $ctrl.filter | filter: $ctrl.filterArea | filter: $ctrl.filterPrice | filter: $ctrl.search | orderBy: $ctrl.orderBy:($ctrl.order == 'desc')">
         <div class="pCard-img-container">
             <img class="pCard-img" ng-src="{{ property.img || $ctrl.noPhotoImg }}">
         </div>

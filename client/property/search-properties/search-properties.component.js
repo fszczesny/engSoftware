@@ -24,6 +24,8 @@ angular
             };
 
             this.addressStates = AddressStates;
+            this.orderBy = 'price';
+            this.order = 'desc';
 
             // > Filters management
             this.enableFilter = {

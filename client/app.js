@@ -67,7 +67,7 @@ angular.module('RealEstate').config(['$stateProvider',
     $stateProvider.state(insertPropertyState);
     $stateProvider.state(employeeHomeState);
 
-    //$urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/searchProperties');
 }]);
 
 angular.module('RealEstate').run(['UserAuth', function(UserAuth) {
