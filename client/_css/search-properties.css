@@ -18,17 +18,29 @@ search-properties .form-check-input {
 
 
 search-properties .filters-container {
-    padding: 1em 0em;
+    padding-top: 1em;
 }
 
 search-properties .filters-column {
     display: inline-block;
     vertical-align: top;
-    margin-right: 4em;
+    margin-bottom: 1em;
+    padding: 0 2em;
+    border-right: 1px solid #d8d8d8;
+}
+
+search-properties .filters-column:first-child {
+    padding-left: 0;
+}
+
+search-properties .filters-column:last-child {
+    margin-right: 0;
+    border-right: none;
 }
 
 search-properties .filters-column#rentOrSale,
-search-properties .filters-column#state {
+search-properties .filters-column#state,
+search-properties .filters-column#search {
     padding-top: 0.3em;
 }
 

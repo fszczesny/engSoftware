@@ -52,7 +52,8 @@ angular
 
             this.filterChange = function(filterName) {
                 this.filter[filterName] = (this.enableFilter[filterName]) ? this.filterValue[filterName] : undefined;
-            }
+            };
+
             this.filterArea = function(property) {
                 var areaMin = self.filterValue.areaMin;
                 var areaMax = self.filterValue.areaMax;
@@ -69,7 +70,7 @@ angular
                 } else {
                     return true;
                 }
-            }
+            };
 
             this.filterPrice = function(property) {
                 var priceMin = self.filterValue.priceMin;
@@ -87,7 +88,32 @@ angular
                 } else {
                     return true;
                 }
-            }
+            };
+
+            this.search = function(property) {
+                var q = self.filterValue.query || "";
+                q = q.toLowerCase();
+                var attrToMatch = [
+                    'address',
+                    'area',
+                    'bathrooms',
+                    'city',
+                    'description',
+                    'price',
+                    'rooms',
+                    'state',
+                    'title'];
+
+                var match = false;
+                attrToMatch.forEach(function(attr) {
+                    var value = property[attr].toString().toLowerCase();
+                    if (value.search(q) >= 0) {
+                        match = true;
+                        return true;
+                    }
+                });
+                return match;
+            };
 
             
         }]

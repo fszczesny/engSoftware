@@ -13,41 +13,41 @@
     </div>
     <div class="filters-column" id="rooms">
         <div class="filter-row">
-            <input type="checkbox" ng-model="$ctrl.enableFilter.rooms" ng-change="$ctrl.filterChange('rooms')">
-            <label for="rooms">Quartos</label>
+            <input type="checkbox" id="roomsCheckbox" ng-model="$ctrl.enableFilter.rooms" ng-change="$ctrl.filterChange('rooms')">
+            <label for="roomsCheckbox">Quartos</label>
             <input type="number" id="rooms" min="1" ng-show="$ctrl.enableFilter.rooms" ng-model="$ctrl.filterValue.rooms" ng-change="$ctrl.filterChange('rooms')">
         </div>
         <div class="filter-row">
-            <input type="checkbox" ng-model="$ctrl.enableFilter.bathrooms" ng-change="$ctrl.filterChange('bathrooms')">
-            <label for="bathrooms">Banheiros</label>
+            <input type="checkbox" id="bathroomsCheckbox" ng-model="$ctrl.enableFilter.bathrooms" ng-change="$ctrl.filterChange('bathrooms')">
+            <label for="bathroomsCheckbox">Banheiros</label>
             <input type="number" id="bathrooms" min="1" ng-show="$ctrl.enableFilter.bathrooms" ng-model="$ctrl.filterValue.bathrooms" ng-change="$ctrl.filterChange('bathrooms')">
         </div>
     </div>
     <div class="filters-column" id="area">
         <div class="filter-row">
-            <input type="checkbox" ng-model="$ctrl.enableFilter.areaMin">
-            <label for="rooms">Área mínima</label>
+            <input type="checkbox" id="areaMinCheckbox" ng-model="$ctrl.enableFilter.areaMin">
+            <label for="areaMinCheckbox">Área mínima</label>
             <input type="number" id="areaMin" min="10" ng-show="$ctrl.enableFilter.areaMin" ng-model="$ctrl.filterValue.areaMin">
         </div>
         <div class="filter-row">
-            <input type="checkbox" ng-model="$ctrl.enableFilter.areaMax">
-            <label for="bathrooms">Área máxima</label>
+            <input type="checkbox" id="areaMaxCheckbox" ng-model="$ctrl.enableFilter.areaMax">
+            <label for="areaMaxCheckbox">Área máxima</label>
             <input type="number" id="areaMax" min="10" ng-show="$ctrl.enableFilter.areaMax" ng-model="$ctrl.filterValue.areaMax">
         </div>
     </div>
     <div class="filters-column" id="price">
         <div class="filter-row">
-            <input type="checkbox" ng-model="$ctrl.enableFilter.priceMin">
-            <label for="rooms">Preço mínimo</label>
+            <input type="checkbox" id="priceMinCheckbox" ng-model="$ctrl.enableFilter.priceMin">
+            <label for="priceMinCheckbox">Preço mínimo</label>
             <input type="number" id="priceMin" min="10" ng-show="$ctrl.enableFilter.priceMin" ng-model="$ctrl.filterValue.priceMin">
         </div>
         <div class="filter-row">
-            <input type="checkbox" ng-model="$ctrl.enableFilter.priceMax">
-            <label for="bathrooms">Preço máximo</label>
+            <input type="checkbox" id="priceMaxCheckbox" ng-model="$ctrl.enableFilter.priceMax">
+            <label for="priceMaxCheckbox">Preço máximo</label>
             <input type="number" id="priceMax" min="10" ng-show="$ctrl.enableFilter.priceMax" ng-model="$ctrl.filterValue.priceMax">
         </div>
     </div>
-    <div class="filters-column" id="address">
+    <div class="filters-column" id="state">
         <div class="form-group">
             <label for="state">Estado</label>
             <select class="form-control form-control-sm" id="state" ng-model="$ctrl.filter.state">
@@ -56,10 +56,16 @@
             </select>
         </div>
     </div>
+    <div class="filters-column" id="search">
+        <div class="form-group">
+            <label for="search">Buscar</label>
+            <input type="text" class="form-control form-control-sm" id="search" ng-model="$ctrl.filterValue.query" placeholder="Endereço, descrição, título, ...">
+        </div>
+    </div>
 </div>
 
 <div class="results-container">
-    <div class="pCard" ng-repeat="property in $ctrl.properties | filter: $ctrl.filter | filter: $ctrl.filterArea | filter: $ctrl.filterPrice">
+    <div class="pCard" ng-repeat="property in $ctrl.properties | filter: $ctrl.filter | filter: $ctrl.filterArea | filter: $ctrl.filterPrice | filter: $ctrl.search">
         <div class="pCard-img-container">
             <img class="pCard-img" ng-src="{{ property.img || $ctrl.noPhotoImg }}">
         </div>
