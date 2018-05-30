@@ -30,7 +30,9 @@ exports.signUp = function(req, res) {
         // Load created userData
         var userId = results.insertId;
         getUserById(userId, function(userData) {
-            res.json(userData);
+            res.json({
+                userData: userData
+            });
         });
     });
 }
@@ -38,7 +40,9 @@ exports.signUp = function(req, res) {
 exports.getUserById = function(req, res) {
     var userId = req.params.userId;
     getUserById(userId, function(userData) {
-        res.json(userData);
+        res.json({
+            userData: userData
+        });
     });
 }
 
@@ -63,9 +67,13 @@ exports.logIn = function(req, res) {
         if (results.length > 0) {
             var userData = results[0];
             delete userData.password;
-            res.json(userData);
+            res.json({
+                userData: userData
+            });
         } else {
-            res.json(null);
+            res.json({
+                userData: null
+            });
         }
     });
 }
@@ -95,9 +103,13 @@ exports.lookUpUser = function(req, res) {
         if (results.length > 0) {
             var userData = results[0];
             delete userData.password;
-            res.json(userData);
+            res.json({
+                userData: userData
+            });
         } else {
-            res.json(null);
+            res.json({
+                userData: null
+            });
         }
     });
 }

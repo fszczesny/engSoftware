@@ -2,7 +2,7 @@
 
 angular
     .module('user')
-    .factory('UsersService', ['$http', function($http) {
+    .factory('UsersService', ['UsersAPI', function(UsersAPI) {
 
         var checkUserType = function(userData, userType) {
             return userData.userType == userType;
@@ -17,17 +17,16 @@ angular
                     return;
                 }
 
-                $http
-                    .post('/api/user/lookup', {
-                        username: username
-                    }).then(function(resp) {
-                        var userData = resp.data;
-                        resolve(userData);
-                    }).catch(function(error) {
-                        reject({
-                            msg: "Não foi possível buscar o usuário"
-                        });
+                UsersAPI.lookUp({
+                    username: username
+                }, function(resp) {
+                    var userData = resp.userData;
+                    resolve(userData);
+                }, function(error) {
+                    reject({
+                        msg: "Não foi possível buscar o usuário"
                     });
+                });
             });
         };
 

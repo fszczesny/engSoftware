@@ -2,18 +2,21 @@
 
 angular
     .module('user')
-    .factory('SignUpService', ['UserService', 'UserSession', '$http', function(UserService, UserSession, $http) {
+    .factory('SignUpService', ['UserService',
+                               'UserSession',
+                               'UsersAPI',
+                               function(UserService, UserSession, UsersAPI) {
+
         var checkUserExists = function(username) {
             return new Promise(function(resolve, reject) {
-                $http
-                    .post('/api/user/check-exist', {
-                        username: username
-                    }).then(function(resp) {
-                        resolve(resp.data.userExists);
-                    }).catch(function(error) {
-                        console.log('Error', error);
-                        reject(error);
-                    });
+                UsersAPI.checkExists({
+                    username: username
+                }, function(resp) {
+                    resolve(resp.userExists);
+                }, function(error) {
+                    console.log('Error', error);
+                    reject(error);
+                });
             });
         };
 
@@ -24,17 +27,15 @@ angular
             return new Promise(function(resolve, reject) {
                 checkUserExists(userData.username).then(function(userExists) {
                     if (!userExists) {
-                        $http
-                            .post('/api/user', userData)
-                            .then(function(resp) {
-                                var userData = resp.data;
-                                resolve(userData);
-                            }).catch(function(error) {
-                                console.log('Error', error);
-                                reject({
-                                    msg: 'ERRO: Não foi possível cadastrar o usuário'
-                                })
-                            });
+                        UsersAPI.create(userData, function(resp) {
+                            var userData = resp.userData;
+                            resolve(userData);
+                        }, function(error) {
+                            console.log('Error', error);
+                            reject({
+                                msg: 'ERRO: Não foi possível cadastrar o usuário'
+                            })
+                        });
                     } else {
                         reject({
                             msg: 'Usuário já cadastrado'
@@ -52,7 +53,7 @@ angular
         /*
          * Sets current user session to create user
          */
-        var logIn = function(userData) {
+        var logInWithData = function(userData) {
             UserSession.setSession(userData);
             UserService.update();
         }
@@ -63,7 +64,7 @@ angular
         var signUp = function(userData) {
             return new Promise(function(resolve, reject) {
                 createUser(userData).then(function(userData) {
-                    logIn(userData);
+                    logInWithData(userData);
                     resolve(userData);
                 }).catch(function(error) {
                    reject({
