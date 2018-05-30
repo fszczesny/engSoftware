@@ -2,8 +2,10 @@
 
 angular.module('RealEstate', [
     'ui.router',
+    'ngResource',
     'core',
     'user',
+    'home',
     'navbar',
     'property',
 ]);
@@ -16,7 +18,7 @@ angular.module('RealEstate').config(['$stateProvider',
     var homeState = {
         name: 'home',
         url: '/home',
-        template: '<h3>Home</h3>'
+        component: 'home'
     };
 
     var signUpState = {
