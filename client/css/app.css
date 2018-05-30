@@ -6,9 +6,10 @@ html {
 }
 
 .bg-sheet {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
+    /* url("http://przemekspider.com/wp-content/uploads/2017/05/real-estate-broker.jpg") */
 }
 
 .main-container {

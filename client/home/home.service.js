@@ -5,7 +5,7 @@ angular
     .factory('HomeService', [function() {
 
         return {
-            a: 'a'
+
         };
 
     }]);

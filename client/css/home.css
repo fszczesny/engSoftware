@@ -1,0 +1,82 @@
+home .pContainer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+home .pCard {
+    word-wrap: break-word;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .5rem;
+    width: 300px;
+    display: inline-block;
+    vertical-align: top;
+    margin: .8em;
+}
+
+home .pCard-img-container {
+    overflow: hidden;
+    width: 100%;
+    height: 225px;
+    text-align: center;
+}
+
+home img.pCard-img {
+    height: 100%;
+    position: relative;
+    left: 100%;
+    margin-left: -200%;
+}
+
+home .pCard-body {
+    padding: 1em;
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+
+home .pCard-title {}
+
+home p.pCard-description {
+    line-height: 1.5em;
+    height: 4.5em;      
+    overflow: hidden;
+}
+
+.textOverflow4LineEllipsis {
+    box-orient: vertical;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+}
+
+home p:last-child {
+    margin-bottom: 0 !important;
+}
+
+home .pCard-footer {
+    position: relative;
+    padding: .8em 1em;
+    background-color: rgba(0,0,0,.04);
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+
+home .pCard-footer p {
+    margin-bottom: 0.2em;
+}
+
+home .pCard-footer .badge {
+    font-size: 0.8em;
+    position: absolute;
+    right: 1.25em;
+}
+
+.badge.blue {
+    color: white;
+    background-color: #007bff;
+}
+
+.badge.green {
+    color: white;
+    background-color: #28a745;
+}

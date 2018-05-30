@@ -1,5 +1,21 @@
-<h3>Buscar imóveis</h3>
+<h3>Pesquisar imóveis</h3>
 
-<div ng-repeat="prop in $ctrl.properties">
-    <span>Imóvel</span>
+<div class="pContainer">
+    <div class="pCard" ng-repeat="property in $ctrl.properties">
+        <div class="pCard-img-container">
+            <img class="pCard-img" ng-src="{{ property.img || $ctrl.noPhotoImg }}">
+        </div>
+        <div class="pCard-body">
+            <h5 class="pCard-title">{{ property.title }}</h5>
+            <p class="pCard-description textOverflow4LineEllipsis">{{ property.description }}</p>
+        </div>
+        <div class="pCard-footer">
+            <span class="badge" ng-class="{ 'green': property.rentOrSale == 'rent', 'blue': property.rentOrSale == 'sale' }">{{ $ctrl.rentOrSaleTxt(property.rentOrSale) }}</span>
+            <small class="text-muted">
+                <p class="pCard-text">Área: {{ property.area }} m²</p>
+                <p class="pCard-text">Quartos: {{ property.rooms }}</p>
+                <p class="pCard-text">Banheiros: {{ property.bathrooms }}</p>
+            </small>
+        </div>
+    </div>
 </div>
