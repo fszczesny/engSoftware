@@ -2,10 +2,14 @@
 
 angular
     .module('core')
-    .factory('GoHome', function() {
+    .factory('GoHome', ['$state', 'UserService', function($state, UserService) {
         return {
             go: function() {
-                window.location.hash = '#!/searchProperties';
+                if (UserService.isClient() || !UserService.isLoggedIn()) {
+                    $state.go('searchProperties');
+                } else {
+                    $state.go('employeeHome');
+                }
             }
         }
-    })
+    }]);

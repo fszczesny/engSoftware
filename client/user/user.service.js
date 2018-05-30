@@ -93,6 +93,9 @@ angular
             isClient: function() {
                 return checkUserType('Customer') || checkUserType('Owner');
             },
+            isEmployee: function() {
+                return checkUserType('Manager') || checkUserType('Supervisor') || checkUserType('Consultant');
+            },
             isCustomer: function() {
                 return checkUserType('Customer');
             },
