@@ -26,3 +26,12 @@ exports.insertProperty = function(req, res) {
         res.json({ propertyId: results.insertId })
     });
 };
+
+exports.getAll = function(req, res) {
+    var sql = "SELECT * FROM properties";
+    
+    dbConnection.query(sql, [], function (error, results, fields) {
+        if (error) throw error;
+        res.json(results);
+    });
+};

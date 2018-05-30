@@ -5,7 +5,8 @@ angular
     .factory('InsertPropertyService', ['UserService',
                                        'UsersService',
                                        '$http',
-                                       function(UserService, UsersService, $http) {
+                                       'PropertiesAPI',
+                                       function(UserService, UsersService, $http, PropertiesAPI) {
         
         var loadOwnerInfo = function(ownerUsername, callback) {
             var resp = {
@@ -52,17 +53,15 @@ angular
         var insertProperty = function(propertyInfo) {
             return new Promise(function(resolve, reject) {
 
-                // Will also update userType (Customer -> Owner) if needed
-                $http
-                    .post('/api/property/', propertyInfo)
-                    .then(function(resp) {
-                        var propertyId = resp.data.propertyId;
-                        resolve(propertyId);
-                    }).catch(function(error) {
-                        reject({
-                            msg: "Não foi possível inserir o imóvel"
-                        })
-                    });
+                PropertiesAPI.save(propertyInfo, function success(resp) {
+                    var propertyId = resp.propertyId;
+                    resolve(propertyId);
+                }, function error(error) {
+                    reject({
+                        msg: "Não foi possível inserir o imóvel"
+                    })
+                });
+                
             });
         };
 
