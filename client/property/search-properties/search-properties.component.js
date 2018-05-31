@@ -4,12 +4,9 @@ angular
     .module('property')
     .component('searchProperties', {
         templateUrl: 'property/search-properties/search-properties.template.html',
-        controller: ['SearchPropertiesService',
-                     'PropertiesAPI',
-                     'NoPhotoImg',
-                     '$scope',
+        controller: ['NoPhotoImg',
                      'AddressStates',
-                     function(SearchPropertiesService, PropertiesAPI, NoPhotoImg, $scope, AddressStates) {
+                     function(NoPhotoImg, AddressStates) {
 
             var self = this;
 
