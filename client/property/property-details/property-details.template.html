@@ -1,0 +1,25 @@
+<div class="pContainer">
+    <div class="pImg-div">
+        <img class="pImg-img" ng-src="{{ $ctrl.property.img || $ctrl.noPhotoImg }}">
+    </div>
+    <div class="pBody">
+        <div class="pInfo-header">
+            <h3>{{ $ctrl.property.title }}</h3>
+            <h4><span class="badge" ng-class="{ 'green': $ctrl.property.rentOrSale == 'rent', 'blue': $ctrl.property.rentOrSale == 'sale' }">{{ $ctrl.rentOrSaleToTxt($ctrl.property.rentOrSale) }}</span></h4>
+        </div>
+        <div class="pInfo-content">
+            <p class="pText"><img class="icon" src="_img/priceIcon.png"><span class="bold">Preço{{ ($ctrl.property.rentOrSale == 'rent') ? ' mensal' : '' }}:</span> {{ $ctrl.property.price | currency:'R$ ' }}</p>
+            <p class="pText"><img class="icon" src="_img/areaIcon.png"><span class="bold">Área:</span> {{ $ctrl.property.area }} m²</p>
+            <p class="pText"><img class="icon" src="_img/roomsIcon.png"><span class="bold">Quartos:</span> {{ $ctrl.property.rooms }}</p>
+            <p class="pText"><img class="icon" src="_img/bathroomsIcon.png"><span class="bold">Banheiros:</span> {{ $ctrl.property.bathrooms }}</p>
+            <div class="pFlex">
+                <p class="pText"><img class="icon" src="_img/addressIcon.png"><span class="bold">Endereço:</span></p>
+                <div class="pText-multiline">
+                    <p class="pText">{{ $ctrl.property.address }}</p>
+                    <p class="pText">{{ $ctrl.property.city }}, {{ $ctrl.property.state }}</p>
+                </div>
+            </div>
+            <p class="pText"><img class="icon" src="_img/descriptionIcon.png"><span class="bold">Descrição:</span> {{ $ctrl.property.description }}</p>
+        </div>
+    </div>
+</div>

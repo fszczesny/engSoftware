@@ -88,6 +88,11 @@ search-properties .pCard {
     margin: .8em;
 }
 
+search-properties .pCard a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
 search-properties .pCard-img-container {
     overflow: hidden;
     width: 100%;
@@ -106,8 +111,6 @@ search-properties .pCard-body {
     padding: 1em;
     border-top: 1px solid rgba(0,0,0,.125);
 }
-
-search-properties .pCard-title {}
 
 search-properties p.pCard-description {
     line-height: 1.5em;
@@ -142,14 +145,4 @@ search-properties .pCard-footer .badge {
     font-size: 0.8em;
     position: absolute;
     right: 1.25em;
-}
-
-.badge.blue {
-    color: white;
-    background-color: #007bff;
-}
-
-.badge.green {
-    color: white;
-    background-color: #28a745;
 }

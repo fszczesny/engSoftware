@@ -35,3 +35,13 @@ exports.getAll = function(req, res) {
         res.json(results);
     });
 };
+
+exports.getPropertyById = function(req, res) {
+    var propertyId = req.params.propertyId;
+    var sql = "SELECT * FROM properties WHERE id = ? LIMIT 1";
+    
+    dbConnection.query(sql, [propertyId], function (error, results, fields) {
+        if (error) throw error;
+        res.json(results[0]);
+    });
+};

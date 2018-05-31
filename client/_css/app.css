@@ -5,6 +5,17 @@ html {
     height: 100%;
 }
 
+.badge.blue {
+    color: white !important;
+    background-color: #007bff;
+}
+
+.badge.green {
+    color: white !important;
+    background-color: #28a745;
+}
+
+
 .bg-sheet {
     position: fixed;
     width: 100%;

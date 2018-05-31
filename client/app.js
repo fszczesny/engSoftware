@@ -54,11 +54,20 @@ angular.module('RealEstate').config(['$stateProvider',
         }
     };
 
+
+
     var employeeHomeState = {
         name: 'employeeHome',
         url: '/employeeHome',
         template: '<h3>Funcionário</h3>'
     };
+
+    var propertyDetailsState = {
+        name: 'propertyDetails',
+        url: '/propertyDetails/{propertyId}',
+        component: 'propertyDetails'
+    };
+
 
     $stateProvider.state(searchPropertiesState);
     $stateProvider.state(signUpState);
@@ -66,6 +75,7 @@ angular.module('RealEstate').config(['$stateProvider',
     $stateProvider.state(employeeSignUpState);
     $stateProvider.state(insertPropertyState);
     $stateProvider.state(employeeHomeState);
+    $stateProvider.state(propertyDetailsState);
 
     $urlRouterProvider.otherwise('/searchProperties');
 }]);

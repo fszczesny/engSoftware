@@ -6,12 +6,13 @@ angular
         templateUrl: 'property/search-properties/search-properties.template.html',
         controller: ['NoPhotoImg',
                      'AddressStates',
-                     function(NoPhotoImg, AddressStates) {
+                     'PropertiesAPI',
+                     function(NoPhotoImg, AddressStates, PropertiesAPI) {
 
             var self = this;
 
             this.noPhotoImg = NoPhotoImg;
-            this.properties = PropertiesAPI.query();
+            this.properties = PropertiesAPI.getAvailables();
 
             this.rentOrSaleToTxt = function(rentOrSale) {
                 var text = {

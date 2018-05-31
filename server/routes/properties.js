@@ -6,5 +6,8 @@ module.exports = function(app) {
     app.route('/api/property')
             .post(property.insertProperty)
             .get(property.getAll);
+    
+    app.route('/api/property/:propertyId')
+            .get(property.getPropertyById);
 
 };
