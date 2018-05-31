@@ -15,6 +15,7 @@ angular
 
             this.noPhotoImg = NoPhotoImg;
             this.properties = PropertiesAPI.query();
+
             this.rentOrSaleToTxt = function(rentOrSale) {
                 var text = {
                     'rent': 'Alugar',
@@ -24,8 +25,15 @@ angular
             };
 
             this.addressStates = AddressStates;
-            this.orderBy = 'price';
-            this.order = 'desc';
+
+            // > Order By management
+            this.order = 'price.asc';
+            this.orderAttr = 'price';
+            this.orderRev = false;
+            this.orderChange = function() {
+                this.orderAttr = this.order.split('.')[0];
+                this.orderRev = this.order.split('.')[1] == 'desc';
+            };
 
             // > Filters management
             this.enableFilter = {

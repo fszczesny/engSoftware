@@ -65,33 +65,39 @@
     <div class="filters-column" id="orderBy">
         <div class="form-group">
             <label for="orderBy">Ordernar por</label>
-            <select class="form-control form-control-sm" id="orderBy" ng-model="$ctrl.orderBy">
-                <option value="price">Preço</option>
-                <option value="area">Área</option>
-                <option value="rooms">Quartos</option>
-                <option value="bathrooms">Banheiros</option>
+            <select class="form-control form-control-sm" id="orderBy" ng-model="$ctrl.order" ng-change="$ctrl.orderChange()">
+                <option value="price.asc">Menor Preço</option>
+                <option value="price.desc">Maior Preço</option>
+                <option value="area.asc">Menor Área</option>
+                <option value="area.desc">Maior Área</option>
+                <option value="rooms.asc">Menos Quartos</option>
+                <option value="rooms.desc">Mais Quartos</option>
+                <option value="bathrooms.asc">Menos Banheiros</option>
+                <option value="bathrooms.desc">Mais Banheiros</option>
             </select>
         </div>
     </div>
 </div>
 
 <div class="results-container">
-    <div class="pCard" ng-repeat="property in $ctrl.properties | filter: $ctrl.filter | filter: $ctrl.filterArea | filter: $ctrl.filterPrice | filter: $ctrl.search | orderBy: $ctrl.orderBy:($ctrl.order == 'desc')">
-        <div class="pCard-img-container">
-            <img class="pCard-img" ng-src="{{ property.img || $ctrl.noPhotoImg }}">
-        </div>
-        <div class="pCard-body">
-            <h5 class="pCard-title">{{ property.title }}</h5>
-            <p class="pCard-description textOverflow4LineEllipsis">{{ property.description }}</p>
-        </div>
-        <div class="pCard-footer">
-            <span class="badge" ng-class="{ 'green': property.rentOrSale == 'rent', 'blue': property.rentOrSale == 'sale' }">{{ $ctrl.rentOrSaleToTxt(property.rentOrSale) }}</span>
-            <small class="text-muted">
-                <p class="pCard-text">Área: {{ property.area }} m²</p>
-                <p class="pCard-text">Quartos: {{ property.rooms }}</p>
-                <p class="pCard-text">Banheiros: {{ property.bathrooms }}</p>
-                <p class="pCard-text">Preço: {{ property.price | currency:'R$ ' }}</p>
-            </small>
-        </div>
+    <div class="pCard" ng-repeat="property in $ctrl.properties | filter: $ctrl.filter | filter: $ctrl.filterArea | filter: $ctrl.filterPrice | filter: $ctrl.search | orderBy: $ctrl.orderAttr:$ctrl.orderRev">
+        <a href="#!/propertyDetails/{{ property.id }}">
+            <div class="pCard-img-container">
+                <img class="pCard-img" ng-src="{{ property.img || $ctrl.noPhotoImg }}">
+            </div>
+            <div class="pCard-body">
+                <h5 class="pCard-title">{{ property.title }}</h5>
+                <p class="pCard-description textOverflow4LineEllipsis">{{ property.description }}</p>
+            </div>
+            <div class="pCard-footer">
+                <span class="badge" ng-class="{ 'green': property.rentOrSale == 'rent', 'blue': property.rentOrSale == 'sale' }">{{ $ctrl.rentOrSaleToTxt(property.rentOrSale) }}</span>
+                <small class="text-muted">
+                    <p class="pCard-text">Área: {{ property.area }} m²</p>
+                    <p class="pCard-text">Quartos: {{ property.rooms }}</p>
+                    <p class="pCard-text">Banheiros: {{ property.bathrooms }}</p>
+                    <p class="pCard-text">Preço: {{ property.price | currency:'R$ ' }}</p>
+                </small>
+            </div>
+        </a>
     </div>
 </div>

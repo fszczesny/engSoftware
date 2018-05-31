@@ -28,7 +28,7 @@ exports.insertProperty = function(req, res) {
 };
 
 exports.getAll = function(req, res) {
-    var sql = "SELECT * FROM properties";
+    var sql = "SELECT * FROM properties WHERE sold = 0";
     
     dbConnection.query(sql, [], function (error, results, fields) {
         if (error) throw error;
