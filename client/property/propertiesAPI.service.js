@@ -5,8 +5,13 @@ angular
     .factory('PropertiesAPI', ['$resource', function($resource) {
 
         return $resource('/api/property/:propertyId', {}, {
-            getAvailables:  { method: 'GET', isArray: true },
-            get:            { method: 'GET' },
+            getAll:     { method: 'GET', isArray: true },
+            get:        { method: 'GET' },
+            loadRents:  {
+                            method: 'GET',
+                            isArray: true,
+                            url: '/api/property/rents/:propertyId'
+                        },
         });
 
     }]);

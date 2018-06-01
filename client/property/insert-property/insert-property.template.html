@@ -29,7 +29,7 @@
             </select>
         </div>
         <div class="form-group col-md-6">
-            <label for="price">Preço {{ ($ctrl.rentOrSale == 'rent') ? 'mensal' : ($ctrl.rentOrSale == 'sale') ? 'de venda' : '' }}</label>
+            <label for="price">Preço {{ ($ctrl.rentOrSale == 'rent') ? 'da diária' : ($ctrl.rentOrSale == 'sale') ? 'de venda' : '' }}</label>
             <input type="number" name="price" ng-class="{ 'is-invalid': propertyForm.price.$invalid && !propertyForm.price.$pristine }"
                 required ng-model="$ctrl.price" class="form-control" id="price" placeholder="Digite o preço">
         </div>

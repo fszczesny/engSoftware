@@ -29,7 +29,37 @@ angular
                 }
             });
 
+            this.rents = PropertiesAPI.loadRents({ propertyId: propertyId }, function() {
+                console.log(self.rents);
+            })
 
+            // Transaction
+            this.doRentOrSale = function() {
+                var property = this.property;
+                if (property.sold) {
+                    alert('Este imóvel já foi vendido!');
+                    return false;
+                }
+
+                if (property.isRent) {
+                    alert('Este imóvel já está alugado!');
+                    return false;
+                }
+
+                if (property.rentOrSale == 'rent') {
+                    this.doRent();
+                } else if (property.rentOrSale == 'sale') {
+                    this.doSale();
+                }
+            };
+
+            this.doRent = function() {
+                
+            };
+
+            this.doSale = function() {
+
+            };
 
         }]
     });

@@ -12,7 +12,7 @@ angular
             var self = this;
 
             this.noPhotoImg = NoPhotoImg;
-            this.properties = PropertiesAPI.getAvailables();
+            this.properties = PropertiesAPI.getAll();
 
             this.rentOrSaleToTxt = function(rentOrSale) {
                 var text = {

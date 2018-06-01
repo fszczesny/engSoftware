@@ -36,12 +36,37 @@ exports.getAll = function(req, res) {
     });
 };
 
+exports.getAvailables = function(req, res) {
+    var sql = "SELECT p.*, (r.rentId IS NOT NULL) as isRent FROM properties AS p ";
+    sql += "LEFT JOIN rents AS r ON ";
+    sql += "(p.id = r.propertyId) AND (CURDATE() BETWEEN r.startDate AND r.endDate) ";
+    sql += "GROUP BY p.id HAVING isRent = 0 AND p.sold = 0";
+    
+    dbConnection.query(sql, [], function (error, results, fields) {
+        if (error) throw error;
+        res.json(results);
+    });
+};
+
 exports.getPropertyById = function(req, res) {
     var propertyId = req.params.propertyId;
-    var sql = "SELECT * FROM properties WHERE id = ? LIMIT 1";
+    var sql = "SELECT p.*, (r.rentId IS NOT NULL) as isRent FROM properties AS p ";
+    sql += "LEFT JOIN rents AS r ON ";
+    sql += "(p.id = r.propertyId) AND (CURDATE() BETWEEN r.startDate AND r.endDate) ";
+    sql += "WHERE p.id = ? LIMIT 1";
     
     dbConnection.query(sql, [propertyId], function (error, results, fields) {
         if (error) throw error;
         res.json(results[0]);
+    });
+};
+
+exports.loadRents = function(req, res) {
+    var propertyId = req.params.propertyId;
+    var sql = "SELECT * FROM rents WHERE propertyId = ?";
+
+    dbConnection.query(sql, [propertyId], function (error, results, fields) {
+        if (error) throw error;
+        res.json(results);
     });
 };

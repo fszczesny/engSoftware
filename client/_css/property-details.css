@@ -1,4 +1,4 @@
-property-details .pContainer {
+property-details .pDetails-container {
     display: flex;
     padding: 1em 2em;
     background-color: #eeeeee;
@@ -51,4 +51,9 @@ property-details .bold {
 
 property-details p.pText-lg {
     font-size: 1.5em;
+}
+
+
+property-details .pRent-container {
+    
 }

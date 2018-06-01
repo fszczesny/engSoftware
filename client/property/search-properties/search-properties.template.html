@@ -95,7 +95,7 @@
                     <p class="pCard-text">Área: {{ property.area }} m²</p>
                     <p class="pCard-text">Quartos: {{ property.rooms }}</p>
                     <p class="pCard-text">Banheiros: {{ property.bathrooms }}</p>
-                    <p class="pCard-text">Preço: {{ property.price | currency:'R$ ' }}</p>
+                    <p class="pCard-text">Preço: {{ property.price | currency:'R$ ' }} {{ (property.rentOrSale == 'rent') ? '/ dia' : '' }}</p>
                 </small>
             </div>
         </a>
