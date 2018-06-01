@@ -128,11 +128,27 @@ angular
                     propertyId: property.id,
                     rentorId: user.id,
                     startDate: startDate.format('YYYY-MM-DD'),
-                    endDate: endDate.format('YYYY-MM-DD')
+                    endDate: endDate.format('YYYY-MM-DD'),
+                    payMethod: paymentMethod,
+                    payApproved: false,
                 }
 
+                // Payment approval
+                if (paymentMethod == 'creditCard') rentData.payApproved = true;
+                if (paymentMethod == 'bankSlip') rentData.payApproved = false;
+
                 PropertiesAPI.rent(rentData).$promise.then(function(resp) {
-                    alert('Parabéns! Imóvel alugado!');
+                    var msg = '';
+                    if (rentData.payApproved) {
+                        msg += 'Parabéns! O imóvel foi alugado!\n';
+                        msg += 'Você só precisa passar em alguma de ';
+                        msg += 'nossas lojas para retirar as chaves do imóvel.';
+                    } else if (paymentMethod == 'bankSlip') {
+                        msg += 'O imóvel foi reservado com sucesso!\n';
+                        msg += 'Assim que o pagamento for aprovado, você receberá ';
+                        msg += 'um e-mail com as instruções para retirada das chaves.';
+                    }
+                    alert(msg);
                     $state.go('searchProperties');
                 }).catch(function(error) {
                     alert('Desculpe-nos! Não foi possível alugar o imóvel.');
