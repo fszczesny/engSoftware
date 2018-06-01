@@ -5,7 +5,7 @@
         <div class="form-row align-items-center">
             <div class="col-sm-5" id="date">
                 <label>Período de aluguel</label>
-                <input readonly ng-change="$ctrl.dateRangeChange()" date-range-picker class="form-control date-picker" type="text" ng-model="$ctrl.date" options="$ctrl.datePickerOptions" required />
+                <input readonly id="dateRange" ng-change="$ctrl.dateRangeChange()" date-range-picker class="form-control date-picker" type="text" ng-model="$ctrl.date" options="$ctrl.datePickerOptions" required />
             </div>
             <div class="col-auto" id="totalPrice" ng-show="$ctrl.rentDays != null">
                 <span>Valor total: <span class="font-weight-bold">{{ $ctrl.totalPrice | currency:'R$ ' }}</span></span>
@@ -18,7 +18,7 @@
                 <option value="creditCard">Cartão de crédito</option>
                 <option value="bankSlip">Boleto bancário</option>
             </select>
-            <small ng-show="$ctrl.paymentMethod == 'bankSlip'" id="paymentMethodHelp" class="form-text text-muted">O boleto será gerado após a submissão do formulário</small>
+            <small ng-show="$ctrl.paymentMethod == 'bankSlip'" id="paymentMethodHelp" class="form-text text-muted">O boleto será enviado por e-mail</small>
 
         </div>
 

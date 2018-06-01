@@ -1,7 +1,6 @@
 rent-property .pRent-container {
     padding: 2em;
-    background-color: #eeeeee;
-    box-shadow: 0px 0px 7px rgba(0,0,0,.3);
+    box-shadow: 0px 0px 5px rgba(0,0,0,.3);
 }
 
 rent-property .pRent-form {

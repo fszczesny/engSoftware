@@ -40,9 +40,39 @@ angular
             this.totalPrice = null;
             
             // Date Picker
+
+            var datePickerInput = $('rent-property input#dateRange');
+
+            var cleanDatePickerInput = function() {
+                self.date.startDate = null;
+                self.date.endDate = null;
+                datePickerInput.val('');
+                datePickerInput.data('daterangepicker').setStartDate(moment());
+                datePickerInput.data('daterangepicker').setEndDate(moment());
+            }
+
+            var validateDateRange = function(start, end) {
+                var valid = true;
+                self.rents.forEach(function(rent) {
+                    var rStart = rent.startDate;
+                    var rEnd = rent.endDate;
+
+                    if (start < rStart && end > rEnd) {
+                        valid = false;
+                        return false;
+                    }
+                });
+                return valid;
+            };
+
             var datePickerChanged = function() {
                 if (self.date.startDate == null || self.date.endDate == null) {
                     self.rentDays = null;
+                    return;
+                }
+
+                if (!validateDateRange(self.date.startDate, self.date.endDate)) {
+                    cleanDatePickerInput();
                     return;
                 }
 
@@ -62,6 +92,7 @@ angular
 
             this.datePickerOptions = {
                 drops: 'up',
+                minDate: moment(),
                 locale: {
                     format: 'DD/MM/YYYY',
                     separator: ' à ',
@@ -72,7 +103,7 @@ angular
                                     'Janeiro','Fevereiro','Março','Abril',
                                     'Maio','Junho','Julho','Agosto',
                                     'Setembro','Novembro','Dezembro'
-                                ],
+                                ]
                 },
                 eventHandlers: {
                     'apply.daterangepicker': datePickerChanged
