@@ -78,6 +78,7 @@ search-properties .results-container {
 }
 
 search-properties .pCard {
+    overflow: hidden;
     word-wrap: break-word;
     background-color: #fff;
     border: 1px solid rgba(0,0,0,.125);
