@@ -1,0 +1,43 @@
+<div class="pRent-container">
+    <h5>Alugar</h5>
+
+    <form name="rentForm" class="pRent-form" on-submit="event.preventDefault()" ng-submit="$ctrl.submit()" novalidate>
+        <div class="form-row align-items-center">
+            <div class="col-sm-5" id="date">
+                <label>Período de aluguel</label>
+                <input readonly ng-change="$ctrl.dateRangeChange()" date-range-picker class="form-control date-picker" type="text" ng-model="$ctrl.date" options="$ctrl.datePickerOptions" required />
+            </div>
+            <div class="col-auto" id="totalPrice" ng-show="$ctrl.rentDays != null">
+                <span>Valor total: <span class="font-weight-bold">{{ $ctrl.totalPrice | currency:'R$ ' }}</span></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Forma de pagamento</label>
+            <select class="form-control" id="paymentMethod" ng-model="$ctrl.paymentMethod" required>
+                <option value="creditCard">Cartão de crédito</option>
+                <option value="bankSlip">Boleto bancário</option>
+            </select>
+            <small ng-show="$ctrl.paymentMethod == 'bankSlip'" id="paymentMethodHelp" class="form-text text-muted">O boleto será gerado após a submissão do formulário</small>
+
+        </div>
+
+        <div class="form-row" ng-show="$ctrl.paymentMethod == 'creditCard'">
+            <div class="col-sm-8">
+                <label>Número do cartão</label>
+                <input type="text" class="form-control" id="creditCard" ng-model="$ctrl.creditCard">
+                <small id="creditCardHelp" class="form-text text-muted">Digite apenas números</small>
+            </div>
+            <div class="col-sm-4">
+                <label>Código de segurança</label>
+                <input type="text" class="form-control" ng-model="$ctrl.cardSafeCode">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Alugar</button>
+
+    </form>
+
+
+
+</div>

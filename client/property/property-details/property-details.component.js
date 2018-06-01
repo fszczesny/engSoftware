@@ -7,7 +7,8 @@ angular
                      '$scope',
                      'GoHome',
                      'NoPhotoImg',
-                     function($state, PropertiesAPI, $scope, GoHome, NoPhotoImg) {
+                     'UserAuth',
+                     function($state, PropertiesAPI, $scope, GoHome, NoPhotoImg, UserAuth) {
 
             var self = this;
             var propertyId = $state.params.propertyId;
@@ -21,6 +22,12 @@ angular
                 return text[rentOrSale];
             }
 
+            UserAuth.validate(function(UserService) {
+                return UserService.isLoggedIn();
+            }, function authError(UserService) {
+                $state.go('propertyDetails', { propertyId: propertyId });
+            }, function authSuccess(UserService) {});
+
             // Load property data
             this.property = PropertiesAPI.get({ propertyId: propertyId }, function() {
                 if (typeof self.property.id == 'undefined') {
@@ -29,36 +36,32 @@ angular
                 }
             });
 
-            this.rents = PropertiesAPI.loadRents({ propertyId: propertyId }, function() {
-                console.log(self.rents);
-            })
-
             // Transaction
             this.doRentOrSale = function() {
                 var property = this.property;
+
+                // Pre-validate
                 if (property.sold) {
                     alert('Este imóvel já foi vendido!');
                     return false;
                 }
 
-                if (property.isRent) {
-                    alert('Este imóvel já está alugado!');
+                if (!UserAuth.isLoggedIn()) {
+                    alert('É necessário conectar à sua conta para alugar/comprar imóveis');
+                    return false;
+                }
+
+                var userId = UserAuth.getUser().getUserData().id;
+                if (userId == property.ownerId) {
+                    alert('Você não pode comprar/alugar o próprio imóvel');
                     return false;
                 }
 
                 if (property.rentOrSale == 'rent') {
-                    this.doRent();
+                    $state.go('propertyDetails.rent', { property: property });
                 } else if (property.rentOrSale == 'sale') {
-                    this.doSale();
+                    $state.go('propertyDetails.sale');
                 }
-            };
-
-            this.doRent = function() {
-                
-            };
-
-            this.doSale = function() {
-
             };
 
         }]

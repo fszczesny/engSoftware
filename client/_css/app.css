@@ -15,6 +15,10 @@ html {
     background-color: #28a745;
 }
 
+.bold {
+    font-weight: 500;
+}
+
 
 .bg-sheet {
     position: fixed;

@@ -13,6 +13,12 @@ module.exports = function(app) {
     app.route('/api/property/availables')
             .get(property.getAvailables);
 
+
+    // Rents
+
+    app.route('/api/property/rents')
+            .post(property.newRent);
+
     app.route('/api/property/rents/:propertyId')
             .get(property.loadRents);
 

@@ -3,6 +3,8 @@ property-details .pDetails-container {
     padding: 1em 2em;
     background-color: #eeeeee;
     align-items: center;
+    margin-bottom: 2em;
+    box-shadow: 0px 0px 7px rgba(0,0,0,.3);
 }
 
 property-details .pImg-div {
@@ -45,15 +47,7 @@ property-details div.pText-multiline p.pText {
     margin-bottom: 0;
 }
 
-property-details .bold {
-    font-weight: 500;
-}
-
 property-details p.pText-lg {
     font-size: 1.5em;
 }
 
-
-property-details .pRent-container {
-    
-}

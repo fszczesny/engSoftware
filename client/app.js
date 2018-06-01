@@ -54,18 +54,31 @@ angular.module('RealEstate').config(['$stateProvider',
         }
     };
 
+    var propertyDetailsState = {
+        name: 'propertyDetails',
+        url: '/propertyDetails/{propertyId}',
+        component: 'propertyDetails'
+    };
+
+    var rentPropertyState = {
+        name: 'propertyDetails.rent',
+        url: '/rent',
+        component: 'rentProperty',
+        params: { property: null, rents: null }
+    };
+
+    var salePropertyState = {
+        name: 'propertyDetails.sale',
+        url: '/sale',
+        template: '<h2>Comprar</h2>'
+    };
+
 
 
     var employeeHomeState = {
         name: 'employeeHome',
         url: '/employeeHome',
         template: '<h3>Funcionário</h3>'
-    };
-
-    var propertyDetailsState = {
-        name: 'propertyDetails',
-        url: '/propertyDetails/{propertyId}',
-        component: 'propertyDetails'
     };
 
 
@@ -76,6 +89,8 @@ angular.module('RealEstate').config(['$stateProvider',
     $stateProvider.state(insertPropertyState);
     $stateProvider.state(employeeHomeState);
     $stateProvider.state(propertyDetailsState);
+    $stateProvider.state(rentPropertyState);
+    $stateProvider.state(salePropertyState);
 
     $urlRouterProvider.otherwise('/searchProperties');
 }]);

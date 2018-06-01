@@ -1,0 +1,18 @@
+rent-property .pRent-container {
+    padding: 2em;
+    background-color: #eeeeee;
+    box-shadow: 0px 0px 7px rgba(0,0,0,.3);
+}
+
+rent-property .pRent-form {
+    width: 40em;
+}
+
+rent-property .form-row {
+    margin-bottom: 1em;
+}
+
+rent-property .form-row #totalPrice {
+    margin-left: 1em;
+    margin-top: 2em;
+}

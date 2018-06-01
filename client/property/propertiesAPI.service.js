@@ -12,6 +12,10 @@ angular
                             isArray: true,
                             url: '/api/property/rents/:propertyId'
                         },
+            rent:       {
+                            method: 'POST',
+                            url: '/api/property/rents'
+                        },
         });
 
     }]);

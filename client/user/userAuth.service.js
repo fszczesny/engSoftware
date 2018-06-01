@@ -65,6 +65,10 @@ angular
 
             getUser: function() {
                 return UserService;
+            },
+
+            isLoggedIn: function() {
+                return UserService.isLoggedIn();
             }
         };
 

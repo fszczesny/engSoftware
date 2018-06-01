@@ -61,6 +61,10 @@ exports.getPropertyById = function(req, res) {
     });
 };
 
+
+
+// > Rents
+
 exports.loadRents = function(req, res) {
     var propertyId = req.params.propertyId;
     var sql = "SELECT * FROM rents WHERE propertyId = ?";
@@ -70,3 +74,16 @@ exports.loadRents = function(req, res) {
         res.json(results);
     });
 };
+
+exports.newRent = function(req, res) {
+    var rentData = req.body;
+    var sql = "INSERT rents SET ?";
+    dbConnection.query(sql, rentData, function (error, results, fields) {
+        if (error) throw error;
+
+        res.json({ rentId: results.insertId })
+    });
+}
+
+
+
