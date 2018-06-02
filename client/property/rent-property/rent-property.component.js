@@ -57,6 +57,8 @@ angular
                     var rStart = rent.startDate;
                     var rEnd = rent.endDate;
 
+                    // Check selected range CONTAINS any rent date range
+                    // PS: other validity cases are guaranteed by datePicker
                     if (start < rStart && end > rEnd) {
                         valid = false;
                         return false;

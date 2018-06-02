@@ -6,7 +6,7 @@
         <div class="pInfo-header">
             <h3>{{ $ctrl.property.title }}</h3>
             <h4>
-                <span class="badge" ng-click="$ctrl.doRentOrSale()" ng-class="{ 'green': $ctrl.property.rentOrSale == 'rent', 'blue': $ctrl.property.rentOrSale == 'sale' }">
+                <span class="badge button" ng-click="$ctrl.doRentOrSale()" ng-class="{ 'green': $ctrl.property.rentOrSale == 'rent', 'blue': $ctrl.property.rentOrSale == 'sale' }">
                     {{ $ctrl.rentOrSaleToTxt($ctrl.property.rentOrSale) }}
                 </span>
             </h4>

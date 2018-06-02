@@ -15,3 +15,17 @@ rent-property .form-row #totalPrice {
     margin-left: 1em;
     margin-top: 2em;
 }
+
+.daterangepicker td.disabled,
+.daterangepicker option.disabled {
+    text-decoration: none;
+}
+
+.daterangepicker td.available,
+.daterangepicker option.available {
+    font-weight: bold; 
+}
+.daterangepicker td.available:not(.active),
+.daterangepicker option.available:not(.active) {
+    color: green;
+}
