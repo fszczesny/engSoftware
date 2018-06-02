@@ -21,6 +21,7 @@ module.exports = function(app) {
     app.route('/api/property/rents/:propertyId')
             .get(property.loadRents);
 
+            
     // Reservations
     app.route('/api/property/reservations')
             .post(property.newReservation);
