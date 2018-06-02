@@ -105,10 +105,7 @@ var schedulePropertyReservationExpiration = function(propertyId, reservationId, 
     schedule.scheduleJob(taskDate, function(propertyId, reservationId) {
         console.log("Reservation time for property (id: " + propertyId + ") expired!");
         // Set property.reserved = false
-        var sql1 = "UPDATE properties SET reserved = 0 WHERE id = ?";
-        dbConnection.query(sql1, [propertyId], function (error, results, fields) {
-            if (error) throw error;
-        });
+        setPropertyReservedState(propertyId, false);
         // Delete propertyReservation
         var sql2 = "DELETE FROM propertyReservations WHERE reservationId = ?";
         dbConnection.query(sql2, [reservationId], function (error, results, fields) {
