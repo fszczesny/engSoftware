@@ -51,7 +51,7 @@ angular
                     return false;
                 }
 
-                var userId = UserAuth.getUser().getUserData().id;
+                var userId = UserAuth.Service.getUserData().id;
                 if (userId == property.ownerId) {
                     alert('Você não pode comprar/alugar o próprio imóvel');
                     return false;

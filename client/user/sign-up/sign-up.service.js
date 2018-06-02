@@ -11,9 +11,9 @@ angular
             return new Promise(function(resolve, reject) {
                 UsersAPI.checkExists({
                     username: username
-                }, function(resp) {
+                }).$promise.then(function(resp) {
                     resolve(resp.userExists);
-                }, function(error) {
+                }).catch(function(error) {
                     console.log('Error', error);
                     reject(error);
                 });
@@ -27,10 +27,10 @@ angular
             return new Promise(function(resolve, reject) {
                 checkUserExists(userData.username).then(function(userExists) {
                     if (!userExists) {
-                        UsersAPI.create(userData, function(resp) {
+                        UsersAPI.create(userData).$promise.then(function(resp) {
                             var userData = resp.userData;
                             resolve(userData);
-                        }, function(error) {
+                        }).catch(function(error) {
                             console.log('Error', error);
                             reject({
                                 msg: 'ERRO: Não foi possível cadastrar o usuário'
@@ -43,7 +43,7 @@ angular
                     }
                 }).catch(function(error) {
                    reject({
-                       msg: 'ERRO: Não foi possível verificar existência do usuário'
+                       msg: 'ERRO: Não foi possível verificar a disponibilidade do usuário'
                    });
                 });
 

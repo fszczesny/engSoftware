@@ -19,10 +19,10 @@ angular
 
                 UsersAPI.lookUp({
                     username: username
-                }, function(resp) {
+                }).$promise.then(function(resp) {
                     var userData = resp.userData;
                     resolve(userData);
-                }, function(error) {
+                }).catch(function(error) {
                     reject({
                         msg: "Não foi possível buscar o usuário"
                     });

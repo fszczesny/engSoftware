@@ -13,11 +13,11 @@ angular
             user = UserSession.getSession();
             if (user != null) {
                 var userId = user.id;
-                UsersAPI.get({ userId: userId }, function(resp) {
+                UsersAPI.get({ userId: userId }).$promise.then(function(resp) {
                     var userData = resp.userData;
                     UserSession.setSession(userData);
                     updateUserData();
-                }, function(error) {
+                }).catch(function(error) {
                     console.log('Error', error);
                 });
             }
@@ -41,19 +41,19 @@ angular
          */
         var logIn = function(logInInfo) {
             return new Promise(function(resolve, reject) {
-                UsersAPI.logIn(logInInfo, function(resp) {
+                UsersAPI.logIn(logInInfo).$promise.then(function(resp) {
                     var userData = resp.userData;
                     if (userData != null) {
                         // Login successful
                         UserSession.setSession(userData);
                         updateUserData();
-                        resolve(resp.data);
+                        resolve(userData);
                     } else {
                         reject({
-                            msg: 'Credenciais erradas!'
+                            msg: 'Usuário ou senha inválidos!'
                         })
                     }
-                }, function(error) {
+                }).catch(function(error) {
                     console.log('Error', error);
                     reject({
                         msg: 'ERRO: Não foi possível fazer login'
