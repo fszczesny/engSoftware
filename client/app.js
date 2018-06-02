@@ -70,7 +70,8 @@ angular.module('RealEstate').config(['$stateProvider',
     var salePropertyState = {
         name: 'propertyDetails.sale',
         url: '/sale',
-        template: '<h2>Comprar</h2>'
+        component: 'sellProperty',
+        params: { property: null }
     };
 
 

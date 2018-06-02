@@ -5,14 +5,26 @@ html {
     height: 100%;
 }
 
-.badge.blue {
+body.noScroll {
+    overflow: hidden;
+}
+
+.badge.blue, .badge.sale {
     color: white !important;
     background-color: #007bff;
 }
 
-.badge.green {
+.text-blue, .text-sale {
+    color: #007bff;
+}
+
+.badge.green, .badge.rent {
     color: white !important;
     background-color: #28a745;
+}
+
+.text-green, .text-rent {
+    color: #28a745;
 }
 
 .bold {

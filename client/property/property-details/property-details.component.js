@@ -22,16 +22,16 @@ angular
                 return text[rentOrSale];
             }
 
-            UserAuth.validate(function(UserService) {
-                return UserService.isLoggedIn();
-            }, function authError(UserService) {
-                $state.go('propertyDetails', { propertyId: propertyId });
-            }, function authSuccess(UserService) {});
-
             // Load property data
             this.property = PropertiesAPI.get({ propertyId: propertyId }, function() {
                 if (typeof self.property.id == 'undefined') {
                     alert('Imóvel não existe');
+                    GoHome.go();
+                } else if (self.property.sold) {
+                    alert('Este imóvel já foi vendido!');
+                    GoHome.go();
+                } else if (self.property.reserved) {
+                    alert('Este imóvel está reservado!');
                     GoHome.go();
                 }
             });
@@ -41,11 +41,6 @@ angular
                 var property = this.property;
 
                 // Pre-validate
-                if (property.sold) {
-                    alert('Este imóvel já foi vendido!');
-                    return false;
-                }
-
                 if (!UserAuth.isLoggedIn()) {
                     alert('É necessário conectar à sua conta para alugar/comprar imóveis');
                     return false;
@@ -60,7 +55,7 @@ angular
                 if (property.rentOrSale == 'rent') {
                     $state.go('propertyDetails.rent', { property: property });
                 } else if (property.rentOrSale == 'sale') {
-                    $state.go('propertyDetails.sale');
+                    $state.go('propertyDetails.sale', { property: property });
                 }
             };
 

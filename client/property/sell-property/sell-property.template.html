@@ -1,0 +1,20 @@
+<div class="pSale-container">
+    <h3 class="text-sale">Comprar</h3>
+
+    <p class="pSale-text">Para comprar esse imóvel, você deve ler o seguinte termo:</p>
+    <p class="pSale-text"><a href="" ng-click="$ctrl.showSaleTerms()">Termo de responsibilidade para compra de imóvel</a></p>
+
+    <div class="pSaleTerms-div" ng-show="$ctrl.displaySaleTerms" ng-click="$ctrl.hideSaleTerms()">
+        <object data="{{ $ctrl.saleTermsPDFUrl }}" type="application/pdf" onclick="event.stopPropagation()"></object>
+    </div>
+
+    <div class="pSale-text" id="acceptTerms" ng-show="$ctrl.saleTermsWasRead">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="acceptTermsCheckbox" ng-model="$ctrl.acceptTerms">
+            <label class="custom-control-label" for="acceptTermsCheckbox">Aceito o termo de responsabilidade</label>
+        </div>
+    </div>
+
+    <button ng-show="$ctrl.acceptTerms" ng-click="$ctrl.submit()" type="submit" class="btn btn-primary">Reservar imóvel</button>
+    
+</div>

@@ -15,11 +15,15 @@ module.exports = function(app) {
 
 
     // Rents
-
     app.route('/api/property/rents')
             .post(property.newRent);
 
     app.route('/api/property/rents/:propertyId')
             .get(property.loadRents);
+
+    // Reservations
+    app.route('/api/property/reservations')
+            .post(property.newReservation);
+
 
 };

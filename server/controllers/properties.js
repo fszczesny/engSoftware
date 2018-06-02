@@ -28,7 +28,7 @@ exports.insertProperty = function(req, res) {
 };
 
 exports.getAll = function(req, res) {
-    var sql = "SELECT * FROM properties WHERE sold = 0";
+    var sql = "SELECT * FROM properties WHERE sold = 0 AND reserved = 0";
     
     dbConnection.query(sql, [], function (error, results, fields) {
         if (error) throw error;
@@ -40,7 +40,7 @@ exports.getAvailables = function(req, res) {
     var sql = "SELECT p.*, (r.rentId IS NOT NULL) as isRent FROM properties AS p ";
     sql += "LEFT JOIN rents AS r ON ";
     sql += "(p.id = r.propertyId) AND (CURDATE() BETWEEN r.startDate AND r.endDate) ";
-    sql += "GROUP BY p.id HAVING isRent = 0 AND p.sold = 0";
+    sql += "GROUP BY p.id HAVING isRent = 0 AND p.sold = 0 AND p.reserved = 0";
     
     dbConnection.query(sql, [], function (error, results, fields) {
         if (error) throw error;
@@ -85,5 +85,48 @@ exports.newRent = function(req, res) {
     });
 }
 
+// > Reservations
+
+exports.newReservation = function(req, res) {
+    var reservationData = req.body;
+    
+    // Insert propertyReservations table
+    var sql1 = "INSERT propertyReservations SET ?";
+    dbConnection.query(sql1, reservationData, function (error, results, fields) {
+        if (error) throw error;
+
+        // Set property.reserved = true
+        var reservationId = results.insertId;
+        var propertyId = reservationData.propertyId;
+        var sql2 = "UPDATE properties SET reserved = 1 WHERE id = ?";
+        dbConnection.query(sql2, [propertyId], function (error, results, fields) {
+            if (error) throw error;
+        });
+
+        // Schedule task: after 5 days -> set property.reserved = false AND delete propertyReservation
+        var schedule = require('node-schedule');
+        var now = new Date();
+        var taskDate = now.setMinutes(now.getMinutes() + 2);
+
+        schedule.scheduleJob(taskDate, function(propertyId, reservationId) {
+            console.log("Reservation time for property (id: " + propertyId + ") expired!");
+            // Set property.reserved = false
+            var sql1 = "UPDATE properties SET reserved = 0 WHERE id = ?";
+            dbConnection.query(sql1, [propertyId], function (error, results, fields) {
+                if (error) throw error;
+            });
+            // Delete propertyReservation
+            var sql2 = "DELETE FROM propertyReservations WHERE reservationId = ?";
+            dbConnection.query(sql2, [reservationId], function (error, results, fields) {
+                if (error) throw error;
+            });
+        }.bind(null, propertyId, reservationId));
+
+        res.json({ reservationId: reservationId });
+
+    });
+    
+    
+}
 
 

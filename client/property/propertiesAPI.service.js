@@ -16,6 +16,10 @@ angular
                             method: 'POST',
                             url: '/api/property/rents'
                         },
+            reserve:    {
+                            method: 'POST',
+                            url: '/api/property/reservations'
+                        }  
         });
 
     }]);
