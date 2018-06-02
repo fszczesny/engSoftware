@@ -2,7 +2,6 @@
 <html lang="pt-br">
 	<head>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="ie-edge">
         <title>Imobiliária UFRGS</title>
         <!-- CSS Frameworks -->
         <link rel="stylesheet" href="_frameworks/Bootstrap/bootstrap.css">
@@ -15,6 +14,7 @@
         <script src="_frameworks/Popper/popper.js"></script>
         <script src="_frameworks/Bootstrap/bootstrap.js"></script>
         
+        <!-- DatePicker support files -->
         <script src="_frameworks/DatePicker/moment.min.js"></script>
         <script src="_frameworks/DatePicker/daterangepicker.min.js"></script>
         <script src="_frameworks/DatePicker/angular-daterangepicker.min.js"></script>
@@ -31,31 +31,43 @@
         <script src="app.js"></script>
         <script src="app.controller.js"></script>
 
+        <!-- Core module -->
         <script src="core/core.module.js"></script>
         <script src="core/filesInput.directive.js"></script>
         <script src="core/go-home.service.js"></script>
 
+        <!-- Navbar module -->
         <script src="navbar/navbar.module.js"></script>
         <script src="navbar/navbar.component.js"></script>
 
+        <!-- User module -->
         <script src="user/user.module.js"></script>
-        <script src="user/usersAPI.service.js"></script>
-        <script src="user/user.service.js"></script>
-        <script src="user/users.service.js"></script>
-        <script src="user/userSession.service.js"></script>
-        <script src="user/userAuth.service.js"></script>
+        <!-- User module > services -->
+        <script src="user/_services/usersAPI.service.js"></script>
+        <script src="user/_services/user.service.js"></script>
+        <script src="user/_services/users.service.js"></script>
+        <script src="user/_services/userSession.service.js"></script>
+        <script src="user/_services/userAuth.service.js"></script>
+        <!-- User module > signUp component -->
         <script src="user/sign-up/sign-up.component.js"></script>
         <script src="user/sign-up/sign-up.service.js"></script>
+        <!-- User module > logIn component -->
         <script src="user/log-in/log-in.component.js"></script>
+        <!-- User module > employeeSignUp component -->
         <script src="user/employee-sign-up/employee-sign-up.component.js"></script>
         <script src="user/employee-sign-up/employee-sign-up.service.js"></script>
 
+        <!-- Property module -->
         <script src="property/property.module.js"></script>
         <script src="property/propertiesAPI.service.js"></script>
+        <!-- Property module > insertProperty component -->
         <script src="property/insert-property/insert-property.component.js"></script>
         <script src="property/insert-property/insert-property.service.js"></script>
+        <!-- Property module > searchProperties component -->
         <script src="property/search-properties/search-properties.component.js"></script>
+        <!-- Property module > propertyDetails component -->
         <script src="property/property-details/property-details.component.js"></script>
+        <!-- Property module > rentProperty component -->
         <script src="property/rent-property/rent-property.component.js"></script>
 
     </head>
