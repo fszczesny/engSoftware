@@ -14,7 +14,8 @@ angular
             if (user != null) {
                 var userId = user.id;
                 UsersAPI.get({ userId: userId }).$promise.then(function(resp) {
-                    var userData = resp.userData;
+                    var userData = (resp.id) ? resp : null;
+                    if (userData == null) return;
                     UserSession.setSession(userData);
                     updateUserData();
                 }).catch(function(error) {

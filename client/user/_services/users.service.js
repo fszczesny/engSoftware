@@ -8,7 +8,7 @@ angular
             return userData.userType == userType;
         };
 
-        var lookUpUser = function(username, callback) {
+        var lookUpUser = function(username) {
             return new Promise(function(resolve, reject) {
                 if (!username || username.length == 0) {
                     reject({
@@ -16,7 +16,7 @@ angular
                     });
                     return;
                 }
-
+                
                 UsersAPI.lookUp({
                     username: username
                 }).$promise.then(function(resp) {
