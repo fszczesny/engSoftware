@@ -10,10 +10,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="r in $ctrl.reservations | orderBy:$ctrl.orderAttr:$ctrl.orderReverse" id="{{ reservation.reservationId }}">
+        <tr ng-click="$ctrl.insertSale(r)" ng-repeat="r in $ctrl.reservations | orderBy:$ctrl.orderAttr:$ctrl.orderReverse" id="{{ reservation.reservationId }}">
             <td>{{ r.buyerName }}</td>
             <td>{{ r.buyerCPF | CPF }}</td>
-            <td><a href="#!/propertyDetails/{{ r.propertyId }}">{{ r.propertyTitle }}</a></td>
+            <td onclick="event.stopPropagation();"><a href="#!/propertyDetails/{{ r.propertyId }}">{{ r.propertyTitle }}</a></td>
             <td>{{ r.dateStr }}</td>
         </tr>
     </tbody>

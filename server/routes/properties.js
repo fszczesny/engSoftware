@@ -28,4 +28,9 @@ module.exports = function(app) {
             .get(property.getAllReservations);
 
 
+    // Sales
+    app.route('/api/property-sales')
+            .post(property.saveSale);
+
+
 };

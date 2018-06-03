@@ -100,6 +100,14 @@ var setPropertyReservedState = function(propertyId, reserved, callback) {
     });
 };
 
+var deletePropertyReservation = function(reservationId, callback) {
+    var sql2 = "DELETE FROM propertyReservations WHERE reservationId = ?";
+    dbConnection.query(sql2, [reservationId], function (error, results, fields) {
+        if (error) throw error;
+        if (typeof callback == 'function') callback();
+    });
+};
+
 var schedulePropertyReservationExpiration = function(propertyId, reservationId, callback) {
     var schedule = require('node-schedule');
     var now = new Date();
@@ -113,15 +121,18 @@ var schedulePropertyReservationExpiration = function(propertyId, reservationId, 
         setPropertyReservedState(propertyId, false);
 
         // Delete propertyReservation
-        var sql2 = "DELETE FROM propertyReservations WHERE reservationId = ?";
-        dbConnection.query(sql2, [reservationId], function (error, results, fields) {
-            if (error) throw error;
-        });
+        deletePropertyReservation(reservationId);
 
         delete scheduledReservations[reservationId];
     }.bind(null, propertyId, reservationId));
 
     scheduledReservations[reservationId] = task;
+}
+
+var cancelScheduledReservationTask = function(reservationId) {
+    var task = scheduledReservations[reservationId];
+    if (task) task.cancel();
+    delete scheduledReservations[reservationId];
 }
 
 exports.newReservation = function(req, res) {
@@ -148,7 +159,9 @@ exports.newReservation = function(req, res) {
 };
 
 exports.getAllReservations = function(req, res) {
-    var sql = "SELECT r.*, p.title AS propertyTitle, u.name AS buyerName, u.username AS buyerCPF ";
+    var sql = "SELECT r.*, ";
+     sql += "p.title AS propertyTitle, p.ownerId AS ownerId, ";
+     sql += "u.name AS buyerName, u.username AS buyerCPF ";
     sql += "FROM propertyReservations AS r  ";
     sql += "INNER JOIN properties AS p ON (p.id = r.propertyId) ";
     sql += "INNER JOIN users AS u ON (u.id = r.buyerId) ";
@@ -158,4 +171,29 @@ exports.getAllReservations = function(req, res) {
     });
 };
 
+
+// > Sales
+
+exports.saveSale = function(req, res) {
+    var saleData = req.body;
+    var reservationId = saleData.reservationId;
+    delete saleData['reservationId'];
+
+    console.log(reservationId);
+
+    var sql = "INSERT sales SET ?";
+    dbConnection.query(sql, saleData, function (error, results, fields) {
+        if (error) throw error;
+
+       
+
+        // Keep property reserved until manager approve sale
+        cancelScheduledReservationTask(reservationId);
+        
+        // Delete propertyReservation
+        deletePropertyReservation(reservationId);
+
+        res.json({ saleId: results.insertId })
+    });
+};
 

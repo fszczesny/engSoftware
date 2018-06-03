@@ -5,7 +5,8 @@ angular
         controller: ['UserAuth',
                      'GoHome',
                      'PropertiesAPI',
-                     function(UserAuth, GoHome, PropertiesAPI) {
+                     '$state',
+                     function(UserAuth, GoHome, PropertiesAPI, $state) {
 
             var self = this;
 
@@ -23,6 +24,11 @@ angular
                 });
             });
 
+            this.insertSale = function(reservation) {
+                $state.go('insertSale', { reservation: reservation });
+            };
+
+            // Order by
             this.orderAttr = 'buyerName';
             this.orderReverse = false;
             this.orderByChange = function($event) {

@@ -4,9 +4,9 @@ module.exports = function(app) {
 
     var core = require('../controllers/core');
 
-    app.route('/api/core/img')
-            .post(core.uploadImg);
+    app.route('/api/core/file')
+            .post(core.uploadFile);
 
-    app.route('/api/core/img/:imgKey')
-            .delete(core.deleteImg);
+    app.route('/api/core/file/:fileKey')
+            .delete(core.deleteFile);
 };

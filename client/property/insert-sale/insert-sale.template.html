@@ -1,0 +1,44 @@
+<h3 style="margin-bottom:0.7em;">Cadastrar venda</h3>
+
+<form name="saleForm" onsubmit="event.preventDefault()" ng-submit="$ctrl.submit(saleForm.$valid)" novalidate>
+    
+    <div class="form-group">
+        <label for="price">Imóvel</label>
+        <a href="#!/propertyDetails/{{ $ctrl.property.id }}">
+            <input type="text" name="property" readonly ng-model="$ctrl.property.title" class="form-control">
+        </a>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="price">Comprador</label>
+            <input type="text" name="buyer" readonly ng-model="$ctrl.buyer.name" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="price">Proprietário do imóvel</label>
+            <input type="text" name="owner" readonly ng-model="$ctrl.owner.name" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="price">Preço da venda</label>
+        <input type="number" name="price" ng-class="{ 'is-invalid': saleForm.price.$invalid && !saleForm.price.$pristine }" required ng-model="$ctrl.price" class="form-control" id="price" placeholder="Digite o preço da venda">
+    </div>
+
+    <div class="form-group">
+        <label for="contract" ng-hide="$ctrl.uploadingFile || $ctrl.fileURL != null">Contrato</label>
+        <div class="custom-file" ng-hide="$ctrl.uploadingFile || $ctrl.fileURL != null">
+            <input type="file" name="contract" ng-change="$ctrl.uploadFile()" class="custom-file-input" id="contract" ng-model="$ctrl.files" files-input accept=".pdf">
+            <label class="custom-file-label" for="photo">Escolha uma arquivo PDF</label>
+        </div>
+        <span ng-show="$ctrl.uploadingFile">
+            Enviando contrato...
+        </span>
+        <div ng-show="$ctrl.fileURL != null">
+            <span>Contrato enviado!</span>
+            <a href="" style="margin-left:0.5em;" ng-click="$ctrl.removeFile();">Remover</a>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" ng-disabled="saleForm.$invalid || $ctrl.fileURL == null" style="margin-top:1em;">Cadastrar venda</button>
+</form>

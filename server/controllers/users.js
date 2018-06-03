@@ -40,9 +40,7 @@ exports.signUp = function(req, res) {
 exports.getUserById = function(req, res) {
     var userId = req.params.userId;
     getUserById(userId, function(userData) {
-        res.json({
-            userData: userData
-        });
+        res.json(userData);
     });
 }
 

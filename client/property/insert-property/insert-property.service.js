@@ -4,9 +4,9 @@ angular
     .module('property')
     .factory('InsertPropertyService', ['UserService',
                                        'UsersService',
-                                       '$http',
+                                       'File',
                                        'PropertiesAPI',
-                                       function(UserService, UsersService, $http, PropertiesAPI) {
+                                       function(UserService, UsersService, File, PropertiesAPI) {
         
         var loadOwnerInfo = function(ownerUsername, callback) {
             var resp = {
@@ -66,46 +66,11 @@ angular
         };
 
         var uploadPhoto = function(file) {
-            return new Promise(function(resolve, reject) {
-            
-                var myReader = new FileReader();
-                myReader.onloadend = function (e) {
-                    var fileData = myReader.result;
-                    var fileInfo = {
-                        extension: '.jpg',
-                        base64: fileData
-                    };
-
-                    $http
-                        .post('/api/core/img/', fileInfo)
-                        .then(function(resp) {
-                            var path = resp.data.url;
-                            resolve(path);
-                        }).catch(function(error) {
-                            reject({
-                                msg: "Não foi fazer upload da imagem"
-                            })
-                        });
-                };
-
-                myReader.readAsDataURL(file);
-            });
+            return File.upload(file, '.jpg');
         };
 
         var removePhoto = function(imgUrl) {
-            return new Promise(function(resolve, reject) {
-                var imgKey = imgUrl.split('/').pop();
-
-                $http
-                    .delete('/api/core/img/' + imgKey)
-                    .then(function(resp) {
-                        resolve(resp.data);
-                    }).catch(function(error) {
-                        reject({
-                            msg: "Não foi remover a imagem"
-                        });
-                    });
-            });
+            return File.delete(imgUrl);
         };
 
         return {

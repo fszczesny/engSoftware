@@ -8,9 +8,9 @@ var port = process.env.PORT || 8000;
 
 // > Configuration
 app.use(express.static(__dirname + '/client'));
-app.use(bodyParser.urlencoded({ 'extended' : 'true' }));        // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+app.use(bodyParser.urlencoded({ extended : 'true' }));        // parse application/x-www-form-urlencoded
 
 // > API routes
 

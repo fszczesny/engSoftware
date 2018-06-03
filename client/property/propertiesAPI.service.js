@@ -13,6 +13,8 @@ angular
             // Reservations
             reserve:         { method: 'POST', url: '/api/property-reservations' },
             getReservations: { method: 'GET', url: '/api/property-reservations', isArray: true },
+            // Sales
+            saveSale:        { method: 'POST', url: '/api/property-sales' },
         });
 
     }]);
