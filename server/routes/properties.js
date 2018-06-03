@@ -23,8 +23,9 @@ module.exports = function(app) {
 
             
     // Reservations
-    app.route('/api/property/reservations')
-            .post(property.newReservation);
+    app.route('/api/property-reservations')
+            .post(property.newReservation)
+            .get(property.getAllReservations);
 
 
 };

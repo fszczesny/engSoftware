@@ -19,6 +19,9 @@
             <li class="nav-item" ng-show="$ctrl.isManager">
                 <a class="nav-link" ui-sref="employeeSignUp" ui-sref-active="active">Cadastrar funcionários</a>
             </li>
+            <li class="nav-item" ng-show="$ctrl.isEmployee">
+                <a class="nav-link" ui-sref="propertyReservations" ui-sref-active="active">Reservas</a>
+            </li>
             <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Imoveis</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -35,11 +38,5 @@
                 <span class="nav-link" ng-click="$ctrl.logOut()">Sair</span>
             </li>
         </ul>
-        
-        <!-- Search field -->
-        <!-- <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Digite aqui" aria-label="Digite aqui">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-        </form> -->
     </div>
 </nav>

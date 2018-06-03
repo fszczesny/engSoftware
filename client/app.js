@@ -74,6 +74,11 @@ angular.module('RealEstate').config(['$stateProvider',
         params: { property: null }
     };
 
+    var propertyReservationsState = {
+        name: 'propertyReservations',
+        url: '/propertyReservations',
+        component: 'propertyReservations',
+    };
 
 
     var employeeHomeState = {
@@ -92,6 +97,7 @@ angular.module('RealEstate').config(['$stateProvider',
     $stateProvider.state(propertyDetailsState);
     $stateProvider.state(rentPropertyState);
     $stateProvider.state(salePropertyState);
+    $stateProvider.state(propertyReservationsState);
 
     $urlRouterProvider.otherwise('/searchProperties');
 }]);

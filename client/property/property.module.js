@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('property', ['user', 'daterangepicker']);
+angular.module('property', ['user', 'daterangepicker', 'core']);

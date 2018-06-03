@@ -1,0 +1,20 @@
+<h3 style="margin-bottom:0.7em;">Reservas de imóveis</h3>
+
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col" id="buyerName" ng-click="$ctrl.orderByChange($event)">Nome do comprador</th>
+            <th scope="col" id="buyerCPF" ng-click="$ctrl.orderByChange($event)">CPF do comprador</th>
+            <th scope="col" id="propertyTitle" ng-click="$ctrl.orderByChange($event)">Imóvel</th>
+            <th scope="col" id="reservationTime" ng-click="$ctrl.orderByChange($event)">Data da reserva</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="r in $ctrl.reservations | orderBy:$ctrl.orderAttr:$ctrl.orderReverse" id="{{ reservation.reservationId }}">
+            <td>{{ r.buyerName }}</td>
+            <td>{{ r.buyerCPF | CPF }}</td>
+            <td><a href="#!/propertyDetails/{{ r.propertyId }}">{{ r.propertyTitle }}</a></td>
+            <td>{{ r.dateStr }}</td>
+        </tr>
+    </tbody>
+</table>

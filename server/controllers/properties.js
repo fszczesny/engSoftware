@@ -62,7 +62,6 @@ exports.getPropertyById = function(req, res) {
 };
 
 
-
 // > Rents
 
 exports.loadRents = function(req, res) {
@@ -85,6 +84,7 @@ exports.newRent = function(req, res) {
     });
 }
 
+
 // > Reservations
 
 var scheduledReservations = {
@@ -104,8 +104,8 @@ var schedulePropertyReservationExpiration = function(propertyId, reservationId, 
     var schedule = require('node-schedule');
     var now = new Date();
 
-    // 2 minutes expiration time
-    var taskDate = now.setMinutes(now.getMinutes() + 2);
+    // X minutes expiration time
+    var taskDate = now.setMinutes(now.getMinutes() + 10);
 
     var task = schedule.scheduleJob(taskDate, function(propertyId, reservationId) {
         console.log("Reservation time for property (id: " + propertyId + ") expired!");
@@ -144,6 +144,17 @@ exports.newReservation = function(req, res) {
         schedulePropertyReservationExpiration(propertyId, reservationId);
 
         res.json({ reservationId: reservationId });
+    });
+};
+
+exports.getAllReservations = function(req, res) {
+    var sql = "SELECT r.*, p.title AS propertyTitle, u.name AS buyerName, u.username AS buyerCPF ";
+    sql += "FROM propertyReservations AS r  ";
+    sql += "INNER JOIN properties AS p ON (p.id = r.propertyId) ";
+    sql += "INNER JOIN users AS u ON (u.id = r.buyerId) ";
+    dbConnection.query(sql, [], function (error, results, fields) {
+        if (error) throw error;
+        res.json(results);
     });
 };
 

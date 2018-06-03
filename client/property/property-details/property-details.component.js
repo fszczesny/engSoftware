@@ -27,12 +27,6 @@ angular
                 if (typeof self.property.id == 'undefined') {
                     alert('Imóvel não existe');
                     GoHome.go();
-                } else if (self.property.sold) {
-                    alert('Este imóvel já foi vendido!');
-                    GoHome.go();
-                } else if (self.property.reserved) {
-                    alert('Este imóvel está reservado!');
-                    GoHome.go();
                 }
             });
 
@@ -41,6 +35,14 @@ angular
                 var property = this.property;
 
                 // Pre-validate
+                if (self.property.sold) {
+                    alert('Este imóvel já foi vendido!');
+                    return false;
+                } else if (self.property.reserved) {
+                    alert('Este imóvel está reservado!');
+                    return false;
+                }
+
                 if (!UserAuth.isLoggedIn()) {
                     alert('É necessário conectar à sua conta para alugar/comprar imóveis');
                     return false;
