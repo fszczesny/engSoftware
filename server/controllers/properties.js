@@ -87,6 +87,10 @@ exports.newRent = function(req, res) {
 
 // > Reservations
 
+var scheduledReservations = {
+    // '<reservationId>': <scheduledTask>
+};
+
 var setPropertyReservedState = function(propertyId, reserved, callback) {
     reserved = + reserved; // Convert bool to int
     var sql2 = "UPDATE properties SET reserved = ? WHERE id = ?";
@@ -100,18 +104,24 @@ var schedulePropertyReservationExpiration = function(propertyId, reservationId, 
     var schedule = require('node-schedule');
     var now = new Date();
 
+    // 2 minutes expiration time
     var taskDate = now.setMinutes(now.getMinutes() + 2);
 
-    schedule.scheduleJob(taskDate, function(propertyId, reservationId) {
+    var task = schedule.scheduleJob(taskDate, function(propertyId, reservationId) {
         console.log("Reservation time for property (id: " + propertyId + ") expired!");
         // Set property.reserved = false
         setPropertyReservedState(propertyId, false);
+
         // Delete propertyReservation
         var sql2 = "DELETE FROM propertyReservations WHERE reservationId = ?";
         dbConnection.query(sql2, [reservationId], function (error, results, fields) {
             if (error) throw error;
         });
+
+        delete scheduledReservations[reservationId];
     }.bind(null, propertyId, reservationId));
+
+    scheduledReservations[reservationId] = task;
 }
 
 exports.newReservation = function(req, res) {
@@ -128,7 +138,9 @@ exports.newReservation = function(req, res) {
         // Set property.reserved = true
         setPropertyReservedState(propertyId, true);
 
-        // Schedule task: after 5 days -> set property.reserved = false AND delete propertyReservation
+        // Schedule task: after expiration period
+        //  -> set property.reserved = false
+        //  -> delete propertyReservation
         schedulePropertyReservationExpiration(propertyId, reservationId);
 
         res.json({ reservationId: reservationId });
