@@ -82,6 +82,7 @@ angular
 
                 var saleInfo = {
                     buyerId: self.buyer.id,
+                    ownerId: self.owner.id,
                     employeeId: employee.id,
                     propertyId: self.property.id,
                     price: self.price,
