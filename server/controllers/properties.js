@@ -193,3 +193,13 @@ exports.saveSale = function(req, res) {
     });
 };
 
+exports.getSales = function(req, res) {
+    var sql = "SELECT * FROM sales";
+    if (req.params.approved)
+        sql += " WHERE approved = " + req.params.approved;
+    
+    dbConnection.query(sql, [], function (error, results, fields) {
+        if (error) throw error;
+        res.json(results);
+    });
+};

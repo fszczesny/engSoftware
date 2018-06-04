@@ -30,7 +30,11 @@ module.exports = function(app) {
 
     // Sales
     app.route('/api/property-sales')
+            .get(property.getSales)
             .post(property.saveSale);
+
+    app.route('/api/property-sales/:approved')
+            .get(property.getSales);
 
 
 };

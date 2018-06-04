@@ -80,7 +80,7 @@ angular.module('RealEstate').config(['$stateProvider',
     var approveSalesState = {
         name: 'approveSales',
         url: '/approveSale',
-        template: '<h3>Aprovar vendas</h3>'
+        component: 'approveSales'
     };
 
 
