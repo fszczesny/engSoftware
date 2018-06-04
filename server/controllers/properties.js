@@ -179,13 +179,9 @@ exports.saveSale = function(req, res) {
     var reservationId = saleData.reservationId;
     delete saleData['reservationId'];
 
-    console.log(reservationId);
-
     var sql = "INSERT sales SET ?";
     dbConnection.query(sql, saleData, function (error, results, fields) {
         if (error) throw error;
-
-       
 
         // Keep property reserved until manager approve sale
         cancelScheduledReservationTask(reservationId);

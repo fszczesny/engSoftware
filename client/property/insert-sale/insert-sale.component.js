@@ -92,11 +92,11 @@ angular
     
                 PropertiesAPI.saveSale(saleInfo).$promise.then(function(resp) {
                     console.log(resp);
-                    alert('Compra cadastrada com sucesso');
+                    alert('Venda cadastrada com sucesso');
                     GoHome.go();
                 }).catch(function(error) {
                     console.log(error);
-                    alert('Não foi possível cadastrar a compra');
+                    alert('Não foi possível cadastrar a venda');
                 });
                 
             };

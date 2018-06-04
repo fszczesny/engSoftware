@@ -7,7 +7,8 @@ var connection = mysql.createConnection({
     user     : "root",
     password : "cS7-AT6-wsd-VEF",
     port     : 3306,
-    database : "engSoftwareDB"
+    database : "engSoftwareDB",
+    timezone : "utc"
 });
 
 connection.connect(function(err) {
