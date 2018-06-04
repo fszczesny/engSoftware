@@ -35,23 +35,13 @@ angular.module('RealEstate').config(['$stateProvider',
     var employeeSignUpState = {
         name: 'employeeSignUp',
         url: '/employeeSignUp',
-        component: 'employeeSignUp',
-        resolve: {
-            checkAuth: function(UserAuth, GoHome) {
-               // Implemented inside controller
-            }
-        }
+        component: 'employeeSignUp'
     };
 
     var insertPropertyState = {
         name: 'insertProperty',
         url: '/insertProperty',
-        component: 'insertProperty',
-        resolve: {
-            checkAuth: function(UserAuth, GoHome) {
-                // Implemented inside controller
-            }
-        }
+        component: 'insertProperty'
     };
 
     var propertyDetailsState = {
@@ -87,6 +77,12 @@ angular.module('RealEstate').config(['$stateProvider',
         params: { reservation: null }
     };
 
+    var approveSalesState = {
+        name: 'approveSales',
+        url: '/approveSale',
+        template: '<h3>Aprovar vendas</h3>'
+    };
+
 
 
     var employeeHomeState = {
@@ -107,6 +103,7 @@ angular.module('RealEstate').config(['$stateProvider',
     $stateProvider.state(salePropertyState);
     $stateProvider.state(propertyReservationsState);
     $stateProvider.state(insertSaleState);
+    $stateProvider.state(approveSalesState);
 
     $urlRouterProvider.otherwise('/searchProperties');
 }]);

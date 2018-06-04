@@ -13,24 +13,17 @@
             <li class="nav-item" ng-hide="$ctrl.loggedIn">
                 <a class="nav-link" ui-sref="logIn" ui-sref-active="active">Entrar</a>
             </li>
-            <li class="nav-item" ng-show="$ctrl.isAdmin">
-                <a class="nav-link" ui-sref="insertProperty" ui-sref-active="active">Cadastrar imóveis</a>
-            </li>
             <li class="nav-item" ng-show="$ctrl.isManager">
                 <a class="nav-link" ui-sref="employeeSignUp" ui-sref-active="active">Cadastrar funcionários</a>
             </li>
-            <li class="nav-item" ng-show="$ctrl.isEmployee">
-                <a class="nav-link" ui-sref="propertyReservations" ui-sref-active="active">Reservas</a>
-            </li>
-            <!-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Imoveis</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="link">Imoveis à venda</a>
-                    <a class="dropdown-item" href="link">Imoveis para Aluguel</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Anunciar imovel</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarPropertiesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Imóveis</a>
+                <div class="dropdown-menu" aria-labelledby="navbarPropertiesDropdown">
+                    <a class="dropdown-item" ng-show="$ctrl.isAdmin" ui-sref="insertProperty" ui-sref-active="active">Cadastrar imóvel</a>
+                    <a class="dropdown-item" ng-show="$ctrl.isAdmin" ui-sref="approveSales" ui-sref-active="active">Aprovar vendas</a>
+                    <a class="dropdown-item" ng-show="$ctrl.isEmployee" ui-sref="propertyReservations" ui-sref-active="active">Reservas</a>
                 </div>
-            </li> -->
+            </li>
         </ul>
         <ul class="navbar-nav">
             <span style="padding-right:0.5rem;" class="navbar-text">{{ $ctrl.user.name }}</span>
