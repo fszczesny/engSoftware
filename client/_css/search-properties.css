@@ -18,7 +18,14 @@ search-properties .form-check-input {
 
 
 search-properties .filters-container {
-    padding-top: 1em;
+    padding: 1em 1em 0em 1em;
+    white-space: nowrap;
+    overflow: auto;
+    box-shadow: 4px 0px 5px -6px rgba(0, 0, 0, 0.5) inset, -4px 0px 5px -6px rgba(0, 0, 0, 0.5) inset;
+}
+
+search-properties .filters-container::-webkit-scrollbar {
+    display: none;
 }
 
 search-properties .filters-column {

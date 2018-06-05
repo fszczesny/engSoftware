@@ -59,10 +59,6 @@ table thead {
     height: 56px;
 }
 
-.header .navbar {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, .3);
-}
-
 .main {
     padding: 30px;
     padding-bottom: calc(30px + 56px);

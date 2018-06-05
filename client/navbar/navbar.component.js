@@ -38,5 +38,10 @@ angular
                 });
             };
 
+            $('a.nav-link:not(.dropdown-toggle), a.dropdown-item').click(function(e) {
+                var collapse = $(this).parents('.navbar-collapse');
+                collapse.collapse('hide');
+            });
+
         }]
     });
