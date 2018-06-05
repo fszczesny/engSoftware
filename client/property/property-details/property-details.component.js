@@ -44,7 +44,11 @@ angular
                 }
 
                 if (!UserAuth.isLoggedIn()) {
-                    alert('É necessário conectar à sua conta para alugar/comprar imóveis');
+                    var nextState = {
+                        name: 'propertyDetails.' +  property.rentOrSale,
+                        params: { propertyId: propertyId, property: property }
+                    };
+                    $state.go('logIn', { toState: nextState });
                     return false;
                 }
 
@@ -54,11 +58,8 @@ angular
                     return false;
                 }
 
-                if (property.rentOrSale == 'rent') {
-                    $state.go('propertyDetails.rent', { property: property });
-                } else if (property.rentOrSale == 'sale') {
-                    $state.go('propertyDetails.sale', { property: property });
-                }
+                var toState = 'propertyDetails.' + property.rentOrSale;
+                $state.go(toState, { property: property });
             };
 
         }]

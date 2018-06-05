@@ -29,7 +29,8 @@ angular.module('RealEstate').config(['$stateProvider',
     var logInState = {
         name: 'logIn',
         url: '/logIn',
-        component: 'logIn'
+        component: 'logIn',
+        params: { toState: { name: null, params: null } },
     };
 
     var employeeSignUpState = {
@@ -54,7 +55,7 @@ angular.module('RealEstate').config(['$stateProvider',
         name: 'propertyDetails.rent',
         url: '/rent',
         component: 'rentProperty',
-        params: { property: null, rents: null }
+        params: { property: null }
     };
 
     var salePropertyState = {

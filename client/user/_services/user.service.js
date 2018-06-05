@@ -45,7 +45,6 @@ angular
                 UsersAPI.logIn(logInInfo).$promise.then(function(resp) {
                     var userData = resp.userData;
                     if (userData != null) {
-                        // Login successful
                         UserSession.setSession(userData);
                         updateUserData();
                         resolve(userData);

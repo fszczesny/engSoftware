@@ -4,21 +4,32 @@ angular
     .module('user')
     .component('logIn', {
         templateUrl: 'user/log-in/log-in.template.html',
-        controller: ['GoHome', 'UserAuth', function LogInController(GoHome, UserAuth) {
+        controller: ['GoHome',
+                     'UserService',
+                     '$state',
+                     '$stateParams',
+                     function LogInController(GoHome, UserService, $state, $stateParams) {
+
+            var redirectSuccess = function() {
+                var toState = $stateParams.toState;
+                console.log(toState);
+                if (toState.name) {
+                    $state.go(toState.name, toState.params);
+                } else {
+                    GoHome.go();
+                }
+            };
             
-            UserAuth.validate(function(UserService) { 
-                return UserService.isLoggedIn();
-            }, function authFailed(UserService) {    
-            }, function authSuccess(UserService) {
-                GoHome.go();
-            });
+            if (UserService.isLoggedIn()) {
+                redirectSuccess();
+            }
 
             this.logIn = function() {
-                UserAuth.Service.logIn({
+                UserService.logIn({
                     username: this.username,
                     password: this.password
                 }).then(function(user) {
-                    GoHome.go();
+                    redirectSuccess();
                 }).catch(function(error) {
                     alert(error.msg); 
                 });
