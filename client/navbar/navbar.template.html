@@ -16,7 +16,7 @@
             <li class="nav-item" ng-show="$ctrl.isManager">
                 <a class="nav-link" ui-sref="employeeSignUp" ui-sref-active="active">Cadastrar funcionários</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" ng-show="$ctrl.isEmployee">
                 <a class="nav-link dropdown-toggle" id="navbarPropertiesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Imóveis</a>
                 <div class="dropdown-menu" aria-labelledby="navbarPropertiesDropdown">
                     <a class="dropdown-item" ng-show="$ctrl.isAdmin" ui-sref="insertProperty" ui-sref-active="active">Cadastrar imóvel</a>

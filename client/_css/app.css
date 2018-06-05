@@ -31,6 +31,17 @@ body.noScroll {
     font-weight: 500;
 }
 
+.table th, .table td {
+    vertical-align: middle !important;
+}
+
+table thead {
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* ------------- */
 
 .bg-sheet {
     position: fixed;

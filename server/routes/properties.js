@@ -37,4 +37,7 @@ module.exports = function(app) {
             .get(property.getSales);
 
 
+    app.route('/api/property-sales/approve')
+            .post(property.approveSale);
+
 };

@@ -3,6 +3,7 @@
 <table class="table table-striped table-hover">
     <thead class="thead-dark">
         <tr>
+            <th scope="col" id="reservationId" ng-click="$ctrl.orderByChange($event)">#</th>
             <th scope="col" id="buyerName" ng-click="$ctrl.orderByChange($event)">Nome do comprador</th>
             <th scope="col" id="buyerCPF" ng-click="$ctrl.orderByChange($event)">CPF do comprador</th>
             <th scope="col" id="propertyTitle" ng-click="$ctrl.orderByChange($event)">Imóvel</th>
@@ -10,7 +11,8 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-click="$ctrl.insertSale(r)" ng-repeat="r in $ctrl.reservations | orderBy:$ctrl.orderAttr:$ctrl.orderReverse" id="{{ reservation.reservationId }}">
+        <tr ng-click="$ctrl.insertSale(r)" ng-repeat="r in $ctrl.reservations | orderBy:$ctrl.orderAttr:$ctrl.orderReverse" id="{{ r.reservationId }}">
+            <th scope="row">{{ r.reservationId }}</td>
             <td>{{ r.buyerName }}</td>
             <td>{{ r.buyerCPF | CPF }}</td>
             <td onclick="event.stopPropagation();">

@@ -160,8 +160,8 @@ exports.newReservation = function(req, res) {
 
 exports.getAllReservations = function(req, res) {
     var sql = "SELECT r.*, ";
-     sql += "p.title AS propertyTitle, p.ownerId AS ownerId, ";
-     sql += "u.name AS buyerName, u.username AS buyerCPF ";
+    sql += "p.title AS propertyTitle, p.ownerId AS ownerId, ";
+    sql += "u.name AS buyerName, u.username AS buyerCPF ";
     sql += "FROM propertyReservations AS r  ";
     sql += "INNER JOIN properties AS p ON (p.id = r.propertyId) ";
     sql += "INNER JOIN users AS u ON (u.id = r.buyerId) ";
@@ -194,7 +194,17 @@ exports.saveSale = function(req, res) {
 };
 
 exports.getSales = function(req, res) {
-    var sql = "SELECT * FROM sales";
+    var sql = "SELECT s.*, ";
+    sql += "bU.name AS buyerName, ";
+    sql += "eU.name AS employeeName, ";
+    sql += "oU.name AS ownerName, ";
+    sql += "p.title AS propertyTitle ";
+    sql += "FROM sales AS s ";
+    sql += "LEFT JOIN users AS bU ON (bU.id = s.buyerId) ";
+    sql += "LEFT JOIN users AS eU ON (eU.id = s.employeeId) ";
+    sql += "LEFT JOIN users AS oU ON (oU.id = s.ownerId) ";
+    sql += "LEFT JOIN properties AS p ON (p.id = s.propertyId)";
+
     if (req.params.approved)
         sql += " WHERE approved = " + req.params.approved;
     
@@ -202,4 +212,29 @@ exports.getSales = function(req, res) {
         if (error) throw error;
         res.json(results);
     });
+};
+
+exports.approveSale = function(req, res) {
+    var saleId = req.body.saleId;
+    var propertyId = req.body.propertyId;
+
+    var resp = {};
+
+    var sql1 = "UPDATE sales SET approved = 1 WHERE saleId = ?";
+    dbConnection.query(sql1, [saleId], function (error, results, fields) {
+        if (error) throw error;
+
+        resp.saleId = saleId;
+        if (resp.propertyId) res.json(resp);
+    });
+
+
+    var sql2 = "UPDATE properties SET sold = 1 WHERE id = ?";
+    dbConnection.query(sql2, [propertyId], function (error, results, fields) {
+        if (error) throw error;
+        
+        resp.propertyId = propertyId;
+        if (resp.saleId) res.json(resp);
+    });
+    
 };

@@ -16,6 +16,7 @@ angular
             // Sales
             saveSale:           { method: 'POST', url: '/api/property-sales' },
             getSales:           { method: 'GET', url: '/api/property-sales/:approved', isArray: true },
+            approveSale:        { method: 'POST', url: '/api/property-sales/approve' },
         });
 
     }]);

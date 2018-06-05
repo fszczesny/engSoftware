@@ -1,1 +1,36 @@
-<h3>Aprovar vendas</h3>
+<h3 style="margin-bottom:0.7em;">Aprovar vendas</h3>
+
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col" id="saleId" ng-click="$ctrl.orderByChange($event)">#</th>
+            <th scope="col" id="buyerName" ng-click="$ctrl.orderByChange($event)">Comprador</th>
+            <th scope="col" id="ownerName" ng-click="$ctrl.orderByChange($event)">Proprietário</th>
+            <th scope="col" id="propertyTile" ng-click="$ctrl.orderByChange($event)">Imóvel</th>
+            <th scope="col" id="price" ng-click="$ctrl.orderByChange($event)">Valor total</th>
+            <th scope="col" id="contract" ng-click="">Contrato</th>
+            <th scope="col" id="employeeName" ng-click="$ctrl.orderByChange($event)">Funcionário</th>
+            <th scope="col" id="date" ng-click="$ctrl.orderByChange($event)">Data</th>
+            <th scope="col" id="approve" ng-click="" width="93">Aprovar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="s in $ctrl.sales | orderBy:$ctrl.orderAttr:$ctrl.orderReverse" id="{{ s.saleId }}">
+            <th scope="row">{{ s.saleId }}</th>
+            <td>{{ s.buyerName }}</td>
+            <td>{{ s.ownerName }}</td>
+            <td>
+                <a href="#!/propertyDetails/{{ s.propertyId }}" target="_blank">{{ s.propertyTitle }}</a>
+            </td>
+            <td>{{ s.price | currency:'R$ ' }}</td>
+            <td>
+                <a href="{{ s.contract }}" target="_blank">Contrato</a>
+            </td>
+            <td>{{ s.employeeName }}</td>
+            <td>{{ s.dateStr }}</td>
+            <td>
+                <button type="button" ng-click="$ctrl.approveSale(s)" class="btn btn-primary btn-sm">Aprovar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
