@@ -45,8 +45,8 @@ angular
 
                 if (!UserAuth.isLoggedIn()) {
                     var nextState = {
-                        name: 'propertyDetails.' +  property.rentOrSale,
-                        params: { propertyId: propertyId, property: property }
+                        name: 'propertyDetails',
+                        params: { propertyId: propertyId }
                     };
                     $state.go('logIn', { toState: nextState });
                     return false;
