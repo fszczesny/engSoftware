@@ -12,7 +12,6 @@ angular
 
             var redirectSuccess = function() {
                 var toState = $stateParams.toState;
-                console.log(toState);
                 if (toState.name) {
                     $state.go(toState.name, toState.params);
                 } else {
