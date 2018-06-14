@@ -84,6 +84,11 @@ angular.module('RealEstate').config(['$stateProvider',
         component: 'approveSales'
     };
 
+    var approveRentsState = {
+        name: 'approveRents',
+        url: '/approveRents',
+        component: 'approveRents'
+    };
 
 
     var employeeHomeState = {
@@ -105,6 +110,7 @@ angular.module('RealEstate').config(['$stateProvider',
     $stateProvider.state(propertyReservationsState);
     $stateProvider.state(insertSaleState);
     $stateProvider.state(approveSalesState);
+    $stateProvider.state(approveRentsState);
 
     $urlRouterProvider.otherwise('/searchProperties');
 }]);

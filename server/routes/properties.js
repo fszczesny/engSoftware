@@ -18,8 +18,14 @@ module.exports = function(app) {
     app.route('/api/property/rents')
             .post(property.newRent);
 
-    app.route('/api/property/rents/:propertyId')
+    app.route('/api/property/rents/load/:propertyId')
             .get(property.loadRents);
+
+    app.route('/api/property/rents/get/:approved')
+            .get(property.getRents);
+
+    app.route('/api/property/rents/approve')
+            .post(property.approveRent);
 
             
     // Reservations

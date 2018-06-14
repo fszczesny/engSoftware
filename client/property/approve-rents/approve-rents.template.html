@@ -1,0 +1,32 @@
+<h3 style="margin-bottom:0.7em;">Aprovar aluguel</h3>
+
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col" id="rentId" ng-click="$ctrl.orderByChange($event)">#</th>
+            <th scope="col" id="rentorName" ng-click="$ctrl.orderByChange($event)">Nome Comprador</th>
+            <th scope="col" id="rentorCPF" ng-click="$ctrl.orderByChange($event)">CPF Comprador</th>
+            <th scope="col" id="propertyTile" ng-click="$ctrl.orderByChange($event)">Imóvel</th>
+            <th scope="col" id="dateStartStr" width="140" ng-click="$ctrl.orderByChange($event)">Data Entrada</th>
+            <th scope="col" id="dateEndStr" width="120" ng-click="$ctrl.orderByChange($event)">Data Saída</th>
+            <th scope="col" id="payApprove" width="60">Pago</th>
+            <th scope="col" id="approve" width="93">Aprovar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="r in $ctrl.rents | orderBy:$ctrl.orderAttr:$ctrl.orderReverse" id="{{ r.rentId }}">
+            <th scope="row">{{ r.rentId }}</th>
+            <td>{{ r.rentorName }}</td>
+            <td>{{ r.rentorCPF | CPF }}</td>
+            <td>
+                <a href="#!/propertyDetails/{{ r.propertyId }}" target="_blank">{{ r.propertyTitle }}</a>
+            </td>
+            <td>{{ r.dateStartStr }}</td>
+            <td>{{ r.dateEndStr }}</td>
+            <td>{{ r.payApproved | checkmark }}</td>
+            <td>
+                <button type="button" ng-click="$ctrl.approveRent(r)" class="btn btn-primary btn-sm">Aprovar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

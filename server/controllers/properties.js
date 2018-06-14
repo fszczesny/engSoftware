@@ -82,8 +82,35 @@ exports.newRent = function(req, res) {
 
         res.json({ rentId: results.insertId })
     });
-}
+};
 
+exports.getRents = function(req, res) {
+    var sql = "SELECT r.*, ";
+    sql += "rU.name AS rentorName, ";
+    sql += "rU.username AS rentorCPF, ";
+    sql += "p.title AS propertyTitle ";
+    sql += "FROM rents AS r ";
+    sql += "LEFT JOIN users AS rU ON (rU.id = r.rentorId) ";
+    sql += "LEFT JOIN properties AS p ON (p.id = r.propertyId)";
+
+    if (req.params.approved)
+        sql += " WHERE approved = " + req.params.approved;
+    
+    dbConnection.query(sql, [], function (error, results, fields) {
+        if (error) throw error;
+        res.json(results);
+    });
+};
+
+exports.approveRent = function(req, res) {
+    var rentId = req.body.rentId;
+
+    var sql = "UPDATE rents SET approved = 1 WHERE rentId = ?";
+    dbConnection.query(sql, [rentId], function (error, results, fields) {
+        if (error) throw error;
+        res.json(rentId);
+    });
+};
 
 // > Reservations
 
