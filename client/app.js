@@ -94,7 +94,7 @@ angular.module('RealEstate').config(['$stateProvider',
     var employeeHomeState = {
         name: 'employeeHome',
         url: '/employeeHome',
-        template: '<h3>Funcionário</h3>'
+        component: 'employeeHome'
     };
 
 

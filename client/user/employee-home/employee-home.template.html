@@ -1,0 +1,12 @@
+<body ng-controller="employeeHome">
+    
+    <div class="jumbotron">
+        <h1 class="display-4">Bem vindo, {{$ctrl.user.name}}.</h1>
+        <p class="lead">Gerente</p>
+        <hr class="my-4">
+        <a class="nav-link" ng-show="$ctrl.isAdmin" ui-sref="insertProperty" ui-sref-active="active" role="button">Cadastrar imóvel</a>
+        <a class="nav-link" ng-show="$ctrl.isAdmin" ui-sref="approveSales" ui-sref-active="active" role="button">Aprovar vendas</a>
+        <a class="nav-link" ng-show="$ctrl.isAdmin" ui-sref="approveRents" ui-sref-active="active" role="button">Aprovar aluguéis</a>
+        <a class="nav-link" ng-show="$ctrl.isEmployee" ui-sref="propertyReservations" ui-sref-active="active" role="button">Reservas</a>
+    </div>
+</body>
