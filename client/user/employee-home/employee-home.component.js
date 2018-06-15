@@ -4,12 +4,9 @@ angular.
     module('user').
     component('employeeHome', {
         templateUrl :'user/employee-home/employee-home.template.html',
-        controller:['GoHome',
-                    '$state',
-                    '$stateParams',
-                    'UserService',
+        controller:['UserService',
                     '$scope',
-                    function EmployeeHome(GoHome, $state, $stateParams,UserService, $scope){
+                    function EmployeeHome(UserService, $scope){
 
             var self = this;
 
