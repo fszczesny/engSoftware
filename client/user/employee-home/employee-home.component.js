@@ -7,7 +7,9 @@ angular.
         controller: ['UserService',
                      '$scope',
                      'EmployeeUserTypes',
-                     function EmployeeHome(UserService, $scope, EmployeeUserTypes) {
+                     'GoHome',
+                     'UserAuth',
+                     function EmployeeHome(UserService, $scope, EmployeeUserTypes, GoHome, UserAuth) {
 
             var self = this;
 
@@ -16,6 +18,12 @@ angular.
             this.isAdmin = false;
             this.isManager = false;
             this.userType = null;
+
+            UserAuth.validate(function(UserService) {
+                return UserService.isEmployee();
+            }, function authError() {
+                GoHome.go();
+            }, function authSuccess() {});
 
             var getUserType = function(userInfo) {
                 var userType = userInfo.userType;
