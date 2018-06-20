@@ -36,7 +36,7 @@ angular
 
             this.logOut = function() {
                 UserService.logOut(function() {
-                    // GoHome.go();
+                    GoHome.go();
                     $scope.$applyAsync();
                 });
             };
