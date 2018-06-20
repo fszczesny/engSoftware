@@ -28,7 +28,14 @@ exports.insertProperty = function(req, res) {
 };
 
 exports.getAll = function(req, res) {
-    var sql = "SELECT * FROM properties WHERE sold = 0 AND reserved = 0";
+    var sql = "SELECT p.*, ";
+    sql += "(r.rentId IS NOT NULL) as isRent, ";
+    sql += "oU.username AS ownerCPF, oU.name AS ownerName ";
+    sql += "FROM properties AS p ";
+    sql += "LEFT JOIN users AS oU ON (p.ownerId = oU.id) ";
+    sql += "LEFT JOIN rents AS r ON ";
+    sql += "(p.id = r.propertyId) AND (CURDATE() BETWEEN r.startDate AND r.endDate) ";
+    sql += "WHERE sold = 0 AND reserved = 0";
     
     dbConnection.query(sql, [], function (error, results, fields) {
         if (error) throw error;
@@ -60,6 +67,16 @@ exports.getPropertyById = function(req, res) {
         res.json(results[0]);
     });
 };
+
+exports.removeProperty = function(req, res) {
+    var propertyId = req.params.propertyId;
+    var sql = "DELETE FROM properties WHERE id = ?";
+    
+    dbConnection.query(sql, [propertyId], function (error, results, fields) {
+        if (error) throw error;
+        res.json({ removed: true, propertyId: propertyId });
+    });
+}
 
 
 // > User properties

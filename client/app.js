@@ -103,6 +103,12 @@ angular.module('RealEstate').config(['$stateProvider',
         component: 'ownerProperties',
     };
 
+    var removePropertiesState = {
+        name: 'removeProperties',
+        url: '/removeProperties',
+        component: 'removeProperties',
+    };
+
 
     $stateProvider.state(searchPropertiesState);
     $stateProvider.state(signUpState);
@@ -118,6 +124,7 @@ angular.module('RealEstate').config(['$stateProvider',
     $stateProvider.state(approveSalesState);
     $stateProvider.state(approveRentsState);
     $stateProvider.state(ownerPropertiesState);
+    $stateProvider.state(removePropertiesState);
 
     $urlRouterProvider.otherwise('/searchProperties');
 }]);

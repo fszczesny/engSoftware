@@ -5,13 +5,11 @@ module.exports = function(app) {
 
     app.route('/api/property')
         .post(property.insertProperty)
-        .get(property.getAll);      // All NON-SOLD properties
+        .get(property.getAll);      // all NON-SOLD
 
     app.route('/api/property/:propertyId')
-        .get(property.getPropertyById);
-
-    app.route('/api/property/availables')
-        .get(property.getAvailables);
+        .get(property.getPropertyById)
+        .delete(property.removeProperty);
 
 
     // User Properties

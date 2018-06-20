@@ -7,6 +7,7 @@ angular
         return $resource('/api/property/:propertyId', {}, {
             getAll:             { method: 'GET', isArray: true },
             get:                { method: 'GET' },
+            remove:             { method: 'DELETE' },
             // Owner properties
             getUserProperties:  { method: 'GET', url: '/api/user-properties/:userId', isArray: true },
             // Rents

@@ -1,0 +1,24 @@
+<h3 style="margin-bottom:0.7em;">Remover imóveis</h3>
+
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col" id="title" ng-click="$ctrl.orderByChange($event)">Imóvel</th>
+            <th scope="col" id="onwerName" ng-click="$ctrl.orderByChange($event)">Proprietário</th>
+            <th scope="col" id="onwerCPF" ng-click="$ctrl.orderByChange($event)">CPF Proprietário</th>
+            <th scope="col" id="remove" width="93">Remover</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="p in $ctrl.properties | orderBy:$ctrl.orderAttr:$ctrl.orderReverse" id="{{ p.id }}">
+            <td>
+                <a href="#!/propertyDetails/{{ p.id }}" target="_blank">{{ p.title }}</a>
+            </td>
+            <td>{{ p.ownerName }}</td>
+            <td>{{ p.ownerCPF | CPF }}</td>
+            <td>
+                <button type="button" ng-click="$ctrl.removeProperty(p)" class="btn btn-primary btn-sm">Remover</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
