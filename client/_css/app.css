@@ -27,6 +27,16 @@ body.noScroll {
     color: #28a745;
 }
 
+.badge.available {
+    color: white !important;
+    background-color: #007bff;
+}
+
+.badge.sold {
+    color: white !important;
+    background-color: #28a745;
+}
+
 .bold {
     font-weight: 500;
 }
@@ -68,4 +78,85 @@ table thead {
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+
+/* ------------ */
+/* Properties Results */
+
+.properties-results.results-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.properties-results .pCard {
+    overflow: hidden;
+    word-wrap: break-word;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .5rem;
+    width: 300px;
+    display: inline-block;
+    vertical-align: top;
+    margin: .8em;
+}
+
+.properties-results .pCard a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.properties-results .pCard-img-container {
+    overflow: hidden;
+    width: 100%;
+    height: 225px;
+    text-align: center;
+}
+
+.properties-results img.pCard-img {
+    height: 100%;
+    position: relative;
+    left: 100%;
+    margin-left: -200%;
+}
+
+.properties-results .pCard-body {
+    padding: 1em;
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+
+.properties-results p.pCard-description {
+    line-height: 1.5em;
+    height: 4.5em;      
+    overflow: hidden;
+}
+
+.textOverflow4LineEllipsis {
+    box-orient: vertical;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+}
+
+.properties-results p:last-child {
+    margin-bottom: 0 !important;
+}
+
+.properties-results .pCard-footer {
+    position: relative;
+    padding: .8em 1em;
+    background-color: rgba(0,0,0,.04);
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+
+.properties-results .pCard-footer p {
+    margin-bottom: 0.2em;
+}
+
+.properties-results .pCard-footer .pCard-action.badge {
+    font-size: 0.8em;
+    position: absolute;
+    right: 1.25em;
 }

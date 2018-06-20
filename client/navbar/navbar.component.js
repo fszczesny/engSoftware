@@ -13,6 +13,8 @@ angular
             this.loggedIn = false;
             this.isAdmin = false;
             this.isManager = false;
+            this.isEmployee = false;
+            this.isOwner = false;
 
             var loadUser = function(UserService) {
                 self.user = UserService.getUserData();
@@ -20,6 +22,7 @@ angular
                 self.isAdmin = UserService.isAdmin();
                 self.isManager = UserService.isManager();
                 self.isEmployee = UserService.isEmployee();
+                self.isOwner = UserService.isOwner();
                 $scope.$applyAsync();
             };
 
@@ -33,7 +36,7 @@ angular
 
             this.logOut = function() {
                 UserService.logOut(function() {
-                    GoHome.go();
+                    // GoHome.go();
                     $scope.$applyAsync();
                 });
             };

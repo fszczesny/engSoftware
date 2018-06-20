@@ -77,7 +77,7 @@
     </div>
 </div>
 
-<div class="results-container">
+<div class="results-container properties-results">
     <div class="pCard" ng-repeat="property in $ctrl.properties | filter: $ctrl.filter | filter: $ctrl.filterArea | filter: $ctrl.filterPrice | filter: $ctrl.search | orderBy: $ctrl.orderAttr:$ctrl.orderRev">
         <a href="#!/propertyDetails/{{ property.id }}">
             <div class="pCard-img-container">
@@ -88,7 +88,7 @@
                 <p class="pCard-description textOverflow4LineEllipsis">{{ property.description }}</p>
             </div>
             <div class="pCard-footer">
-                <span class="badge" ng-class="{ 'green': property.rentOrSale == 'rent', 'blue': property.rentOrSale == 'sale' }">{{ $ctrl.rentOrSaleToTxt(property.rentOrSale) }}</span>
+                <span class="pCard-action badge" ng-class="{ 'green': property.rentOrSale == 'rent', 'blue': property.rentOrSale == 'sale' }">{{ $ctrl.rentOrSaleToTxt(property.rentOrSale) }}</span>
                 <small class="text-muted">
                     <p class="pCard-text">Área: {{ property.area }} m²</p>
                     <p class="pCard-text">Quartos: {{ property.rooms }}</p>

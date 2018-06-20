@@ -62,6 +62,23 @@ exports.getPropertyById = function(req, res) {
 };
 
 
+// > User properties
+
+exports.getUserProperties = function(req, res) {
+    var userId = req.params.userId;
+    var sql = "SELECT p.*, (r.rentId IS NOT NULL) as isRent ";
+    sql += "FROM properties AS p ";
+    sql += "LEFT JOIN rents AS r ON ";
+    sql += "(p.id = r.propertyId) AND (CURDATE() BETWEEN r.startDate AND r.endDate) ";
+    sql += "GROUP BY p.id HAVING p.ownerId = ?";
+
+    dbConnection.query(sql, [userId], function (error, results, fields) {
+        if (error) throw error;
+        res.json(results);
+    });
+};
+
+
 // > Rents
 
 exports.loadRents = function(req, res) {

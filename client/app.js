@@ -97,6 +97,12 @@ angular.module('RealEstate').config(['$stateProvider',
         component: 'employeeHome'
     };
 
+    var ownerPropertiesState = {
+        name: 'ownerProperties',
+        url: '/ownerProperties',
+        component: 'ownerProperties',
+    };
+
 
     $stateProvider.state(searchPropertiesState);
     $stateProvider.state(signUpState);
@@ -111,6 +117,7 @@ angular.module('RealEstate').config(['$stateProvider',
     $stateProvider.state(insertSaleState);
     $stateProvider.state(approveSalesState);
     $stateProvider.state(approveRentsState);
+    $stateProvider.state(ownerPropertiesState);
 
     $urlRouterProvider.otherwise('/searchProperties');
 }]);

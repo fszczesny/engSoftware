@@ -93,18 +93,21 @@ angular
             isClient: function() {
                 return checkUserType('Customer') || checkUserType('Owner');
             },
-            isEmployee: function() {
-                return checkUserType('Manager') || checkUserType('Supervisor') || checkUserType('Consultant');
+            isOwner: function() {
+                return checkUserType('Owner');
             },
             isCustomer: function() {
                 return checkUserType('Customer');
             },
-            isManager: function() {
-                return checkUserType('Manager');
+            isEmployee: function() {
+                return checkUserType('Manager') || checkUserType('Supervisor') || checkUserType('Consultant');
             },
             isAdmin: function() {
                 return checkUserType('Manager') || checkUserType('Supervisor');
-            }
+            },
+            isManager: function() {
+                return checkUserType('Manager');
+            },
         };
 
         return User;

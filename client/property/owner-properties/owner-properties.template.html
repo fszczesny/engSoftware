@@ -1,0 +1,17 @@
+<h3>Meus Imóveis</h3>
+
+<div class="properties-results results-container">
+    <div class="pCard" ng-repeat="property in $ctrl.properties | orderBy:'statusId':true">
+        <a href="#!/propertyDetails/{{ property.id }}">
+            <div class="pCard-img-container">
+                <img class="pCard-img" ng-src="{{ property.img || $ctrl.noPhotoImg }}">
+            </div>
+            <div class="pCard-body">
+                <h5 class="pCard-title" style="margin-bottom:0;">{{ property.title }}</h5>
+            </div>
+            <div class="pCard-footer">
+                <span class="pCard-status badge {{ property.statusId }}">{{ property.statusName }}</span>
+            </div>
+        </a>
+    </div>
+</div>

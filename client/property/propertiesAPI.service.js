@@ -7,6 +7,8 @@ angular
         return $resource('/api/property/:propertyId', {}, {
             getAll:             { method: 'GET', isArray: true },
             get:                { method: 'GET' },
+            // Owner properties
+            getUserProperties:  { method: 'GET', url: '/api/user-properties/:userId', isArray: true },
             // Rents
             loadRents:          { method: 'GET', url: '/api/property/rents/load/:propertyId', isArray: true },
             getRents:           { method: 'GET', url: '/api/property/rents/get/:approved', isArray: true },
