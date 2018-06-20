@@ -1,7 +1,7 @@
 <h3>Meus Imóveis</h3>
 
 <div class="properties-results results-container">
-    <div class="pCard" ng-repeat="property in $ctrl.properties | orderBy:'statusId':true">
+    <div class="pCard" ng-repeat="property in $ctrl.properties | orderBy:$ctrl.orderAttr:$ctrl.orderReverse">
         <a href="#!/propertyDetails/{{ property.id }}">
             <div class="pCard-img-container">
                 <img class="pCard-img" ng-src="{{ property.img || $ctrl.noPhotoImg }}">

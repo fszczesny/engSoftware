@@ -40,6 +40,10 @@ angular
                 });
             });
 
+            // Order By
+
+            this.orderAttr = 'statusId';
+            this.orderReverse = true;
 
         }]
     });
