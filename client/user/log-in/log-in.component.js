@@ -11,8 +11,9 @@ angular
                      function LogInController(GoHome, UserService, $state, $stateParams) {
 
             var redirectSuccess = function() {
-                var toState = $stateParams.toState;
-                if (toState.name) {
+                var existsRedirectState = $stateParams && $stateParams.toState && $stateParams.toState.name;
+                if (existsRedirectState) {
+                    var toState = $stateParams.toState;
                     $state.go(toState.name, toState.params);
                 } else {
                     GoHome.go();
