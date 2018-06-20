@@ -63,7 +63,7 @@ angular
             addListener: addListener,
             validate: validateAuth,
 
-            Service: UserService,
+            info: UserService,
 
             isLoggedIn: function() {
                 return UserService.isLoggedIn();

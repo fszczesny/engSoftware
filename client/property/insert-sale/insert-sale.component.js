@@ -78,7 +78,7 @@ angular
                     return;
                 }
 
-                var employee = UserAuth.Service.getUserData();
+                var employee = UserAuth.info.getUserData();
 
                 var saleInfo = {
                     buyerId: self.buyer.id,

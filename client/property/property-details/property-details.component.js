@@ -52,7 +52,7 @@ angular
                     return false;
                 }
 
-                var userId = UserAuth.Service.getUserData().id;
+                var userId = UserAuth.info.getUserData().id;
                 if (userId == property.ownerId) {
                     alert('Você não pode comprar/alugar o próprio imóvel');
                     return false;
