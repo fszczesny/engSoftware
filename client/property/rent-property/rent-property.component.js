@@ -20,14 +20,16 @@ angular
 
             this.rents = PropertiesAPI.loadRents({ propertyId: this.property.id }, function() {
                 self.rents.forEach(function(rent) {
-                    rent.startDate = new Date(rent.startDate);
-                    rent.endDate = new Date(rent.endDate);
+                    rent.startDate = new Date(rent.startDate).setUTCHours(3);
+                    rent.endDate = new Date(rent.endDate).setUTCHours(3);
                 });
             });
 
             var isRentOnDate = function(date) {
                 var isRent = false;
                 self.rents.forEach(function(rent) {
+                    var sDate = moment();
+                    var eDate = moment();
                     if (date >= rent.startDate && date <= rent.endDate) {
                         isRent = true;
                         return true;

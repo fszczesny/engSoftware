@@ -21,8 +21,8 @@ angular
 
             this.rents = PropertiesAPI.getRents({ approved: 0 }, function() {
                 self.rents.forEach(function(rent) {
-                    var startStr = moment(rent.startDate).format('DD/MM');
-                    var endStr = moment(rent.endDate).format('DD/MM');
+                    var startStr = moment(rent.startDate).zone('+0300').format('DD/MM');
+                    var endStr = moment(rent.endDate).zone('+0300').format('DD/MM');
                     rent.dateStartStr = startStr;
                     rent.dateEndStr = endStr;
                 });
